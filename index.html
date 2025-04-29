@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Namn - turista i Småland och på Öland</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav>
+    <nav id="navbar">
         <a href="index.html"><h1>Namn</h1></a>
-        <a href="favoriter.html"><img src="" alt="favoriter"></a>
-        <ul>
-            <li>
-
-            </li>
+        <div id="asideDiv">
+        <a href="favoriter.html"><img src="" alt="Favoriter"></a>
+        <ul id="hamburgerMenu">
+            <li><a href="listsida.html">Alla turistmål</a></li>
+            <li><a href="favoriter.html">Favoriter</a></li>
+            <li><a href="omoss.html">Om oss</a></li>
+            <li><a href="kontakt.html">Kontakta oss</a></li>
         </ul>
+    </div>
     </nav>
     <main>
         <section>
@@ -30,7 +34,7 @@
             <form id="question2">
                 <p>2. Är det viktigt att turistmålet är barnvänligt?</p>
                 <label>Ja<input type="radio" name="child" id="yes"></label>
-                <label>Nej<input type="radio" name="child" id="no"><no/label>
+                <label>Nej<input type="radio" name="child" id="no"></label>
             </form>
             <form id="question3">
                 <p>3. Är du/ni intresserade av en aktivitet eller vill du/ni kolla på servärdheter?</p>
@@ -45,6 +49,20 @@
                 <label>250-500<input type="checkbox" name="250" id="250"></label>
                 <label>500+<input type="checkbox" name="500" id="500"></label>
             </form>
+        </section>
+        <section>
+            <h2>Populära turistmål</h2>
+            <section class="popular">
+                <h4>Utomhus</h4>
+                <div id="popularOutside"></div>
+                <button id="outsideBtn" onclick="window.location.href='fiskmannen.html'">Se alla utomhus</button>
+            </section>
+            <section class="popular">
+                <h4>Inomhus</h4>
+                <div id="popularInside"></div>
+                <button id="insideBtn" onclick="window.location.href='fiskmannen.html'">Se alla inomhus</button>
+            </section>
+            <button id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål<img src="" alt="pil"></button>
         </section>
     </main>
     
