@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Namn - turista i Småland och på Öland</title>
 </head>
 <body>
-    <h1>Loves test</h1>
+    <nav>
+        <a href="index.html"><h1>Namn</h1></a>
+        <a href="favoriter.html"><img src="" alt="favoriter"></a>
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <p>Namn riktar sig ill dig som vill upptäcka Småland och Öland. Läs mer om namn <a href="">här</a></p>
+            <p>Svara på 4 korta frågor och få förslag på vad som skulle kunna passa dig!</p>
+        </section>
+        <section id="form">
+            <form id="question1">
+                <p>1. Vilken typ passar dig/er bäst?</p>
+                <label>Utomhusaktiviteter<input type="radio" name="what" id="outside"></label>
+                <label>Inomhusaktiviteter<input type="radio" name="what" id="inside"></label>
+                <label>Båda<input type="radio" name="what" id="both"></label>
+            </form>
+            <form id="question2">
+                <p>2. Är det viktigt att turistmålet är barnvänligt?</p>
+                <label>Ja<input type="radio" name="child" id="yes"></label>
+                <label>Nej<input type="radio" name="child" id="no"><no/label>
+            </form>
+            <form id="question3">
+                <p>3. Är du/ni intresserade av en aktivitet eller vill du/ni kolla på servärdheter?</p>
+                <label>Aktiviteter<input type="radio" name="activityorsights" id="activity"></label>
+                <label>Sevärdheter<input type="radio" name="activityorsights" id="sights"></label>
+                <label>Båda<input type="radio" name="activityorsights" id="both3"></label>
+            </form>
+            <form id="question4">
+                <p>4. Vilken prisklass skulle du/ni kunna tänka er?</p>
+                <label>0-100 kr<input type="checkbox" name="0" id="0"></label>
+                <label>100-250<input type="checkbox" name="100" id="100"></label>
+                <label>250-500<input type="checkbox" name="250" id="250"></label>
+                <label>500+<input type="checkbox" name="500" id="500"></label>
+            </form>
+        </section>
+    </main>
+    
     
 </body>
 </html>
