@@ -1,0 +1,32 @@
+/* Hela navigeringen */
+#navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+ /* Navigeringen till höger */
+#asideDiv {
+    display: flex;
+    align-items: center;
+}
+
+/* Hela formuläret för frågorna */
+#form {
+    border: 1px solid rgb(133, 203, 218);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* Svarsalternativen */
+#form label {
+    display: block;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+/* De olika frågorna i formuläret */
+#question2,
+#question3,
+#question4 {
+    display: none;
+}
