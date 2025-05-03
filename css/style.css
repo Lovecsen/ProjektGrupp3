@@ -25,8 +25,12 @@
 }
 
 /* De olika frågorna i formuläret */
-#question2,
+#question1,
 #question3,
 #question4 {
     display: none;
+}
+
+#firstNext {
+    
 }
