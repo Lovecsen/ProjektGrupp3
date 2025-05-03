@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Namn - turista i Småland och på Öland</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
     <nav id="navbar">
@@ -30,17 +31,22 @@
                 <label>Utomhusaktiviteter<input type="radio" name="what" id="outside"></label>
                 <label>Inomhusaktiviteter<input type="radio" name="what" id="inside"></label>
                 <label>Båda<input type="radio" name="what" id="both"></label>
+                <button id="firstNext">Nästa</button>
             </form>
             <form id="question2">
                 <p>2. Är det viktigt att turistmålet är barnvänligt?</p>
                 <label>Ja<input type="radio" name="child" id="yes"></label>
                 <label>Nej<input type="radio" name="child" id="no"></label>
+                <button>Föregående</button>
+                <button>Nästa</button>
             </form>
             <form id="question3">
                 <p>3. Är du/ni intresserade av en aktivitet eller vill du/ni kolla på servärdheter?</p>
                 <label>Aktiviteter<input type="radio" name="activityorsights" id="activity"></label>
                 <label>Sevärdheter<input type="radio" name="activityorsights" id="sights"></label>
                 <label>Båda<input type="radio" name="activityorsights" id="both3"></label>
+                <button>Föregående</button>
+                <button>Nästa</button>
             </form>
             <form id="question4">
                 <p>4. Vilken prisklass skulle du/ni kunna tänka er?</p>
@@ -48,13 +54,15 @@
                 <label>100-250<input type="checkbox" name="100" id="100"></label>
                 <label>250-500<input type="checkbox" name="250" id="250"></label>
                 <label>500+<input type="checkbox" name="500" id="500"></label>
+                <button>Föregående</button>
+                <button>Nästa</button>
             </form>
         </section>
         <section>
             <h2>Populära turistmål</h2>
-            <section class="popular">
+            <section class="popular" id="popularOutside">
                 <h4>Utomhus</h4>
-                <div id="popularOutside"></div>
+                <div id="popularOutsideDiv"></div>
                 <button id="outsideBtn" onclick="window.location.href='fiskmannen.html'">Se alla utomhus</button>
             </section>
             <section class="popular">
