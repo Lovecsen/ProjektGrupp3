@@ -17,8 +17,8 @@ async function popularOutsideDestinations() {
     if (responseOutside.ok) {
         let dataOutside = await responseOutside.json();
         console.log("Data hämtad:", dataOutside);
-        responsePopularOutsideDestinations(dataOutside);
-    }
+        responsePopularOutsideDestinations(dataOutside.payload);
+    } else popularOutside.innerText = "Fel vid hämtning: " + responseOutside.status;
 
 }
 
@@ -29,8 +29,9 @@ function responsePopularOutsideDestinations(jsonData) {
     for (let i = 0; i < jsonData.length; i++) {
         const outside = jsonData[i];
         const newDiv = document.createElement("div");
-        
-        newDiv.innerHTML = "<p>namn: " + outside.name + "</p>";
+        newDiv.classList.add("smapiPopular");
+
+        newDiv.innerHTML = "<h4>" + outside.name + "</h4><p>Stad: " + outside.city + "</p><p>Pris: " + outside.price_range + " kr</p>";
 
         popularOutside.appendChild(newDiv);
         
