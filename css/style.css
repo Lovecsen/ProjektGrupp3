@@ -55,7 +55,7 @@ html {
     color: rgb(238, 249, 243);
 }
 
-.inactive {
-    background-color: grey;
-    color: black;
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }
