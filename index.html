@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,25 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
 </head>
+
 <body>
     <nav id="navbar">
-        <a href="index.html"><h1>Namn</h1></a>
+        <a href="index.html">
+            <h1>Namn</h1>
+        </a>
         <div id="asideDiv">
-        <a href="favoriter.html"><img src="" alt="Favoriter"></a>
-        <ul id="hamburgerMenu">
-            <li><a href="listsida.html">Alla turistmål</a></li>
-            <li><a href="favoriter.html">Favoriter</a></li>
-            <li><a href="omoss.html">Om oss</a></li>
-            <li><a href="kontakt.html">Kontakta oss</a></li>
-        </ul>
-    </div>
+            <a href="favoriter.html"><img src="" alt="Favoriter"></a>
+            <ul id="hamburgerMenu">
+                <li><a href="listsida.html">Alla turistmål</a></li>
+                <li><a href="favoriter.html">Favoriter</a></li>
+                <li><a href="omoss.html">Om oss</a></li>
+                <li><a href="kontakt.html">Kontakta oss</a></li>
+            </ul>
+        </div>
     </nav>
     <main>
         <section>
-            <p>Namn riktar sig ill dig som vill upptäcka Småland och Öland. Läs mer om namn <a href="">här</a></p>
+            <p>Namn riktar sig till dig som vill upptäcka Småland och Öland. Läs mer om namn <a href="">här</a>.</p>
             <p>Svara på 4 korta frågor och få förslag på vad som skulle kunna passa dig!</p>
         </section>
         <section id="form">
@@ -30,32 +34,28 @@
                 <p>1. Vilken typ passar dig/er bäst?</p>
                 <label>Utomhusaktiviteter<input type="radio" name="what" id="outside"></label>
                 <label>Inomhusaktiviteter<input type="radio" name="what" id="inside"></label>
-                <label>Båda<input type="radio" name="what" id="both"></label>
-                <button id="firstNext">Nästa</button>
+                <label>Båda<input type="radio" name="what" id="both"><button class=next id="firstNext">Nästa</button></label>
             </form>
             <form id="question2">
                 <p>2. Är det viktigt att turistmålet är barnvänligt?</p>
                 <label>Ja<input type="radio" name="child" id="yes"></label>
-                <label>Nej<input type="radio" name="child" id="no"></label>
-                <button>Föregående</button>
-                <button>Nästa</button>
+                <label>Nej<input type="radio" name="child" id="no"><button>Nästa</button>
+                    <button>Föregående</button></label>
+
             </form>
             <form id="question3">
                 <p>3. Är du/ni intresserade av en aktivitet eller vill du/ni kolla på servärdheter?</p>
                 <label>Aktiviteter<input type="radio" name="activityorsights" id="activity"></label>
                 <label>Sevärdheter<input type="radio" name="activityorsights" id="sights"></label>
-                <label>Båda<input type="radio" name="activityorsights" id="both3"></label>
-                <button>Föregående</button>
-                <button>Nästa</button>
+                <label>Båda<input type="radio" name="activityorsights" id="both3"><button>Nästa</button><button>Föregående</button></label>
+             
             </form>
             <form id="question4">
                 <p>4. Vilken prisklass skulle du/ni kunna tänka er?</p>
                 <label>0-100 kr<input type="checkbox" name="0" id="0"></label>
                 <label>100-250<input type="checkbox" name="100" id="100"></label>
                 <label>250-500<input type="checkbox" name="250" id="250"></label>
-                <label>500+<input type="checkbox" name="500" id="500"></label>
-                <button>Föregående</button>
-                <button>Nästa</button>
+                <label>500+<input type="checkbox" name="500" id="500"><button>Få resultat</button><button>Föregående</button></label>
             </form>
         </section>
         <section>
@@ -64,7 +64,7 @@
                 <h3>Utomhus</h3>
                 <div id="popularOutsideDiv"></div>
             </section>
-                <button id="outsideBtn" onclick="window.location.href='fiskmannen.html'">Se alla utomhus</button>
+            <button id="outsideBtn" onclick="window.location.href='fiskmannen.html'">Se alla utomhus</button>
             <section class="popular">
                 <h3>Inomhus</h3>
                 <div id="popularInsideDiv"></div>
@@ -73,7 +73,8 @@
             <button id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål<img src="" alt="pil"></button>
         </section>
     </main>
-    
-    
+
+
 </body>
+
 </html>
