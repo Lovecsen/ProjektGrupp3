@@ -7,6 +7,7 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 2px solid black;
 }
  /* Navigeringen till höger */
 #asideDiv {
@@ -16,7 +17,7 @@ html {
 
 /* Hela formuläret för frågorna */
 #form {
-    border: 1px solid rgb(133, 203, 218);
+    border: 1px solid rgb(53, 148, 93);
     border-radius: 10px;
     padding: 5px;
 }
@@ -29,7 +30,7 @@ html {
 }
 
 /* De olika frågorna i formuläret */
-#question1,
+#question2,
 #question3,
 #question4 {
     display: none;
@@ -37,8 +38,24 @@ html {
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
-    
     border: 1px solid rgb(53, 148, 93);
+    background-color: rgb(238, 249, 243);
+    border-radius: 10px;
     padding: 10px;
-    text-align: right;;
+    text-align: right;
+    margin: 10px;
+}
+
+
+#form button {
+    float: right;
+    width: auto;
+    background-color: rgb(53, 148, 93);
+    border:rgb(238, 249, 243);
+    color: rgb(238, 249, 243);
+}
+
+.inactive {
+    background-color: grey;
+    color: black;
 }
