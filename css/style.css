@@ -30,9 +30,7 @@ html {
 }
 
 /* De olika frågorna i formuläret */
-#question2,
-#question3,
-#question4 {
+.hide {
     display: none;
 }
 
@@ -47,15 +45,26 @@ html {
 }
 
 
+/* knapparna i formuläret */
 #form button {
     float: right;
     width: auto;
     background-color: rgb(53, 148, 93);
     border:rgb(238, 249, 243);
     color: rgb(238, 249, 243);
+    margin: 5px;
 }
 
+/* klass för stilsättning av inaktiverad knapp */
 .disabled {
     pointer-events: none;
     opacity: 0.5;
+}
+
+#question1,
+#question2,
+#question3,
+#question4 {
+    height: 150px;
+
 }
