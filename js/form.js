@@ -40,20 +40,32 @@ function init() {
 
     let radioBtn1 = document.querySelectorAll(".first"); //knapparna för svarsalternativen
 
+    let isChecked = false;
     for (let i = 0; i < radioBtn1.length; i++) {
-    radioBtn1[i].addEventListener("click", next1); //anropar funktionen next när ett alternativ har klickats i
+        if (radioBtn1[i].checked) {
+            isChecked = true;
+        }
+        radioBtn1[i].addEventListener("change", function () {
+            firstNextBtn.classList.remove("disabled");
+            firstNextBtn.disabled = false;
+        }); 
     }
 
+    if (isChecked) {
+        firstNextBtn.classList.remove("disabled");
+        firstNextBtn.disabled = false;
+    } else {
+        firstNextBtn.classList.add("disabled");
+        firstNextBtn.disabled = true;
+    }
+
+    firstNextBtn.addEventListener("click", nextQuestion2); //anrop av funktion för att byta fråga
 }
 window.addEventListener("DOMContentLoaded", init);
 
-//funktion för att göra nästa knappen på fråga 1 aktiverad
-function next1() {
+function prevQuestion1() {
     question1.classList.remove("hide"); //visar fråga 1 om tillbaka knappen tryckts på
     question2.classList.add("hide"); //gömmer fråga 2 om tillbaka knappen tryckts på
-
-    firstNextBtn.classList.remove("disabled"); //tar bort klassen för inaktiverad knapp
-    firstNextBtn.disabled = false; //aktiverar knappen
 }
 
 //funktion för att byta fråga i formuläret
@@ -64,27 +76,35 @@ function nextQuestion2() {
     resetInputs(question2, "q2");
 
     prevBtn2 = document.querySelector("#previous2");
-    prevBtn2.addEventListener("click", next1);
+    prevBtn2.addEventListener("click", prevQuestion1);
 
-    secondNextBtn.classList.add("disabled");
-    secondNextBtn.disabled = true;
-    secondNextBtn.addEventListener("click", nextQuestion3); //anrop av funktion för att byta fråga
+    question2.classList.remove("hide"); //visar fråga 1 om tillbaka knappen tryckts på
+    question3.classList.add("hide"); //gömmer fråga 2 om tillbaka knappen tryckts på
 
     let radioBtn2 = document.querySelectorAll(".second");
 
+    let isChecked = false;
     for (let i = 0; i < radioBtn2.length; i++) {
-        radioBtn2[i].addEventListener("click", next2); //anropar funktionen next när ett alternativ har klickats i
+        if (radioBtn2[i].checked) {
+            isChecked = true;
         }
+        radioBtn2[i].addEventListener("change", function () {
+            secondNextBtn.classList.remove("disabled");
+            secondNextBtn.disabled = false;
+        }); 
+    }
+
+    if (isChecked) {
+        secondNextBtn.classList.remove("disabled");
+        secondNextBtn.disabled = false;
+    } else {
+        secondNextBtn.classList.add("disabled");
+        secondNextBtn.disabled = true;
+    }
+
+    secondNextBtn.addEventListener("click", nextQuestion3); //anrop av funktion för att byta fråga
 }
 
-//funktion för att göra nästa knappen på fråga 2 aktiverad
-function next2() {
-    question2.classList.remove("hide"); //visar fråga 2 om tillbaka knappen tryckts på
-    question3.classList.add("hide"); //gömmer fråga 3 om tillbaka knappen tryckts på
-
-    secondNextBtn.classList.remove("disabled"); //tar bort klassen för inaktiverad knapp
-    secondNextBtn.disabled = false; //aktiverar knappen
-}
 
 function nextQuestion3() {
     question2.classList.add("hide"); //lägg till klass för att dölja frågan
@@ -93,26 +113,34 @@ function nextQuestion3() {
     resetInputs(question3, "q3");
 
     prevBtn3 = document.querySelector("#previous3");
-    prevBtn3.addEventListener("click", next2);
+    prevBtn3.addEventListener("click", nextQuestion2);
 
-    thirdNextBtn.classList.add("disabled");
-    thirdNextBtn.disabled = true;
-    thirdNextBtn.addEventListener("click", nextQuestion4); //anrop av funktion för att byta fråga
+    question3.classList.remove("hide"); //visar fråga 1 om tillbaka knappen tryckts på
+    question4.classList.add("hide"); //gömmer fråga 2 om tillbaka knappen tryckts på
 
     let radioBtn3 = document.querySelectorAll(".third");
 
+    let isChecked = false;
     for (let i = 0; i < radioBtn3.length; i++) {
-        radioBtn3[i].addEventListener("click", next3); //anropar funktionen next när ett alternativ har klickats i
+        if (radioBtn3[i].checked) {
+            isChecked = true;
         }
+        radioBtn3[i].addEventListener("change", function () {
+            thirdNextBtn.classList.remove("disabled");
+            thirdNextBtn.disabled = false;
+        }); 
+    }
 
-}
+    if (isChecked) {
+        thirdNextBtn.classList.remove("disabled");
+        thirdNextBtn.disabled = false;
+    } else {
+        thirdNextBtn.classList.add("disabled");
+        thirdNextBtn.disabled = true;
+    }
 
-function next3() {
-    question3.classList.remove("hide"); //visar fråga 3 om tillbaka knappen tryckts på
-    question4.classList.add("hide"); //gömmer fråga 4 om tillbaka knappen tryckts på
+    thirdNextBtn.addEventListener("click", nextQuestion4); //anrop av funktion för att byta fråga
 
-    thirdNextBtn.classList.remove("disabled"); //tar bort klassen för inaktiverad knapp
-    thirdNextBtn.disabled = false; //aktiverar knappen
 }
 
 function nextQuestion4() {
@@ -122,38 +150,33 @@ function nextQuestion4() {
     resetInputs(question4, "q4");
 
     prevBtn4 = document.querySelector("#previous4");
-    prevBtn4.addEventListener("click", next3);
-
-    fourthNextBtn.classList.add("disabled");
-    fourthNextBtn.disabled = true;
+    prevBtn4.addEventListener("click", nextQuestion3);
 
     radioBtn4 = document.querySelectorAll(".fourth");
 
-    for (let i = 0; i < radioBtn4.length; i++) {
-        radioBtn4[i].addEventListener("click", next4); //anropar funktionen next när ett alternativ har klickats i
-        }
-}
-
-function next4() {
-
-    let checked = false;
-
+    let isChecked = false;
     for (let i = 0; i < radioBtn4.length; i++) {
         if (radioBtn4[i].checked) {
-            checked = true;
-            break;
+            isChecked = true;
         }
+        radioBtn4[i].addEventListener("change", function () {
+            fourthNextBtn.classList.remove("disabled");
+            fourthNextBtn.disabled = false;
+        }); 
     }
 
-    if (checked) {
-        fourthNextBtn.classList.remove("disabled"); //tar bort klassen för inaktiverad knapp
-        fourthNextBtn.disabled = false; //aktiverar knappen
+    if (isChecked) {
+        fourthNextBtn.classList.remove("disabled");
+        fourthNextBtn.disabled = false;
     } else {
         fourthNextBtn.classList.add("disabled");
         fourthNextBtn.disabled = true;
     }
+
+    fourthNextBtn.addEventListener("click", nextQuestion4); //anrop av funktion för att byta fråga
 }
 
+//kollar om användaren ser frågan för första gången elelr inte
 function resetInputs(questionElement, key) {
     if (!visitedQuestions[key]) {
         let inputs = questionElement.querySelectorAll('input[type="radio"], input[type="checkbox"]');
