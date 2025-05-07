@@ -89,3 +89,8 @@ body {
 #hamburgerMenu li {
     margin-bottom: 15px;
 }
+
+#hamburgerIcon {
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
