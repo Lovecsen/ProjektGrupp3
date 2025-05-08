@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #004225;
 }
  /* Navigeringen till höger */
 #asideDiv {
@@ -22,7 +22,7 @@ body {
 
 /* Hela formuläret för frågorna */
 #form {
-    border: 1px solid rgb(53, 148, 93);
+    border: 1px solid #004225;
     border-radius: 10px;
     padding: 5px;
 }
@@ -41,12 +41,11 @@ body {
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
-    border: 1px solid rgb(53, 148, 93);
-    background-color: rgb(238, 249, 243);
+    border: 1px solid #004225;
     border-radius: 10px;
     padding: 10px;
     text-align: right;
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -54,9 +53,7 @@ body {
 #form button {
     float: right;
     width: auto;
-    background-color: rgb(53, 148, 93);
-    border:rgb(238, 249, 243);
-    color: rgb(238, 249, 243);
+    background-color: #CDEDB3;
     margin: 5px;
 }
 
@@ -70,7 +67,7 @@ body {
 #question2,
 #question3,
 #question4 {
-    height: 150px;
+    height: 180px;
 
 }
 
@@ -78,7 +75,7 @@ body {
     display: none; /*Göm länkarna i hamburgarmenyn*/
     list-style-type: none;
     position: absolute;
-    background-color: #DDEB9D;
+    background-color: #CDEDB3;
     top: 100%;
     padding: 10px;
     margin-top: 0px;
@@ -93,4 +90,16 @@ body {
 #hamburgerIcon {
     margin-left: 15px;
     margin-bottom: 5px;
+}
+
+button {
+    border-radius: 10%;
+    border: 0;
+    background-color: #CDEDB3;
+}
+
+button:hover,
+#form button:hover {
+    background-color: #b0d294;
+    color: white;
 }
