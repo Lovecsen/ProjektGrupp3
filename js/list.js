@@ -23,14 +23,22 @@ async function getData() {
 }
 
 function showPlaces(places) {
-    placeContainer.innerHTML = ""; // rensar innehållet först
+    placeContainer.innerHTML = ""; // rensar innehållet
 
     for (let i = 0; i < places.length; i++) {
         const place = places[i];
         const newDiv = document.createElement("div");
         newDiv.classList.add("smapiPlace");
 
-        newDiv.innerHTML = "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>";
+        let shortDescription = "";
+
+        if (place.abstract.length > 100) {
+            shortDescription = place.abstract.substring(0, 100).trim() + "...";
+        } else {
+            shortDescription = place.abstract.trim();
+        } 
+
+        newDiv.innerHTML = "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription;
 
         placeContainer.appendChild(newDiv);
     }
