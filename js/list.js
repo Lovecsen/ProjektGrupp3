@@ -44,6 +44,16 @@ function showPlaces(places) {
 
         newDiv.innerHTML = "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
+
+
+        newDiv.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
+            
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+            });
+
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
     }
+
 }
