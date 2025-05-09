@@ -87,7 +87,7 @@ function responsePopularInsideDestinations(jsonData) {
 function showSlide() {
     slideWidth = wrapperElemOutside.querySelector(".smapiPopular").offsetWidth; 
     wrapperElemOutside.style.transitionDuration = "0.3s";
-    wrapperElemOutside.style.transform = "translateX(" + (-currentIx * slideWidth * 2) + "px)";
+    wrapperElemOutside.style.transform = "translateX(" + (-currentIx * slideWidth) + "px)";
 }
 
 function dragStart(e) {
@@ -105,7 +105,7 @@ function dragStart(e) {
 function dragMove(e) {
     if (!e.isPrimary) return;
     let deltaX = e.pageX - xStart;
-    wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIx * slideWidth * 2) + "px)";
+    wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIx * slideWidth) + "px)";
 }
 
 function dragEnd(e) {
