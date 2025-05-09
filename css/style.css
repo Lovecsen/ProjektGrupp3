@@ -39,16 +39,6 @@ body {
     display: none;
 }
 
-/* nya div elementen för populära turistmål */
-.smapiPopular {
-    border: 1px solid #004225;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: right;
-    margin-bottom: 10px;
-}
-
-
 /* knapparna i formuläret */
 #form button {
     float: right;
@@ -102,4 +92,25 @@ button:hover,
 #form button:hover {
     background-color: #b0d294;
     color: white;
+}
+
+#popularOutsideDiv { 
+    overflow: hidden;
+    position: relative;
+    
+}
+
+#popularOutsideDiv > div {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+/* nya div elementen för populära turistmål */
+.smapiPopular {
+    flex: 0 0 40vw;
+    cursor: grab;
+    border:1px solid #004225;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 10px;
 }

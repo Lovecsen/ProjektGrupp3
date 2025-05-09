@@ -1,17 +1,28 @@
 const myApiKey = "Tc9ZD2gK"; //API nyckel
 let popularOutside; //div element för att hålla de populära turistmålen för utomhus
 let popularInside; //div element för att hålla de populära turistmålen för inomhus
+let wrapperElemOutside;
+let currentIx = 0;
+let slideWidth;
+const minDrag = 50;
+let xStart = 0;
 
 //initiering 
 function init() {
     let outsideBtn = document.querySelector("#outsideBtn"); //knapp för att visa alla utomhus turistmål
-    popularOutside = document.querySelector("#popularOutsideDiv"); //div element för att hålla de populära turistmålen för utomhus
+    popularOutside = document.querySelector("#popularOutsideDiv #wrapperElem"); //div element för att hålla de populära turistmålen för utomhus
+    wrapperElemOutside = document.querySelector("#wrapperElem");
+
 
     let insideBtn = document.querySelector("#insideBtn"); //knapp för att visa alla inomhus turistmål
-    popularInside = document.querySelector("#popularInsideDiv"); //div element för att hålla de populära turistmålen för inomhus
+    popularInside = document.querySelector("#popularInsideDiv div"); //div element för att hålla de populära turistmålen för inomhus
+
+    wrapperElemOutside.addEventListener("pointerdown", dragStart);
 
     popularOutsideDestinations(); //anrop av funktion för att hämta utomhusdata från SMAPI
     popularInsideDestinations(); //anrop av funktion för att hämta inomhusdata från SMAPI
+
+    
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -71,4 +82,45 @@ function responsePopularInsideDestinations(jsonData) {
         popularInside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
         
     }
+}
+
+function showSlide() {
+    slideWidth = wrapperElemOutside.querySelector(".smapiPopular").offsetWidth; 
+    wrapperElemOutside.style.transitionDuration = "0.3s";
+    wrapperElemOutside.style.transform = "translateX(" + (-currentIx * slideWidth * 2) + "px)";
+}
+
+function dragStart(e) {
+    if (!e.isPrimary) return;
+    e.preventDefault();
+    xStart = e.pageX;
+
+    wrapperElemOutside.style.transitionDuration ="0s";
+
+    document.addEventListener("pointermove", dragMove);
+    document.addEventListener("pointerup", dragEnd);
+    document.addEventListener("pointercancel", dragEnd);
+}
+
+function dragMove(e) {
+    if (!e.isPrimary) return;
+    let deltaX = e.pageX - xStart;
+    wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIx * slideWidth * 2) + "px)";
+}
+
+function dragEnd(e) {
+    if (!e.isPrimary) return;
+
+    let deltaX = e.pageX - xStart;
+
+    if (deltaX > minDrag && currentIx > 0) {
+        currentIx--;
+    } else if (deltaX < -minDrag && currentIx < wrapperElemOutside.children.length - 1) {
+        currentIx++;
+    }
+    showSlide();
+
+    document.removeEventListener("pointermove", dragMove);
+    document.removeEventListener("pointerup", dragEnd);
+    document.removeEventListener("pointercancel", dragEnd);
 }
