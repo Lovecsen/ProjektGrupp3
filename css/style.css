@@ -45,6 +45,7 @@ body {
     width: auto;
     background-color: #CDEDB3;
     margin: 5px;
+
 }
 
 /* klass för stilsättning av inaktiverad knapp */
@@ -107,7 +108,7 @@ button:hover,
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
-    flex: 0 0 40vw;
+    flex: 0 0 55vw;
     cursor: grab;
     border:1px solid #004225;
     border-radius: 10px;
@@ -122,4 +123,9 @@ button:hover,
     padding: 10px;
     text-align: right;
     margin-bottom: 10px;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
 }
