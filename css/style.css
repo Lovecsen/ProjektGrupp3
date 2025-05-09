@@ -114,3 +114,12 @@ button:hover,
     margin-right: 10px;
     padding: 10px;
 }
+
+/* nya div elementen för alla turistmål på listsidan */
+.smapiPlace {
+    border: 1px solid #004225;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: right;
+    margin-bottom: 10px;
+}
