@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #FAF6E9;
+    background-color: #ffffff;
 }
 
 /* Hela navigeringen */
@@ -22,9 +22,9 @@ body {
 
 /* Hela formuläret för frågorna */
 #form {
-    border: 1px solid #004225;
     border-radius: 10px;
     padding: 5px;
+    background-color: #e5f1db;
 }
 
 /* Svarsalternativen */
@@ -32,6 +32,7 @@ body {
     display: block;
     margin-left: 20px;
     padding: 5px;
+    
 }
 
 /* De olika frågorna i formuläret */
@@ -43,7 +44,7 @@ body {
 #form button {
     float: right;
     width: auto;
-    background-color: #CDEDB3;
+    background-color: #e5f1db;
     margin: 5px;
 
 }
@@ -54,6 +55,7 @@ body {
     opacity: 0.5;
 }
 
+/* de olika frågorna i formuläret */
 #question1,
 #question2,
 #question3,
@@ -62,6 +64,7 @@ body {
 
 }
 
+/* hamburgermenyn till höger */
 #hamburgerMenu {
     display: none; /*Göm länkarna i hamburgarmenyn*/
     list-style-type: none;
@@ -74,33 +77,43 @@ body {
     border-radius: 3%;
 }
 
+/* de olika länkarna i hamburgermenyn */
 #hamburgerMenu li {
     margin-bottom: 15px;
 }
 
+/* bilden för hamburgarmenyn */
 #hamburgerIcon {
     margin-left: 15px;
     margin-bottom: 5px;
 }
 
+/* alla knapparna */
 button {
     border-radius: 10%;
     border: 0;
     background-color: #CDEDB3;
+    color:#004225;
+    font-size: 13px;
+    padding: 8px;
+    margin-top: 10px;
 }
 
+/* när man hovrar över knapparna */
 button:hover,
 #form button:hover {
     background-color: #b0d294;
     color: white;
 }
 
+/* div element runt annat div element som är runt det nya div elementet som skapas för varje populär turistdestination */
 #popularOutsideDiv { 
     overflow: hidden;
     position: relative;
     
 }
 
+/* div elementet som är runt det nya div elementet för varje populär turistdestination */
 #popularOutsideDiv > div {
     display: flex;
     transition: transform 0.3s ease;
@@ -110,7 +123,7 @@ button:hover,
 .smapiPopular {
     flex: 0 0 55vw;
     cursor: grab;
-    border:1px solid #004225;
+    border:1px solid #b0d294;
     border-radius: 10px;
     margin-right: 10px;
     padding: 10px;
@@ -125,7 +138,9 @@ button:hover,
     margin-bottom: 10px;
 }
 
+/* kartan */ 
 #map {
     height: 400px;
     width: 100%;
 }
+

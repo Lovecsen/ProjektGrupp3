@@ -95,8 +95,6 @@ function inputReset(Qelem) {
 }
 
 function inputChecked(inputs) {
-
-
     
     return Array.from(inputs).some(input => input.checked);
     
