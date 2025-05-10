@@ -28,10 +28,14 @@ async function getData() {
 function showPlaces(places) {
     placeContainer.innerHTML = ""; // rensar innehållet
 
+
     //loopa genom varje turistmål i listan
     for (let i = 0; i < places.length; i++) {
         const place = places[i]; //aktuellt turistmål
+        markerLocations(place);
+
         const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
+        
         newDiv.classList.add("smapiPlace"); //lägg till en class
 
         let shortDescription = "";

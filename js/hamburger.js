@@ -1,7 +1,7 @@
 function init() {
     const hamburgerIcon = document.querySelector("#hamburgerIcon");
 
-    hamburgerIcon.addEventListener("click", showHamburger);
+    hamburgerIcon.addEventListener("pointerdown", showHamburger);
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -16,7 +16,7 @@ function showHamburger() {
 }
 
 // Stäng dropdown-menyn om man klickar  utanför
-window.addEventListener("click", function (event) {
+window.addEventListener("pointerdown", function (event) {
     if (!hamburgerIcon.contains(event.target) && !hamburgerMenu.contains(event.target)) {
         hamburgerMenu.style.display = "none";
     }

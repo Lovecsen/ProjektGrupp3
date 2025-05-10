@@ -1,6 +1,5 @@
 
 let map; //objekt för kartan
-let marker; //objekt för markör på kartan
 
 function init() {
     initMap("map");
@@ -14,6 +13,43 @@ function initMap(id) {
     map = L.map(id).setView([57.353,15.601], 7);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
-    marker = L.marker([0, 0]).addTo(map); //ny markör
 
+}
+
+function markerLocations(obj) {
+
+    const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+    
+    //gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
+    setTimeout(() => {
+        const el = marker.getElement();
+        if (!el) return;
+
+        const smallInfo = document.createElement('div'); //div element för att visa info bredvid markörer
+        smallInfo.classList.add("smallInfoDiv");
+        smallInfo.innerHTML = "<h4>" + obj.name + "</h4><p>" + obj.description + "</p><p>" + obj.price_range + " kr</p>";
+        document.body.appendChild(smallInfo);
+
+        el.addEventListener('pointerenter', (e) => {
+            const rect = el.getBoundingClientRect();
+            smallInfo.style.left = rect.right + 10 + 'px';
+            smallInfo.style.top = rect.top + 'px';
+            smallInfo.style.display = 'block';
+        });
+
+        el.addEventListener('pointerleave', () => {
+            smallInfo.style.display = 'none'
+        });
+
+        el.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            window.location.href = "produkt.html";
+            //const isVisible = smallInfo.style.display == 'block';
+            //const rect = el.getBoundingClientRect();
+            //smallInfo.style.left = rect.right + 10 + 'px';
+            //smallInfo.style.top = rect.top + 'px';
+            //smallInfo.style.display = isVisible ? 'none' : 'block';
+        });
+    }, 0);
+ 
 }

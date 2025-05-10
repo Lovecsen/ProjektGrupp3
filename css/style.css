@@ -4,6 +4,7 @@ html {
 
 body {
     background-color: #ffffff;
+    position: relative;
 }
 
 /* Hela navigeringen */
@@ -12,6 +13,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 2px solid #004225;
+    z-index: 1000;
 }
  /* Navigeringen till höger */
 #asideDiv {
@@ -75,6 +77,7 @@ body {
     margin-top: 0px;
     box-shadow: 0 1px 2px;
     border-radius: 3%;
+    z-index: 1001; /* så dropdownen hamnar över kartan*/
 }
 
 /* de olika länkarna i hamburgermenyn */
@@ -140,7 +143,19 @@ button:hover,
 
 /* kartan */ 
 #map {
+    position: relative;
     height: 400px;
     width: 100%;
+    z-index: 0;
 }
+
+/* små rutorna som popar upp när man hovrar över en pin på kartan*/
+.smallInfoDiv {
+    position: absolute;
+    display: none;
+    background: white;
+    padding: 10px;
+}
+
+
 
