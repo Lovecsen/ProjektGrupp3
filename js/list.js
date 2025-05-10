@@ -2,6 +2,7 @@
 const myApiKey = "Tc9ZD2gK"; //API nyckel
 let placeContainer; //div element för att hålla temaparker
 let allPlaces = []; //array för alla platser
+let imgUrl; //urlen för den bild som ska visas
 
 function init() {
     placeContainer = document.querySelector("#placeContainer"); //hämtar det tomma div-elementet i HTML
@@ -42,7 +43,14 @@ function showPlaces(places) {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
         } 
 
-        newDiv.innerHTML = "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        //lägger till bilden fyr på id 678 och 679, på de andra finns inga bilder - lägg till fler när fler bilder finns
+        if (place.id == "678" || place.id == "679") {
+            imgUrl = "photos/fyr.svg";
+        } else {
+            imgUrl= "";
+        }
+
+        newDiv.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "'>" + "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
 
 
