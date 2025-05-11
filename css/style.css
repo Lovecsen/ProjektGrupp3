@@ -110,14 +110,16 @@ button:hover,
 }
 
 /* div element runt annat div element som är runt det nya div elementet som skapas för varje populär turistdestination */
-#popularOutsideDiv { 
+#popularOutsideDiv,
+#popularInsideDiv { 
     overflow: hidden;
     position: relative;
     
 }
 
 /* div elementet som är runt det nya div elementet för varje populär turistdestination */
-#popularOutsideDiv > div {
+#popularOutsideDiv > div,
+#popularInsideDiv > div {
     display: flex;
     transition: transform 0.3s ease;
 }
