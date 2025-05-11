@@ -107,6 +107,7 @@ button:hover,
 #form button:hover {
     background-color: #b0d294;
     color: white;
+    cursor: pointer;
 }
 
 /* div element runt annat div element som är runt det nya div elementet som skapas för varje populär turistdestination */
@@ -159,5 +160,19 @@ button:hover,
     padding: 10px;
 }
 
+#allDestinations {
+    display: flex;
+    justify-content: center;
+}
+
+#allBtn {
+    background: none;
+    font-size: 15px;
+}
+
+#allBtn:hover {
+    text-decoration: underline;
+    color: #004225;
+}
 
 
