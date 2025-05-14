@@ -52,8 +52,9 @@ function responsePopularOutsideDestinations(jsonData) {
         const outside = jsonData[i]; //variabel för objektet i SMAPI
         const newDiv = document.createElement("div"); //nytt div element för SMAPI objektet
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
+        let imgUrl = "photos/fyr.svg";
 
-        newDiv.innerHTML = "<h4>" + outside.name + "</h4><p>Stad: " + outside.city + "</p><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<h4>" + outside.name + "</h4><img src='" + imgUrl + "'><p>Stad: " + outside.city + "</p><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
         popularOutside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
@@ -94,14 +95,14 @@ function showSlide(e) {
     e.style.transitionDuration = "0.3s";
 
     if (dragged == wrapperElemOutside) {
-    e.style.transform = "translateX(" + (-currentIxOutside * slideWidth) + "px)";
+        e.style.transform = "translateX(" + (-currentIxOutside * (slideWidth * 3)) + "px)";
     }
 
     if (dragged == wrapperElemInside) {
-       
-        e.style.transform = "translateX(" + (-currentIxInside * slideWidth) + "px)";
+
+        e.style.transform = "translateX(" + (-currentIxInside * (slideWidth * 3)) + "px)";
     }
-    
+
 
 }
 
@@ -122,13 +123,13 @@ function dragStart(e) {
 function dragMove(e) {
     if (!e.isPrimary) return;
     let deltaX = e.pageX - xStart;
-    
+
     if (dragged == wrapperElemOutside) {
-    wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIxOutside * slideWidth) + "px)";
+        wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIxOutside * slideWidth) + "px)";
     }
 
     if (dragged == wrapperElemInside) {
-    wrapperElemInside.style.transform = "translateX(" + (deltaX - currentIxInside * slideWidth) + "px)";
+        wrapperElemInside.style.transform = "translateX(" + (deltaX - currentIxInside * slideWidth) + "px)";
     }
 }
 

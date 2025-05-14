@@ -11,14 +11,16 @@ function initMap(id) {
 
     //nytt kartobjekt
     map = L.map(id).setView([57.353,15.601], 7);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        minZoom: 6
+    }).addTo(map);
 
 }
 
 function markerLocations(obj) {
 
     const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+    
     
     //gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
     setTimeout(() => {
@@ -51,5 +53,5 @@ function markerLocations(obj) {
             //smallInfo.style.display = isVisible ? 'none' : 'block';
         });
     }, 0);
- 
+
 }
