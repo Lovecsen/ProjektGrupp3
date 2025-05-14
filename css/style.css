@@ -127,13 +127,37 @@ button:hover,
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
-    flex: 0 0 55vw;
+    flex: 0 0 23vw;
+    height: 100px;
     cursor: grab;
     border:1px solid #b0d294;
     border-radius: 10px;
     margin-right: 10px;
     padding: 10px;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: 1px 1px;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "h4 h4"
+    "img p";
+    
 }
+
+.smapiPopular img {
+    width: 50px;
+    grid-area: "img";
+}
+
+.smapiPopular p {
+    grid-area: "p";
+}
+
+.smapiPopular h4 {
+    grid-area: "h4";
+}
+
+
 
 /* nya div elementen för alla turistmål på listsidan */
 .smapiPlace {
@@ -154,10 +178,11 @@ button:hover,
 
 /* små rutorna som popar upp när man hovrar över en pin på kartan*/
 .smallInfoDiv {
-    position: absolute;
+    position:fixed;
     display: none;
     background: white;
     padding: 10px;
+    border: 1px solid #004225;
 }
 
 #allDestinations {
@@ -174,5 +199,7 @@ button:hover,
     text-decoration: underline;
     color: #004225;
 }
+
+
 
 

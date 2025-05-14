@@ -31,6 +31,7 @@ async function getProductDetails(placeId) {
 function showProductDetails(product) {
     const newProduct = document.createElement("div"); //skapa nytt div-element för turistmålet
     newProduct.classList.add("smapiProduct"); //lägg till en class
+    markerLocations(product);
 
     newProduct.innerHTML =
         "<h2>" + product.name + "</h2>" +
@@ -39,4 +40,5 @@ function showProductDetails(product) {
         "<p><strong>Beskrivning:</strong> " + product.abstract + "</p>";
 
     productDetails.appendChild(newProduct);
+
 }
