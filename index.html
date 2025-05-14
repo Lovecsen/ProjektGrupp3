@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
     <script src="js/test.js" defer></script>
+    <script src="js/formfunction.js"></script>
     <script src="js/hamburger.js"></script>
+    
 </head>
 
 <body>
@@ -42,9 +44,10 @@
             </div>
             </form>
             <form id="question2" class="hide">
-                <p>2. Är det viktigt att turistmålet är barnvänligt?</p>
+                <p>2. Vill du/ni att turistmålet ska vara barnvänligt?</p>
                 <label>Ja<input type="radio" name="child" id="yes" class="second"></label>
                 <label>Nej<input type="radio" name="child" id="no" class="second"></label>
+                <label>Spelar ingen roll<input type="radio" name="child" id="yesno" class="second"></label>
                 <div class="formBtn">
                 <button type="button" id="secondNext">Nästa</button>
                     <button type="button" id="previous2">Föregående</button>
@@ -64,11 +67,11 @@
             <form id="question4" class="hide">
                 <p>4. Vilken prisklass skulle du/ni kunna tänka er?</p>
                 <label>0-100 kr<input type="checkbox" name="0" id="0" class="fourth"></label>
-                <label>100-300<input type="checkbox" name="100" id="100" class="fourth"></label>
-                <label>300-500<input type="checkbox" name="250" id="250" class="fourth"></label>
-                <label>500+<input type="checkbox" name="500" id="500" class="fourth"></label>
+                <label>100-300 kr<input type="checkbox" name="100" id="100" class="fourth"></label>
+                <label>300-500 kr<input type="checkbox" name="250" id="300" class="fourth"></label>
+                <label>500+ kr<input type="checkbox" name="500" id="500" class="fourth"></label>
                 <div class="formBtn">
-                <button type="button" id="fourthNext" onclick="window.location.href='fiskmannen.html'">Få resultat</button><button type="button" id="previous4">Föregående</button>
+                <button type="button" id="fourthNext" onclick="window.location.href='quizresultat.html'">Få resultat</button><button type="button" id="previous4">Föregående</button>
                 </div>
             </form>
         </section>
