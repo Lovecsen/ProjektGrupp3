@@ -183,7 +183,7 @@ button:hover,
 /* kartan */ 
 #map {
     position: relative;
-    height: 400px;
+    height: 250px;
     width: 100%;
     z-index: 0;
 }
