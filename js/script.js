@@ -23,6 +23,7 @@ function init() {
 
     wrapperElemOutside.addEventListener("pointerdown", dragStart);
     wrapperElemInside.addEventListener("pointerdown", dragStart);
+    
 
     popularOutsideDestinations(); //anrop av funktion för att hämta utomhusdata från SMAPI
     popularInsideDestinations(); //anrop av funktion för att hämta inomhusdata från SMAPI
@@ -54,7 +55,7 @@ function responsePopularOutsideDestinations(jsonData) {
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
         let imgUrl = "photos/fyr.svg";
 
-        newDiv.innerHTML = "<h4>" + outside.name + "</h4><img src='" + imgUrl + "'><p>Stad: " + outside.city + "</p><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<h3>" + outside.name + "</h3><img src='" + imgUrl + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
         popularOutside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
@@ -82,8 +83,9 @@ function responsePopularInsideDestinations(jsonData) {
         const inside = jsonData[i]; //variabel för objektet i SMAPI
         const newDiv = document.createElement("div"); //nytt div element för SMAPI objektet
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
+        let imgUrl = "photos/fyr.svg";
 
-        newDiv.innerHTML = "<h4>" + inside.name + "</h4><p>Stad: " + inside.city + "</p><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<h3>" + inside.name + "</h3><img src='" + imgUrl + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
 
         popularInside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
@@ -95,12 +97,12 @@ function showSlide(e) {
     e.style.transitionDuration = "0.3s";
 
     if (dragged == wrapperElemOutside) {
-        e.style.transform = "translateX(" + (-currentIxOutside * (slideWidth * 3)) + "px)";
+        e.style.transform = "translateX(" + (-currentIxOutside * (slideWidth * 2)) + "px)";
     }
 
     if (dragged == wrapperElemInside) {
 
-        e.style.transform = "translateX(" + (-currentIxInside * (slideWidth * 3)) + "px)";
+        e.style.transform = "translateX(" + (-currentIxInside * (slideWidth * 2)) + "px)";
     }
 
 
@@ -125,11 +127,11 @@ function dragMove(e) {
     let deltaX = e.pageX - xStart;
 
     if (dragged == wrapperElemOutside) {
-        wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIxOutside * slideWidth) + "px)";
+        wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIxOutside * (slideWidth * 2)) + "px)";
     }
 
     if (dragged == wrapperElemInside) {
-        wrapperElemInside.style.transform = "translateX(" + (deltaX - currentIxInside * slideWidth) + "px)";
+        wrapperElemInside.style.transform = "translateX(" + (deltaX - currentIxInside * (slideWidth * 2)) + "px)";
     }
 }
 
