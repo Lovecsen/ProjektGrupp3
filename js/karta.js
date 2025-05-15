@@ -10,9 +10,9 @@ window.addEventListener("load", init);
 function initMap(id) {
 
     //nytt kartobjekt
-    map = L.map(id).setView([57.353,15.601], 7);
+    map = L.map(id).setView([57.353,15.601], 6);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        minZoom: 6
+        minZoom: 5
     }).addTo(map);
 
 }
