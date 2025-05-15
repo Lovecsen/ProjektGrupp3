@@ -3,7 +3,6 @@ html {
 }
 
 body {
-    background-color: #ffffff;
     position: relative;
 }
 
@@ -12,9 +11,13 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 2px solid #004225;
     z-index: 1000;
 }
+
+main {
+    background-color: rgb(248, 245, 245);
+}
+
  /* Navigeringen till höger */
 #asideDiv {
     display: flex;
@@ -26,7 +29,7 @@ body {
 #form {
     border-radius: 10px;
     padding: 5px;
-    background-color: #e5f1db;
+    background-color: #f9fcf5c2;
 }
 
 /* Svarsalternativen */
@@ -95,8 +98,8 @@ body {
 button {
     border-radius: 10%;
     border: 0;
-    background-color: #CDEDB3;
-    color:#004225;
+    background-color: #FFEDA8;
+    color:#000000;
     font-size: 13px;
     padding: 8px;
     margin-top: 10px;
@@ -128,6 +131,7 @@ button:hover,
 /* nya div elementen för populära turistmål */
 .smapiPopular {
     flex: 0 0 35vw;
+    background-color: #f9fcf5c2;
     height: 150px;
     cursor: grab;
     border:1px solid #b0d294;
@@ -167,6 +171,7 @@ button:hover,
     margin-top: 7px;
     font-size: 12px;
     text-align: center;
+    
 }
 
 
@@ -178,6 +183,7 @@ button:hover,
     padding: 10px;
     text-align: right;
     margin-bottom: 10px;
+    background-color: #f9fcf5c2;
 }
 
 /* kartan */ 
