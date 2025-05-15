@@ -1,12 +1,16 @@
 // Globala variabler
 const apiKey = "Tc9ZD2gK";
-const storedPlace = localStorage.getItem("selectedPlace");
+//const storedPlace = localStorage.getItem("selectedPlace");
 let productDetails;
+let reviewsDiv;
+const placeId = localStorage.getItem("selectedPlaceId"); // hämta turistmålets id
 
 function init() {
+    console.log("placeId från localStorage:", placeId);
+
     productDetails = document.querySelector("#productDetails"); // hämta produkt-diven
 
-    const placeId = localStorage.getItem("selectedPlaceId"); // hämta turistmålets id
+    reviewsDiv = document.querySelector("#reviewsDiv"); // hämta recensioner-diven
 
     getProductDetails(placeId);
 
@@ -27,7 +31,6 @@ async function getProductDetails(placeId) {
     }
 }
 
-
 function showProductDetails(product) {
     const newProduct = document.createElement("div"); //skapa nytt div-element för turistmålet
     newProduct.classList.add("smapiProduct"); //lägg till en class
@@ -36,9 +39,38 @@ function showProductDetails(product) {
     newProduct.innerHTML =
         "<h2>" + product.name + "</h2>" +
         "<p><strong>Stad:</strong> " + product.city + "</p>" +
-        "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" +
+        "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
         "<p><strong>Beskrivning:</strong> " + product.abstract + "</p>";
 
     productDetails.appendChild(newProduct);
 
+    getReviews(placeId);
+}
+
+async function getReviews(placeId) {
+    const responseReviews = await fetch("https://smapi.lnu.se/api/?api_key=" + apiKey + "&controller=establishment&method=getreviews&id=" + placeId)
+
+    if (responseReviews.ok) {
+        let dataReviews = await responseReviews.json();
+        const reviews = dataReviews.payload;
+
+        for (let i = 0; i < reviews.length; i++) {
+            showReviews(reviews[i]);
+        }
+    }
+    else {
+        reviewsDiv.innerText = "Fel vid hämtning: " + responseReviews.status; //felmeddelande 
+    }
+}
+
+function showReviews(reviews) {
+    const newReview = document.createElement("div"); //skapa nytt div-element för recensionerna
+    newReview.classList.add("smapiReviews"); //lägg till en class
+
+    newReview.innerHTML =
+        "<p><strong>" + reviews.name + "</strong></p>" +
+        "<p>" + reviews.comment + "</p>" + "<p>" + reviews.relative_time + "</p>";
+    console.log(newReview)
+
+    reviewsDiv.appendChild(newReview);
 }
