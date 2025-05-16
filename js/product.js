@@ -69,7 +69,7 @@ function showReviews(reviews) {
 
     newReview.innerHTML =
         "<p><strong>" + reviews.name + "</strong></p>" +
-        "<p>" + reviews.comment + "</p>" + "<p>" + reviews.relative_time + "</p>";
+        "<p>" + reviews.comment + "</p>" + "<p><i>" + reviews.relative_time + "</i></p>";
     console.log(newReview)
 
     reviewsDiv.appendChild(newReview);
