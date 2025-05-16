@@ -57,6 +57,14 @@ function responsePopularOutsideDestinations(jsonData) {
 
         newDiv.innerHTML = "<h3>" + outside.name + "</h3><img src='" + imgUrl + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
+        newDiv.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", outside.id); // Spara turistmålets ID i localStorage
+            
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+            });
+
+
         popularOutside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
     }
@@ -87,6 +95,13 @@ function responsePopularInsideDestinations(jsonData) {
 
         newDiv.innerHTML = "<h3>" + inside.name + "</h3><img src='" + imgUrl + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
 
+        newDiv.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", inside.id); // Spara turistmålets ID i localStorage
+            
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+            });
+
         popularInside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
     }
@@ -104,8 +119,6 @@ function showSlide(e) {
 
         e.style.transform = "translateX(" + (-currentIxInside * (slideWidth * 2)) + "px)";
     }
-
-
 }
 
 function dragStart(e) {
