@@ -249,6 +249,26 @@ button:hover {
     color: #004225;
 }
 
+#reviewsDiv {
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+}
+
+.smapiReviews {
+    min-width: 200px;
+    background-color: #dfedd8;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 12px;
+
+}
+
+.smapiReviews i {
+    font-size: 10px;
+}
+
 
 
 
