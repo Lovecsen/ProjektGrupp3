@@ -36,6 +36,9 @@ function showProductDetails(product) {
     newProduct.classList.add("smapiProduct"); //lägg till en class
     markerLocations(product);
 
+    const lat = product.lat;
+    const lng = product.lng;
+
     newProduct.innerHTML =
         "<h2>" + product.name + "</h2>" +
         "<p><strong>Stad:</strong> " + product.city + "</p>" +

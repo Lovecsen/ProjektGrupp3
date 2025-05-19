@@ -21,9 +21,6 @@ function init() {
     let insideBtn = document.querySelector("#insideBtn"); //knapp för att visa alla inomhus turistmål
     popularInside = document.querySelector("#popularInsideDiv div"); //div element för att hålla de populära turistmålen för inomhus
 
-    wrapperElemOutside.addEventListener("pointerdown", dragStart);
-    wrapperElemInside.addEventListener("pointerdown", dragStart);
-    
 
     popularOutsideDestinations(); //anrop av funktion för att hämta utomhusdata från SMAPI
     popularInsideDestinations(); //anrop av funktion för att hämta inomhusdata från SMAPI
@@ -105,73 +102,4 @@ function responsePopularInsideDestinations(jsonData) {
         popularInside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
 
     }
-}
-
-function showSlide(e) {
-    slideWidth = e.querySelector(".smapiPopular").offsetWidth; //storleken på en ruta
-    e.style.transitionDuration = "0.3s";
-
-    if (dragged == wrapperElemOutside) {
-        e.style.transform = "translateX(" + (-currentIxOutside * (slideWidth * 2)) + "px)";
-    }
-
-    if (dragged == wrapperElemInside) {
-
-        e.style.transform = "translateX(" + (-currentIxInside * (slideWidth * 2)) + "px)";
-    }
-}
-
-function dragStart(e) {
-    if (!e.isPrimary) return;
-    e.preventDefault();
-    xStart = e.pageX;
-    dragged = e.currentTarget; //det element som dragits för att veta vilken av utonhus eller inomhus som dras
-
-    wrapperElemOutside.style.transitionDuration = "0s";
-    wrapperElemInside.style.transitionDuration = "0s";
-
-    document.addEventListener("pointermove", dragMove);
-    document.addEventListener("pointerup", dragEnd);
-    document.addEventListener("pointercancel", dragEnd);
-}
-
-function dragMove(e) {
-    if (!e.isPrimary) return;
-    let deltaX = e.pageX - xStart;
-
-    if (dragged == wrapperElemOutside) {
-        wrapperElemOutside.style.transform = "translateX(" + (deltaX - currentIxOutside * (slideWidth * 2)) + "px)";
-    }
-
-    if (dragged == wrapperElemInside) {
-        wrapperElemInside.style.transform = "translateX(" + (deltaX - currentIxInside * (slideWidth * 2)) + "px)";
-    }
-}
-
-function dragEnd(e) {
-    if (!e.isPrimary) return;
-
-    let deltaX = e.pageX - xStart;
-    if (dragged == wrapperElemOutside) {
-        if (deltaX > minDrag && currentIxOutside > 0) {
-            currentIxOutside--;
-        } else if (deltaX < -minDrag && currentIxOutside < wrapperElemOutside.children.length - 1) {
-            currentIxOutside++;
-        }
-        showSlide(wrapperElemOutside);
-    }
-
-    if (dragged == wrapperElemInside) {
-        if (deltaX > minDrag && currentIxInside > 0) {
-            currentIxInside--;
-        } else if (deltaX < -minDrag && currentIxInside < wrapperElemInside.children.length - 1) {
-            currentIxInside++;
-        }
-        showSlide(wrapperElemInside);
-    }
-
-    document.removeEventListener("pointermove", dragMove);
-    document.removeEventListener("pointerup", dragEnd);
-    document.removeEventListener("pointercancel", dragEnd);
-    dragged = null; //nollställs
 }
