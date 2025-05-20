@@ -35,10 +35,12 @@ async function getData(answer1, answer2, answer3, answer4) {
    
     let data = await response.json();
 
+    if (window.location.pathname.includes("quizresultat.html")) {
     //om det inte finns något som matchas med svaren i smapi
     if (!data.payload || data.payload.length == 0) {
         resultElem.innerText = "Inga resultat matchade dina svar";
         return;
+    }
     }
  
     showResult(data.payload); // skicka vidare till funktion showPlaces
