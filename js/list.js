@@ -55,44 +55,6 @@ function showPlaces(places) {
 
         newDiv.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
-        const heartPicture = newDiv.querySelector(".heart");
-        const placeId = heartPicture.dataset.id;
-
-        let favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
-
-        let liked = favorites.includes(placeId);
-
-        if (liked) {
-            heartPicture.src = "photos/smallredheart.svg";
-        }
-
-            heartPicture.addEventListener("pointerenter", () => {
-                if (!liked) {
-                heartPicture.src = "photos/smallredheart.svg";
-            }});
-
-            heartPicture.addEventListener("pointerleave", () => {
-                if (!liked) {
-                heartPicture.src = "photos/smallheart.svg";
-            }});
-
-            heartPicture.addEventListener("pointerdown", (e) => {
-                e.stopPropagation();
-
-                if (!liked) {
-                heartPicture.src = "photos/smallredheart.svg";
-                favorites.push(placeId);
-                liked = true;
-                } else {
-                heartPicture.src = "photos/smallheart.svg";
-                favorites = favorites.filter(name => name !== placeId);
-                liked = false;
-                }
-
-                localStorage.setItem("favoriter", JSON.stringify(favorites));
-            });
-        
-
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
@@ -101,6 +63,8 @@ function showPlaces(places) {
         });
 
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
+
+        heart(newDiv);
     }
 
 }
