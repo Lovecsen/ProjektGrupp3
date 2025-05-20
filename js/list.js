@@ -32,6 +32,7 @@ function showPlaces(places) {
     for (let i = 0; i < places.length; i++) {
         const place = places[i]; //aktuellt turistmål
         markerLocations(place);
+        fetchImage(place); 
 
         const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
 
