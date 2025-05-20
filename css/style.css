@@ -2,12 +2,10 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 body {
     position: relative;
     background-color: rgb(248, 245, 245);
 }
-
 
 /* Hela navigeringen */
 #navbar {
@@ -17,14 +15,12 @@ body {
     z-index: 1000;
 }
 
-
  /* Navigeringen till höger */
 #asideDiv {
     display: flex;
     align-items: center;
     position: relative;
 }
-
 
 /* Hela formuläret för frågorna */
 #form {
@@ -33,21 +29,17 @@ body {
     background-color: #dfedd8;
 }
 
-
 /* Svarsalternativen */
 #form label {
     display: block;
     margin-left: 20px;
     padding: 5px;
-   
 }
-
 
 /* De olika frågorna i formuläret */
 .hide {
     display: none;
 }
-
 
 /* knapparna i formuläret */
 #form button {
@@ -55,10 +47,7 @@ body {
     width: auto;
     background-color: #b6dca5;
     margin: 5px;
-
-
 }
-
 
 /* klass för stilsättning av inaktiverad knapp */
 .disabled {
@@ -66,17 +55,13 @@ body {
     opacity: 0.5;
 }
 
-
 /* de olika frågorna i formuläret */
 #question1,
 #question2,
 #question3,
 #question4 {
     height: 180px;
-
-
 }
-
 
 /* hamburgermenyn till höger */
 #hamburgerMenu {
@@ -92,19 +77,16 @@ body {
     z-index: 1001; /* så dropdownen hamnar över kartan*/
 }
 
-
 /* de olika länkarna i hamburgermenyn */
 #hamburgerMenu li {
     margin-bottom: 15px;
 }
-
 
 /* bilden för hamburgarmenyn */
 #hamburgerIcon {
     margin-left: 15px;
     margin-bottom: 5px;
 }
-
 
 /* alla knapparna */
 button {
@@ -116,7 +98,6 @@ button {
     padding: 8px;
     margin-top: 10px;
 }
-
 
 /* när man hovrar över knapparna */
 button:hover {
@@ -130,15 +111,12 @@ button:hover {
     cursor: pointer;
 }
 
-
 /* div element runt annat div element som är runt det nya div elementet som skapas för varje populär turistdestination */
 #popularOutsideDiv,
 #popularInsideDiv {
     overflow: hidden;
     position: relative;
-   
 }
-
 
 /* div elementet som är runt det nya div elementet för varje populär turistdestination */
 #popularOutsideDiv > div,
@@ -146,7 +124,6 @@ button:hover {
     display: flex;
     transition: transform 0.3s ease;
 }
-
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
@@ -165,48 +142,41 @@ button:hover {
     ". img ."
     "h4 h4 h4"
     "p p p";
-    
-   
 }
 
-
+/* img i populära turistmål */
 .smapiPopular img {
     width: 60px;
     grid-area: img;
 }
 
-
+/* p i populära turistmål */
 .smapiPopular p {
     grid-area: p;
     margin-top: 0px;
     text-align: center;
 }
 
-
+/* h4 i populära turistmål */
 .smapiPopular h4 {
     grid-area: h4;
     margin-top: 7px;
     text-align: center;
 }
 
-
+/* h3 i populära turistmål */
 .smapiPopular h3 {
     grid-area: h3;
     margin-top: 7px;
     font-size: 12px;
     text-align: center;
-   
 }
 
+/* omslutande element för populära turistmål */
 #wrapperElem, 
 #wrapperElem2 {
     overflow-y: scroll;
 }
-
-
-
-
-
 
 /* nya div elementen för alla turistmål på listsidan */
 .smapiPlace {
@@ -218,7 +188,6 @@ button:hover {
     border: 1px solid #727070
 }
 
-
 /* kartan */
 #map {
     position: relative;
@@ -226,7 +195,6 @@ button:hover {
     width: 100%;
     z-index: 0;
 }
-
 
 /* små rutorna som popar upp när man hovrar över en pin på kartan*/
 .smallInfoDiv {
@@ -237,30 +205,32 @@ button:hover {
     border: 1px solid #004225;
 }
 
-
+/* omslutande div element för knappen till alla turistmål på startsidan */
 #allDestinations {
     display: flex;
     justify-content: center;
 }
 
-
+/* knappen för att komma till alla turistmål på startsidan */
 #allBtn {
     background: none;
     font-size: 15px;
 }
 
-
+/* när man hovrar över knappen för att visa alla turistmålen på startsidan */
 #allBtn:hover {
     text-decoration: underline;
     color: #004225;
 }
 
+/* element runt div elementen för recensioner */
 #reviewsDiv {
     display: flex;
     flex-direction: row;
     overflow-y: scroll;
 }
 
+/* rutorna för recensioner */
 .smapiReviews {
     min-width: 200px;
     background-color: #dfedd8;
@@ -268,9 +238,9 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     font-size: 12px;
-
 }
 
+/* texten för hur många år sen recensionen lades */
 .smapiReviews i {
     font-size: 10px;
 }
