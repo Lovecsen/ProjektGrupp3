@@ -111,37 +111,38 @@ button:hover {
     cursor: pointer;
 }
 
-/* div element runt annat div element som är runt det nya div elementet som skapas för varje populär turistdestination */
-#popularOutsideDiv,
-#popularInsideDiv {
-    overflow: hidden;
-    position: relative;
-}
-
 /* div elementet som är runt det nya div elementet för varje populär turistdestination */
 #popularOutsideDiv > div,
 #popularInsideDiv > div {
     display: flex;
-    transition: transform 0.3s ease;
 }
 
 /* nya div elementen för populära turistmål */
 .smapiPopular {
-    flex: 0 0 35vw;
+    flex: 0 0 40vw;
     background-color: #dfedd8;
-    height: 150px;
-    cursor: grab;
+    height: 175px;
+    cursor: pointer;
     border-radius: 10px;
     margin-right: 10px;
     font-size: 11px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: min-content min-content min-content;
+    grid-template-rows: min-content min-content min-content min-content min-content;
     grid-template-areas:
+    ". . heart"
     "h3 h3 h3"
     ". img ."
     "h4 h4 h4"
     "p p p";
+}
+
+.smapiPopular .heart {
+    grid-area: heart;
+    width: 20px;
+    justify-self: end;
+    padding: 7px;
+    margin-bottom: 0px;
 }
 
 /* img i populära turistmål */
@@ -167,7 +168,7 @@ button:hover {
 /* h3 i populära turistmål */
 .smapiPopular h3 {
     grid-area: h3;
-    margin-top: 7px;
+    margin-top: 0px;
     font-size: 12px;
     text-align: center;
 }
