@@ -7,11 +7,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const answer3 = localStorage.getItem("answer3");
     const answer4 = localStorage.getItem("answer4");
 
-    if (answer1 && answer2 && answer3 && answer4) {
-        getData(answer1, answer2, answer3, answer4);
-    } else {
-        console.error("Data saknas");
-    }
+    getData(answer1, answer2, answer3, answer4);
+    
 });
 
 async function getData(answer1, answer2, answer3, answer4) {
