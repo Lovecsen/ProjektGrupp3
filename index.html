@@ -12,23 +12,23 @@
     <script src="js/hamburger.js"></script>
     <script src="js/navfunction.js"></script>
     <script src="js/favoriter.js"></script>
-    
+
 </head>
 
 <body>
     <nav id="navbar">
         <a href="index.html"><img src="photos/Logga.svg" alt="Älv och Ö"></a>
         <div id="asideDiv">
-        <a href="favoriter.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
-        <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
-        <ul id="hamburgerMenu">
-            <li><a href="index.html">Startsida</a></li>
-            <li><a href="listsida.html">Alla turistmål</a></li>
-            <li><a href="favoriter.html">Favoriter</a></li>
-            <li><a href="omoss.html">Om oss</a></li>
-            <li><a href="kontakt.html">Kontakta oss</a></li>
-        </ul>
-    </div>
+            <a href="favoriter.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
+            <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
+            <ul id="hamburgerMenu">
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="listsida.html">Alla turistmål</a></li>
+                <li><a href="favoriter.html">Favoriter</a></li>
+                <li><a href="omoss.html">Om oss</a></li>
+                <li><a href="kontakt.html">Kontakta oss</a></li>
+            </ul>
+        </div>
     </nav>
     <main>
         <section>
@@ -42,8 +42,8 @@
                 <label>Inomhusaktiviteter<input type="radio" name="what" id="inside" class="first"></label>
                 <label>Båda<input type="radio" name="what" id="both" class="first"></label>
                 <div class="formBtn">
-                <button type="button" class=next id="firstNext">Nästa</button>
-            </div>
+                    <button type="button" class=next id="firstNext">Nästa</button>
+                </div>
             </form>
             <form id="question2" class="hide">
                 <p>2. Vill du/ni att turistmålet ska vara barnvänligt?</p>
@@ -51,7 +51,7 @@
                 <label>Nej<input type="radio" name="child" id="no" class="second"></label>
                 <label>Spelar ingen roll<input type="radio" name="child" id="yesno" class="second"></label>
                 <div class="formBtn">
-                <button type="button" id="secondNext">Nästa</button>
+                    <button type="button" id="secondNext">Nästa</button>
                     <button type="button" id="previous2">Föregående</button>
                 </div>
 
@@ -62,9 +62,9 @@
                 <label>Sevärdheter<input type="radio" name="activityorsights" id="sights" class="third"></label>
                 <label>Båda<input type="radio" name="activityorsights" id="both3" class="third"></label>
                 <div class="formBtn">
-                <button type="button" id="thirdNext">Nästa</button><button type="button" id="previous3">Föregående</button>
+                    <button type="button" id="thirdNext">Nästa</button><button type="button" id="previous3">Föregående</button>
                 </div>
-             
+
             </form>
             <form id="question4" class="hide">
                 <p>4. Vilken prisklass skulle du/ni kunna tänka er?</p>
@@ -73,7 +73,7 @@
                 <label>300-500 kr<input type="checkbox" name="250" id="300" class="fourth"></label>
                 <label>500+ kr<input type="checkbox" name="500" id="500" class="fourth"></label>
                 <div class="formBtn">
-                <button type="button" id="fourthNext" onclick="window.location.href='quizresultat.html'">Få resultat</button><button type="button" id="previous4">Föregående</button>
+                    <button type="button" id="fourthNext" onclick="window.location.href='quizresultat.html'">Få resultat</button><button type="button" id="previous4">Föregående</button>
                 </div>
             </form>
         </section>
@@ -98,12 +98,17 @@
             </section>
             <button type="button" id="insideBtn" onclick="window.location.href='listsida.html'">Se alla inomhus <img src="photos/rightarrow.svg" alt="pil"></button>
             <div id="allDestinations">
-            <button type="button" id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål <img src="photos/rightarrow.svg" alt="pil"></button>
+                <button type="button" id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål <img src="photos/rightarrow.svg" alt="pil"></button>
             </div>
         </section>
     </main>
-
+    <footer>
+        <h4>Älv & Ö</h4>
+        <p>Tel: 08-00000000</p>
+        <p>Kontakt@alv&o.se</p>
+    </footer>
 
 </body>
+
 
 </html>
