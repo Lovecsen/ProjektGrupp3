@@ -1,41 +1,17 @@
-function init() {
-    
+export async function fetchImages(place) {
+    const lat = place.lat;
+    const lng = place.lng;
 
-}
-window.addEventListener("load", init);
+    let answer = await fetch("https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=ef613a81486a76320dc01145298bc636&lat=" + lat + "&lon=" + lng + "&per_page=1&format=json&nojsoncallback=1&");
+    let JSONdata = await answer.json();
 
-function fetchImages (place) {
- var apiKey = "ef613a81486a76320dc01145298bc636";
-
-    var url = "https://api.flickr.com/services/rest/?api_key=" + apiKey +
-              "&method=flickr.photos.search" +
-              "&lat=" + place.lat +
-              "&lon=" + place.lon +
-              "&per_page=" + 3 +
-              "&format=json" +
-              "&nojsoncallback=1";
-
-
- fetch(url)
-        .then(function(response) {
-            if (!response.ok) {
-                throw new Error("Fel vid hämtning av bilder");
-            }
-            return response.json();
-        })
-        .then(function(data) {
-            showImages(data.photos.photo, place.name);
-        })
-        .catch(function(error) {
-            console.error("Kunde inte hämta bilder:", error);
-        });
-}
-
-function showImages(photos) {
-
-    for (var i = 0; i < photos.length; i++) {
-        var photo = photos[i];
-        
+    if (JSONdata.photos.photo.length > 0) {
+        const photo = JSONdata.photos.photo[0];
+        const imgUrl = "https://live.staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_s.jpg";
+        return imgUrl;
+    } else {
+        return "photos/no-image.jpg"; // en defaultbild om inget hittas
     }
-
 }
+
+//window.addEventListener("load", fetchImages(place));
