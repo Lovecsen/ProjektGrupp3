@@ -192,7 +192,50 @@ button:hover {
     text-align: right;
     margin-bottom: 15px;
     background-color: #e8f3e3;
-    border: 1px solid #727070
+    border: 1px solid #727070;
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-areas:
+    "imgUrl namn heartId"
+    "imgUrl stad stad"
+    "imgUrl pris pris"
+    "beskrivning beskrivning beskrivning";
+}
+
+#heartId {
+    grid-area: heartId;
+    padding-left: 30px;
+    padding-top: 4px;
+}
+
+#imgUrl {
+    display:block;
+    width: 150px;
+    object-fit: cover;
+    grid-area: imgUrl;
+    padding-right: 15px;
+    padding-top: 20px;
+}
+
+#namn {
+    grid-area: namn;
+    text-align: left;
+}
+
+#stad {
+    grid-area: stad;
+    text-align: left;
+}
+
+#pris {
+    grid-area: pris;
+    text-align: left;
+}
+
+#beskrivning {
+    grid-area: beskrivning;
+    text-align: left;
 }
 
 /* kartan */
