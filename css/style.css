@@ -5,6 +5,11 @@ html {
 body {
     position: relative;
     background-color: rgb(248, 245, 245);
+    margin: 0px;
+}
+
+main {
+    margin: 7px;
 }
 
 /* Hela navigeringen */
@@ -244,6 +249,12 @@ button:hover {
 /* texten för hur många år sen recensionen lades */
 .smapiReviews i {
     font-size: 10px;
+}
+
+footer {
+    background-color: #dfedd8;
+    padding: 10px;
+    width: 100%;
 }
 
 
