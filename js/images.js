@@ -7,7 +7,7 @@ export async function fetchImages(place) {
 
     if (JSONdata.photos.photo.length > 0) {
         const photo = JSONdata.photos.photo[0];
-        const imgUrl = "https://live.staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_s.jpg";
+        const imgUrl = "https://live.staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_m.jpg";
         return imgUrl;
     } else {
         return "photos/no-image.jpg"; // en defaultbild om inget hittas
