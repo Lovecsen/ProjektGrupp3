@@ -5,6 +5,8 @@ function init() {
 
     let navHeart = document.querySelector("#favorites");
 
+    if (!navHeart) return;
+
     navHeart.addEventListener("pointerenter", () => {
 
         navHeart.src = "photos/redfavorites.svg";
