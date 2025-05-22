@@ -78,7 +78,7 @@ if (window.location.pathname.includes("quizresultat.html")) {
             imgUrl = "";
         }
 
-        newDiv.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "'>" + "<h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        newDiv.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
@@ -88,6 +88,8 @@ if (window.location.pathname.includes("quizresultat.html")) {
         });
 
         resultElem.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
+
+        heart(newDiv);
     }
 }
 }
