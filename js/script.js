@@ -1,3 +1,4 @@
+import { fetchImages } from './images.js';
 const myApiKey = "Tc9ZD2gK"; //API nyckel
 let popularOutside; //div element för att hålla de populära turistmålen för utomhus
 let popularInside; //div element för att hålla de populära turistmålen för inomhus
@@ -44,13 +45,13 @@ async function popularOutsideDestinations() {
 }
 
 //skriver ut datan från SMAPI för populära utomhus turistmål
-function responsePopularOutsideDestinations(jsonData) {
+async function responsePopularOutsideDestinations(jsonData) {
 
     for (let i = 0; i < jsonData.length; i++) {
         const outside = jsonData[i]; //variabel för objektet i SMAPI
         const newDiv = document.createElement("div"); //nytt div element för SMAPI objektet
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
-        let imgUrl = "photos/fyr.svg";
+        let imgUrl = await fetchImages(outside);
 
         newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + outside.id + "'><h3>" + outside.name + "</h3><img src='" + imgUrl + "' alt='" + outside.name + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
@@ -84,13 +85,13 @@ async function popularInsideDestinations() {
 }
 
 //skriver ut datan från SMAPI för populära utomhus turistmål
-function responsePopularInsideDestinations(jsonData) {
+async function responsePopularInsideDestinations(jsonData) {
 
     for (let i = 0; i < jsonData.length; i++) {
         const inside = jsonData[i]; //variabel för objektet i SMAPI
         const newDiv = document.createElement("div"); //nytt div element för SMAPI objektet
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
-        let imgUrl = "photos/fyr.svg";
+        let imgUrl = await fetchImages(inside);
 
         newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "' class='picture'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
         

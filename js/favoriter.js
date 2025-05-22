@@ -1,5 +1,4 @@
 
-
 function init() {
 
     showFavorites();
@@ -10,6 +9,9 @@ window.addEventListener("load", init);
 function heart(elem) {
 
     const heartPicture = elem.querySelector(".heart");
+
+    if (!heartPicture) return;
+
     const placeId = heartPicture.dataset.id.toString();
 
     let favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
@@ -93,7 +95,7 @@ async function showFavorites() {
 
         let imgUrl = "";
 
-        div.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' data-id='" + place.id + "'><h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='stad'>Stad: " + place.city + "</p><p id='pris'>Pris: " + place.price_range + " kr</p>" + "<p id='beskrivning>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
         favoriteDiv.appendChild(div);
     }
