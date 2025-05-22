@@ -146,6 +146,7 @@ button:hover {
 .smapiPopular .heart {
     grid-area: heart;
     width: 20px;
+    height:20px;
     justify-self: end;
     padding: 7px;
     margin-bottom: 0px;
@@ -154,6 +155,7 @@ button:hover {
 /* img i populära turistmål */
 .smapiPopular img {
     width: 60px;
+    height: 60px;
     grid-area: img;
 }
 
@@ -197,14 +199,14 @@ button:hover {
     grid-template-columns: 3fr 3fr 1fr;
     grid-template-rows: min-content min-content min-content min-content;
     grid-template-areas:
-    "imgUrl namn heartId"
+    "imgUrl namn favorite"
     "imgUrl stad stad"
     "imgUrl pris pris"
     "beskrivning beskrivning beskrivning";
 }
 
-#heartId {
-    grid-area: heartId;
+#favorite {
+    grid-area: favorite;
     padding-left: 30px;
     padding-top: 4px;
 }
@@ -300,6 +302,13 @@ footer {
     padding: 10px;
     
 }
+
+.picture {
+    width: 80px;
+    height: 150px;
+}
+
+
 
 
 
