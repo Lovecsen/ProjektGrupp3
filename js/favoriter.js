@@ -14,36 +14,36 @@ function heart(elem) {
 
     let favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
 
-    let liked = favorites.includes(placeId);
-
-    if (liked) {
+    if (favorites.includes(placeId)) {
         heartPicture.src = "photos/smallredheart.svg";
     }
 
     heartPicture.addEventListener("pointerenter", () => {
-        if (!liked) {
+        if (!favorites.includes(placeId)) {
             heartPicture.src = "photos/smallredheart.svg";
         }
     });
 
     heartPicture.addEventListener("pointerleave", () => {
-        if (!liked) {
+        if (!favorites.includes(placeId)) {
             heartPicture.src = "photos/smallheart.svg";
         }
     });
 
     heartPicture.addEventListener("pointerdown", (e) => {
         e.stopPropagation();
+
+        favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
         
 
-        if (!liked) {
-            heartPicture.src = "photos/smallredheart.svg";
+        if (!favorites.includes(placeId)) {
             favorites.push(placeId);
-            liked = true;
+            heartPicture.src = "photos/smallredheart.svg";
+            
         } else {
-            heartPicture.src = "photos/smallheart.svg";
             favorites = favorites.filter(id => id !== placeId);
-            liked = false;
+            heartPicture.src = "photos/smallheart.svg";
+            
         }
         localStorage.setItem("favoriter", JSON.stringify(favorites));
     });
@@ -52,7 +52,9 @@ function heart(elem) {
 async function showFavorites() {
     const favIds = (JSON.parse(localStorage.getItem("favoriter")) || []).map(id => id.toString());
 
-    let favoriteDiv = document.querySelector("#placeContainer");
+    let favoriteDiv = document.querySelector("#favoritesContainer");
+
+    if (!favoriteDiv) return;
 
     favoriteDiv.innerHTML = ""; //rensa innehåll först
 
@@ -71,13 +73,8 @@ async function showFavorites() {
     let data = await response.json();
     const places = data.payload;
 
-    let favoritePlaces = [];
+    let favoritePlaces = places.filter(place => favIds.includes(place.id.toString()));
     
-    for (let i = 0; i < places.length; i++) {
-        if (favIds.includes(places[i].id.toString())) {
-            favoritePlaces.push(places[i]);
-        }
-    }
 
 
     for (let i = 0; i < favoritePlaces.length; i++) {
