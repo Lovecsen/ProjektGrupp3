@@ -1,5 +1,6 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
 
 body {
@@ -28,11 +29,17 @@ main {
     position: relative;
 }
 
+#intro {
+    text-align: center;
+}
+
 /* Hela formuläret för frågorna */
 #form {
     border-radius: 10px;
     padding: 5px;
     background-color: #dfedd8;
+    height: 210px;
+    position: relative;
 }
 
 /* Svarsalternativen */
@@ -49,10 +56,24 @@ main {
 
 /* knapparna i formuläret */
 #form button {
-    float: right;
-    width: auto;
     background-color: #b6dca5;
     margin: 5px;
+}
+
+/* omslutande element för nästa och tillbaka knapparna i formuläret */
+.formBtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* för första frågan som bara har en knapp, så den också ligger till höger */
+.formBtn:has(button:first-child:last-child) {
+  justify-content: flex-end;
 }
 
 /* klass för stilsättning av inaktiverad knapp */
