@@ -7,9 +7,9 @@
     <title>Listsida</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/hamburger.js"></script>
-   <script type="module" src="/js/list.js"></script>
+    <script type="module" src="/js/list.js"></script>
     <script src="js/karta.js"></script>
-  <script type="module" src="js/images.js"></script>
+    <script type="module" src="js/images.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -31,13 +31,24 @@
         </div>
     </nav>
     <main>
-    <button><img src="photos/arrowback.svg" alt="Tillbaka"></button>
-    <h1>Turistmål i Småland och på Öland</h1>
-    <div id="map"></div>
-    <button>Filter <img src="photos/arrowdown.svg" alt="nedåtpil"></button>
+        <button><img src="photos/arrowback.svg" alt="Tillbaka"></button>
+        <h1>Turistmål i Småland och på Öland</h1>
+        <div id="map"></div>
+        
+        <div class="dropdown">
+            <button id="categoryBtn">Välj kategorier <img src="photos/arrowdown.svg" alt="pil ner"></button>
+            <div class="dropdownMenu" id="category"></div>
 
-    <div id="placeContainer"></div>
-</main>
+            <button id="priceBtn">Pris <img src="photos/arrowdown.svg" alt="pil ner"></button>
+            <div class="dropdownMenu" id="price"></div>
+
+            <button id="cityBtn">Stad <img src="photos/arrowdown.svg" alt="pil ner"></button>
+            <div class="dropdownMenu" id="city"></div>
+        </div>
+
+
+        <div id="placeContainer"></div>
+    </main>
     <footer>
         <h4>Älv & Ö</h4>
         <p>Tel: 08-00000000</p>

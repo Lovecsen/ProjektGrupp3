@@ -331,6 +331,38 @@ footer {
     height: 150px;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dropdownToggle {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dropdownMenu label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.dropdown.open .dropdownMenu {
+    display:block;
+}
+
 
 
 
