@@ -1,4 +1,5 @@
 import { fetchImages } from './images.js';
+import { heart } from './heart.js';
 const myApiKey = "Tc9ZD2gK"; //API nyckel
 let popularOutside; //div element för att hålla de populära turistmålen för utomhus
 let popularInside; //div element för att hålla de populära turistmålen för inomhus

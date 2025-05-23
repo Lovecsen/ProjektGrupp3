@@ -1,4 +1,5 @@
 import { fetchImages } from './images.js';
+import { heart } from './heart.js';
 //Globala variabler
 const myApiKey = "Tc9ZD2gK"; //API nyckel
 let placeContainer; //div element för att hålla temaparker

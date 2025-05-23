@@ -1,3 +1,5 @@
+import { fetchImages } from './images.js';
+import { heart } from './heart.js';
 let resultElem;
 
 //tar med svaren från föregående sida med localstorage
@@ -50,7 +52,7 @@ async function getData(answer1, answer2, answer3, answer4) {
 }
 
 
-function showResult(result) {
+async function showResult(result) {
 if (window.location.pathname.includes("quizresultat.html")) {
     for (let i = 0; i < result.length; i++) {
         const place = result[i]; //aktuellt turistmål
@@ -70,15 +72,9 @@ if (window.location.pathname.includes("quizresultat.html")) {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
         }
 
-        let imgUrl = "";
-        //lägger till bilden fyr på id 678 och 679, på de andra finns inga bilder - lägg till fler när fler bilder finns
-        if (place.id == "678" || place.id == "679") {
-            imgUrl = "photos/fyr.svg";
-        } else {
-            imgUrl = "";
-        }
+        let imgUrl = await fetchImages(place);
 
-        newDiv.innerHTML = "<img src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4>" + place.name + "</h4><p>Stad: " + place.city + "</p><p>Pris: " + place.price_range + " kr</p>" + "<p>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
