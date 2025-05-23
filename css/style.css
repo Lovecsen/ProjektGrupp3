@@ -140,7 +140,8 @@ button:hover {
 
 /* div elementet som är runt det nya div elementet för varje populär turistdestination */
 #popularOutsideDiv > div,
-#popularInsideDiv > div {
+#popularInsideDiv > div,
+#near {
     display: flex;
 }
 
@@ -204,7 +205,8 @@ button:hover {
 
 /* omslutande element för populära turistmål */
 #wrapperElem, 
-#wrapperElem2 {
+#wrapperElem2, 
+#near {
     overflow-y: scroll;
 }
 

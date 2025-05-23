@@ -3,7 +3,6 @@ let map; //objekt för kartan
 
 function init() {
     initMap("map");
-
 }
 window.addEventListener("load", init);
 
@@ -18,7 +17,6 @@ function initMap(id) {
 }
 
 function markerLocations(obj) {
-
     const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
     
     
@@ -54,4 +52,12 @@ function markerLocations(obj) {
         });
     }, 0);
 
+}
+
+function nearLocations(obj) {
+
+    map.setView([obj.lat, obj.lng], 10);
+
+    const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+    
 }
