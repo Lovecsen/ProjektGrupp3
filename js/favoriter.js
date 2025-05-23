@@ -1,55 +1,10 @@
-
+import { fetchImages } from './images.js';
 function init() {
 
     showFavorites();
 
 }
 window.addEventListener("load", init);
-
-function heart(elem) {
-
-    const heartPicture = elem.querySelector(".heart");
-
-    if (!heartPicture) return;
-
-    const placeId = heartPicture.dataset.id.toString();
-
-    let favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
-
-    if (favorites.includes(placeId)) {
-        heartPicture.src = "photos/smallredheart.svg";
-    }
-
-    heartPicture.addEventListener("pointerenter", () => {
-        if (!favorites.includes(placeId)) {
-            heartPicture.src = "photos/smallredheart.svg";
-        }
-    });
-
-    heartPicture.addEventListener("pointerleave", () => {
-        if (!favorites.includes(placeId)) {
-            heartPicture.src = "photos/smallheart.svg";
-        }
-    });
-
-    heartPicture.addEventListener("pointerdown", (e) => {
-        e.stopPropagation();
-
-        favorites = JSON.parse(localStorage.getItem("favoriter")) || [];
-        
-
-        if (!favorites.includes(placeId)) {
-            favorites.push(placeId);
-            heartPicture.src = "photos/smallredheart.svg";
-            
-        } else {
-            favorites = favorites.filter(id => id !== placeId);
-            heartPicture.src = "photos/smallheart.svg";
-            
-        }
-        localStorage.setItem("favoriter", JSON.stringify(favorites));
-    });
-}
 
 async function showFavorites() {
     const favIds = (JSON.parse(localStorage.getItem("favoriter")) || []).map(id => id.toString());
@@ -81,6 +36,7 @@ async function showFavorites() {
 
     for (let i = 0; i < favoritePlaces.length; i++) {
         const place = favoritePlaces[i];
+        markerLocations(place);
         const div = document.createElement("div");
         div.classList.add("smapiPlace");
 
@@ -93,7 +49,7 @@ async function showFavorites() {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
         }
 
-        let imgUrl = "";
+        let imgUrl = await fetchImages(place);
 
         div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 

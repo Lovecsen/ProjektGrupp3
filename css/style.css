@@ -220,10 +220,10 @@ button:hover {
     grid-template-columns: 3fr 3fr 1fr;
     grid-template-rows: min-content min-content min-content min-content;
     grid-template-areas:
-    "imgUrl namn favorite"
-    "imgUrl stad stad"
-    "imgUrl pris pris"
-    "beskrivning beskrivning beskrivning";
+    "imgUrl name favorite"
+    "imgUrl city city"
+    "imgUrl price price"
+    "description description description";
 }
 
 #favorite {
@@ -241,23 +241,23 @@ button:hover {
     padding-top: 20px;
 }
 
-#namn {
-    grid-area: namn;
+#name {
+    grid-area: name;
     text-align: left;
 }
 
-#stad {
-    grid-area: stad;
+#city {
+    grid-area: city;
     text-align: left;
 }
 
-#pris {
-    grid-area: pris;
+#price {
+    grid-area: price;
     text-align: left;
 }
 
-#beskrivning {
-    grid-area: beskrivning;
+#description {
+    grid-area: description;
     text-align: left;
 }
 
