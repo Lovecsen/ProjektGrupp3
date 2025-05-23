@@ -50,7 +50,7 @@ async function showPlaces(places) {
 
         const imgUrl = await fetchImages(place); //HÄR hämtar vi bilden från den andra filen
 
-        newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='stad'>Stad: " + place.city + "</p><p id='pris'>Pris: " + place.price_range + " kr</p>" + "<p id='beskrivning'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
