@@ -95,7 +95,7 @@ async function showFavorites() {
 
         let imgUrl = "";
 
-        div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='stad'>Stad: " + place.city + "</p><p id='pris'>Pris: " + place.price_range + " kr</p>" + "<p id='beskrivning>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 
         favoriteDiv.appendChild(div);
     }
