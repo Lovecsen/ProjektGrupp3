@@ -18,7 +18,7 @@ async function getData(answer1, answer2, answer3, answer4) {
     
     resultElem = document.querySelector("#destination"); //element för att hålla de nya div elementen för turistmålen
 
-    answerElem = document.querySelector("#answer");
+    answerElem = document.querySelector("#answer"); //p element som ska kunna ändras
 
     let myApiKey = "Tc9ZD2gK";
 
@@ -37,6 +37,7 @@ async function getData(answer1, answer2, answer3, answer4) {
    
     let data = await response.json();
 
+    //körs endast om man är i quizresultat
     if (window.location.pathname.includes("quizresultat.html")) {
     //om det inte finns något som matchas med svaren i smapi
     if (!data.payload || data.payload.length == 0) {

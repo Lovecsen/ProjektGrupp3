@@ -7,11 +7,13 @@ function init() {
 
     if (!navHeart) return;
 
+    //mus är över hjärtat ändras det till rött
     navHeart.addEventListener("pointerenter", () => {
 
         navHeart.src = "photos/redfavorites.svg";
     });
 
+    //mus försvinner från hjärtat ändras det tillbaka
     navHeart.addEventListener("pointerleave", () => {
         navHeart.src = "photos/heart.svg";
     });
@@ -21,6 +23,7 @@ window.addEventListener("DOMContentLoaded", init);
 function showHamburger() {
     const hamburgerMenu = document.querySelector("#hamburgerMenu");
 
+    //för att visa dropdown för hamburgermenyn
     if (hamburgerMenu.style.display == "block") {
         hamburgerMenu.style.display = "none";
     } else {

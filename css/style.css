@@ -29,6 +29,7 @@ main {
     position: relative;
 }
 
+/* section element för intro texten på index.html */
 #intro {
     text-align: center;
 }
@@ -132,6 +133,7 @@ button:hover {
     cursor: pointer;
 }
 
+/* hover för forumlärets knappar */
 #form button:hover {
     background-color: #b0d294;
     color: white;
@@ -165,6 +167,7 @@ button:hover {
     "p p p";
 }
 
+/* hjärt ikonen i populära resmål*/
 .smapiPopular .heart {
     grid-area: heart;
     width: 20px;
@@ -229,12 +232,14 @@ button:hover {
     "description description description";
 }
 
+/* Hjärt inkonen */
 #favorite {
     grid-area: favorite;
     padding-left: 30px;
     padding-top: 4px;
 }
 
+/* bilden för resmålet */
 #imgUrl {
     display:block;
     width: 150px;
@@ -244,21 +249,25 @@ button:hover {
     padding-top: 20px;
 }
 
+/* Rubriken för resmålet */
 #name {
     grid-area: name;
     text-align: left;
 }
 
+/* Staden för resmålet */
 #city {
     grid-area: city;
     text-align: left;
 }
 
+/* Pris för resmålet */
 #price {
     grid-area: price;
     text-align: left;
 }
 
+/* beskrivning för resmålet */
 #description {
     grid-area: description;
     text-align: left;
@@ -324,26 +333,16 @@ button:hover {
 footer {
     background-color: #dfedd8;
     padding: 10px;
-    
 }
 
-.picture {
-    width: 80px;
-    height: 150px;
-}
-
+/* omgivande div för alla filtreringsknappar */
 .dropdown {
     position: relative;
     display: inline-block;
     margin-bottom: 10px;
 }
 
-.dropdownToggle {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
+/*Div som håller alla label element som skapas med svarsalternativen*/
 .dropdownMenu {
     display: none;
     position: absolute;
@@ -355,28 +354,34 @@ footer {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* de nya label elementen som skapas i javascript för svarsalternativen */
 .dropdownMenu label {
     display: block;
     margin-bottom: 0.5rem;
 }
 
+/* klass som läggs till när en dropdown meny ska synas */ 
 .open {
     display:block;
 }
 
+/* img elementet för varje resemåls "kort"*/ 
 .picture {
     display:block;
     width: 150px;
+    height: 150px;
     object-fit: cover;
     grid-area: imgUrl;
     padding-right: 15px;
     padding-top: 20px;
 }
 
+/* hover effekt för "läs mer" när en beskrivning är för lång */
 i:hover {
     text-decoration: underline;
 }
 
+/* input i forumläret */
 input {
     cursor: pointer;
 }

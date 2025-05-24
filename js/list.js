@@ -27,10 +27,11 @@ window.addEventListener("DOMContentLoaded", init);
 //för att kunna klicka utanför knappen för att stänga dropdownen
 document.addEventListener("click", (e) => {
     const dropdowns = document.querySelectorAll(".dropdownMenu");
-    const isBtn = e.target.closest("button");
-    const isMenu = e.target.closest(".dropdownMenu");
+    const isBtn = e.target.closest("button"); //knapp klickades på
+    const isMenu = e.target.closest(".dropdownMenu"); //meny klickades på
 
-    if (!isBtn && ! isMenu) {
+    //om man inte klickat på knapp eller meny stängs alla öppna dropdowns
+    if (!isBtn && !isMenu) {
         for (let i = 0; i < dropdowns.length; i++) {
             dropdowns[i].classList.remove("open");
         }
@@ -41,6 +42,7 @@ document.addEventListener("click", (e) => {
 function toggleDropdown(id) {
     let menu = document.querySelectorAll(".dropdownMenu");
 
+    //visa eller dölja dropdown menyn
     for (let i = 0; i < menu.length; i++) {
         if (menu[i].id == id ) {
             menu[i].classList.toggle("open");
@@ -61,13 +63,14 @@ async function getData() {
         let data = await response.json();
         allPlaces = data.payload;
 
-        filters(allPlaces);
+        filters(allPlaces); //skicka vidare till funktion filters
         showPlaces(allPlaces); // skicka vidare till funktion showPlaces
     } else {
         placeContainer.innerText = "Fel vid hämtning: " + response.status; //felmeddelande 
 }
 }
 
+//sorterar de olika filtermöjligheterna
 function filters(places) {
     const categories = new Set();
     const prices = new Set();
@@ -85,6 +88,7 @@ function filters(places) {
     fill("city", Array.from(cities).sort());
 }
 
+//skapar checkboxar för varje värde till dropdown menyn
 function fill(id, items) {
     const container = document.getElementById(id);
     container.innerHTML = "";
@@ -92,9 +96,11 @@ function fill(id, items) {
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
 
+        //skapar nytt label element
         const label = document.createElement("label");
         label.classList.add("dropdown-item");
 
+        //skapar nytt input element
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.value = item;
@@ -106,12 +112,13 @@ function fill(id, items) {
 
         container.appendChild(label);
 
-       
     }
 }
 
+//hämtar alla valda checkbox-värden och skickar med till showPlaces för att visa resmålen
 function applyFilter() {
 
+    //objekt för att samla de filterval som gjorts
     const filters = {
         categories: checkedValues("category"),
         prices: checkedValues("price"),
@@ -124,21 +131,24 @@ function applyFilter() {
     
 }
 
+//hämtar valda checkboxar 
 function checkedValues(name) {
-    const checkboxes = document.querySelectorAll("input[name='" + name + "']:checked");
+    const checkboxes = document.querySelectorAll("input[name='" + name + "']:checked"); //valda checkboxar
 
     return Array.from(checkboxes).map(checkbox => checkbox.value);
 }
 
+//returnerar ny lista med värden för de olika filterna
 function filterPlaces(places, filters) {
 
+    //gå igenom varje place i listan places, returnerar ny lista med endast objekt som matchar vollkoren
     return places.filter(place => {
 
-        const matchCategory = filters.categories.length == 0 || filters.categories.includes(place.description);
+        const matchCategory = filters.categories.length == 0 || filters.categories.includes(place.description); //ingen kategori vald eller om place.description finns med
 
-        const matchPrice = filters.prices.length == 0 || filters.prices.includes(place.price_range);
+        const matchPrice = filters.prices.length == 0 || filters.prices.includes(place.price_range); //om inget pris är valt eller om place.price_range finns med
 
-        const matchCity = filters.cities.length == 0 || filters.cities.includes(place.city);
+        const matchCity = filters.cities.length == 0 || filters.cities.includes(place.city); //om ingen stad är vald eller om place.city finns med
 
         return matchCategory && matchPrice && matchCity;
     });
