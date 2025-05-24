@@ -359,9 +359,19 @@ footer {
     margin-bottom: 0.5rem;
 }
 
-.dropdown.open .dropdownMenu {
+.open {
     display:block;
 }
+
+.picture {
+    display:block;
+    width: 150px;
+    object-fit: cover;
+    grid-area: imgUrl;
+    padding-right: 15px;
+    padding-top: 20px;
+}
+
 
 
 
