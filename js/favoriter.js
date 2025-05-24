@@ -22,7 +22,7 @@ async function showFavorites() {
     }
 
     let myApiKey = "Tc9ZD2gK";
-    
+
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
     let response = await fetch("https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions); //skicka förfrågan tilll SMAPI
@@ -31,7 +31,7 @@ async function showFavorites() {
     const places = data.payload;
 
     let favoritePlaces = places.filter(place => favIds.includes(place.id.toString()));
-    
+
 
 
     for (let i = 0; i < favoritePlaces.length; i++) {
@@ -43,7 +43,9 @@ async function showFavorites() {
         let shortDescription = "";
 
         // Om beskrivningen är längre än 100 tecken, kapa och lägg till "..."
-        if (place.abstract.length > 100) {
+        if (place.abstract == "") {
+            shortDescription = "Ingen beskrivning tillgänglig";
+        } else if (place.abstract.length > 100) {
             shortDescription = place.abstract.substring(0, 100).trim() + "...";
         } else {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen

@@ -41,11 +41,17 @@ function showProductDetails(product) {
     newProduct.classList.add("smapiProduct"); //lägg till en class
     markerLocations(product);
 
+    //Om ingen beskrivning finns skrivs "Ingen beskrivning tillgänglig" ut
+    let description = product.abstract;
+    if (product.abstract == "") {
+        description = "Ingen beskrivning tillgänglig";
+    }
+
     newProduct.innerHTML =
         "<h2>" + product.name + "</h2>" +
         "<p><strong>Stad:</strong> " + product.city + "</p>" +
         "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
-        "<p><strong>Beskrivning:</strong> " + product.abstract + "</p>";
+        "<p><strong>Beskrivning:</strong> " + description + "</p>";
 
     productDetails.appendChild(newProduct);
 
@@ -60,12 +66,15 @@ async function getReviews(placeId) {
         let dataReviews = await responseReviews.json();
         const reviews = dataReviews.payload;
 
+        //om det inte finns recensioner, skriv ut "Inga recensioner tilgängliga"
+        if (reviews == "") {
+            reviewsDiv.innerHTML = "<p>Inga recensioner tillgängliga</p>"
+            return
+        }
+
         for (let i = 0; i < reviews.length; i++) {
             showReviews(reviews[i]);
         }
-    }
-    else {
-        reviewsDiv.innerText = "Fel vid hämtning: " + responseReviews.status; //felmeddelande 
     }
 }
 
@@ -76,7 +85,7 @@ function showReviews(reviews) {
     newReview.innerHTML =
         "<p><strong>" + reviews.name + "</strong></p>" +
         "<p>" + reviews.comment + "</p>" + "<p><i>" + reviews.relative_time + "</i></p>";
-    console.log(newReview)
+
 
     reviewsDiv.appendChild(newReview);
 
@@ -95,13 +104,13 @@ async function getNear(product) {
     if (responseNearAct.ok) {
         let dataAct = await responseNearAct.json();
 
-        const nearAct = dataAct.payload.filter(item => item.id !==product.id);
+        const nearAct = dataAct.payload.filter(item => item.id !== product.id);
         bothActAtt = bothActAtt.concat(nearAct);
     }
 
     if (responseNearAtt.ok) {
         let dataAtt = await responseNearAtt.json();
-        const nearAtt = dataAtt.payload.filter(item => item.id !==product.id);
+        const nearAtt = dataAtt.payload.filter(item => item.id !== product.id);
         bothActAtt = bothActAtt.concat(nearAtt);
     }
 
@@ -114,8 +123,8 @@ async function getNear(product) {
 
     const responseNear = await fetch("https://smapi.lnu.se/api/?api_key=" + apiKey + "&controller=establishment&method=getall&ids=" + ids);
 
-        const dataNear = await responseNear.json();
-        const establishment = dataNear.payload;
+    const dataNear = await responseNear.json();
+    const establishment = dataNear.payload;
 
     for (const near of establishment) {
         await showNear(near);
@@ -127,7 +136,7 @@ async function showNear(near) {
     newNear.classList.add("smapiPopular"); //lägg till en class
 
     let imgUrl = await fetchImages(near);
-   
+
     newNear.innerHTML =
         "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + near.id + "'><h3>" + near.name + "</h3><img src='" + imgUrl + "' alt='" + near.name + "'><h4>Stad: " + near.city + "</h4><p>Pris: " + near.price_range + " kr</p>"; //strukturen för informationen
 
@@ -135,9 +144,9 @@ async function showNear(near) {
 
     let nearMarkersBtn = document.querySelector("#nearMarkers");
     nearMarkersBtn.addEventListener("pointerdown", () => {
-         nearLocations(near);
+        nearLocations(near);
     });
 
     heart(newNear);
-    
+
 }
