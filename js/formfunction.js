@@ -1,6 +1,7 @@
 import { fetchImages } from './images.js';
 import { heart } from './heart.js';
 let resultElem;
+let answerElem;
 
 //tar med svaren från föregående sida med localstorage
 window.addEventListener("DOMContentLoaded", () => {
@@ -16,6 +17,8 @@ window.addEventListener("DOMContentLoaded", () => {
 async function getData(answer1, answer2, answer3, answer4) {
     
     resultElem = document.querySelector("#destination"); //element för att hålla de nya div elementen för turistmålen
+
+    answerElem = document.querySelector("#answer");
 
     let myApiKey = "Tc9ZD2gK";
 
@@ -37,7 +40,7 @@ async function getData(answer1, answer2, answer3, answer4) {
     if (window.location.pathname.includes("quizresultat.html")) {
     //om det inte finns något som matchas med svaren i smapi
     if (!data.payload || data.payload.length == 0) {
-        resultElem.innerText = "Inga resultat matchade dina svar";
+        answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
         return;
     }
     }
