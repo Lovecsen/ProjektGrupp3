@@ -218,6 +218,7 @@ button:hover {
     margin-top: 15px;
     background-color: #e8f3e3;
     border: 1px solid #727070;
+    cursor: pointer;
     display: grid;
     grid-template-columns: 3fr 3fr 1fr;
     grid-template-rows: min-content min-content min-content min-content;
@@ -370,6 +371,14 @@ footer {
     grid-area: imgUrl;
     padding-right: 15px;
     padding-top: 20px;
+}
+
+i:hover {
+    text-decoration: underline;
+}
+
+input {
+    cursor: pointer;
 }
 
 
