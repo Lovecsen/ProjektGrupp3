@@ -18,9 +18,27 @@ function initMap(id) {
 
 function markerLocations(obj) {
     const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+
+    smallInfo(marker, obj);
+
+}
+
+function nearLocations(obj) {
+
+    let myIcon = L.icon({
+        iconUrl: "photos/marker.svg"
+    });
+
+    map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng oc zoomar in
+
+    const marker = L.marker([obj.lat, obj.lng], {icon: myIcon}).addTo(map); //ny markör med lat och lng för de olika objekten
+
+    smallInfo(marker, obj);
     
-    
-    //gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
+}
+
+function smallInfo(marker, obj) {
+//gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
     setTimeout(() => {
         const el = marker.getElement();
         if (!el) return;
@@ -46,13 +64,4 @@ function markerLocations(obj) {
             window.location.href = "produkt.html";
         });
     }, 0);
-
-}
-
-function nearLocations(obj) {
-
-    map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng oc zoomar in
-
-    const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
-    
 }
