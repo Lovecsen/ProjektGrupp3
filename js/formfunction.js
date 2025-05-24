@@ -69,7 +69,9 @@ if (window.location.pathname.includes("quizresultat.html")) {
         let shortDescription = ""; //kort beskrivning som ska visas
 
         // Om beskrivningen är längre än 100 tecken, kapa och lägg till "..."
-        if (place.abstract.length > 100) {
+        if (place.abstract == "") {
+            shortDescription = "Ingen beskrivning tillgänglig";
+        } else if (place.abstract.length > 100) {
             shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
         } else {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
