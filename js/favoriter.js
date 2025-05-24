@@ -46,7 +46,7 @@ async function showFavorites() {
         if (place.abstract == "") {
             shortDescription = "Ingen beskrivning tillgänglig";
         } else if (place.abstract.length > 100) {
-            shortDescription = place.abstract.substring(0, 100).trim() + "...";
+            shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
         } else {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
         }
