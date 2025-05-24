@@ -94,7 +94,7 @@ async function responsePopularInsideDestinations(jsonData) {
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
         let imgUrl = await fetchImages(inside);
 
-        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "' class='picture'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
         
 
         newDiv.addEventListener("pointerdown", function () {
