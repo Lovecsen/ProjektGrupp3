@@ -44,11 +44,6 @@ function markerLocations(obj) {
         el.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             window.location.href = "produkt.html";
-            //const isVisible = smallInfo.style.display == 'block';
-            //const rect = el.getBoundingClientRect();
-            //smallInfo.style.left = rect.right + 10 + 'px';
-            //smallInfo.style.top = rect.top + 'px';
-            //smallInfo.style.display = isVisible ? 'none' : 'block';
         });
     }, 0);
 
@@ -56,7 +51,7 @@ function markerLocations(obj) {
 
 function nearLocations(obj) {
 
-    map.setView([obj.lat, obj.lng], 10);
+    map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng oc zoomar in
 
     const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
     
