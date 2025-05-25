@@ -56,6 +56,13 @@ async function showFavorites() {
 
         div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 
+        div.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
+
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+        });
+
         favoriteDiv.appendChild(div);
     }
 
