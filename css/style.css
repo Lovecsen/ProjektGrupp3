@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -7,11 +11,13 @@ body {
     position: relative;
     background-color: rgb(248, 245, 245);
     margin: 0px;
+    padding-top: 100px;
 }
 
 main {
     margin: 7px;
 }
+
 
 /* Hela navigeringen */
 #navbar {
@@ -19,7 +25,12 @@ main {
     flex-direction: row;
     justify-content: space-between;
     z-index: 1000;
-    margin: 13px;
+    top: 0;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    height: 95px;
+    padding: 15px;
 }
 
  /* Navigeringen till höger */
@@ -170,8 +181,8 @@ button:hover {
 /* hjärt ikonen i populära resmål*/
 .smapiPopular .heart {
     grid-area: heart;
-    width: 20px;
-    height:20px;
+    width: 35px;
+    height:35px;
     justify-self: end;
     padding: 7px;
     margin-bottom: 0px;
@@ -385,6 +396,14 @@ i:hover {
 input {
     cursor: pointer;
 }
+
+#contact {
+    background-color: #dfedd8;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
 
 
 
