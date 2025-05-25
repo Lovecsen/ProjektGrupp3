@@ -15,12 +15,25 @@ let xStart = 0;
 //initiering 
 function init() {
     let outsideBtn = document.querySelector("#outsideBtn"); //knapp för att visa alla utomhus turistmål
+
+    //eventlyssnare för se alla utomhus knappen så användaren skickas vidare till en redan filtrerad listsida med bara utomhus
+    outsideBtn.addEventListener("pointerdown", function () {
+        localStorage.setItem("filterOutdoors", "Y");
+        window.location.href = "listsida.html";
+    });
+    
     popularOutside = document.querySelector("#popularOutsideDiv #wrapperElem"); //div element för att hålla de populära turistmålen för utomhus
     wrapperElemOutside = document.querySelector("#wrapperElem");
     wrapperElemInside = document.querySelector("#wrapperElem2");
 
 
     let insideBtn = document.querySelector("#insideBtn"); //knapp för att visa alla inomhus turistmål
+
+    insideBtn.addEventListener("pointerdown", function () {
+        localStorage.setItem("filterOutdoors", "N");
+        window.location.href = "listsida.html";
+    })
+    
     popularInside = document.querySelector("#popularInsideDiv div"); //div element för att hålla de populära turistmålen för inomhus
 
 
