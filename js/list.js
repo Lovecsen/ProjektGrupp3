@@ -6,9 +6,28 @@ let placeContainer; //div element för att hålla temaparker
 let allPlaces = []; //array för alla platser
 let imgUrl; //urlen för den bild som ska visas
 
+
+
 async function init() {
     placeContainer = document.querySelector("#placeContainer"); //hämtar det tomma div-elementet i HTML
     await getData(); //anropa funktion getData
+
+    const outdoorsFilter = localStorage.getItem("filterOutdoors");
+
+    //detta filtrerar sidan efter om användaren klickat på "se alla utomhus" eller "se alla inomhus" knappen på första sidan
+    if (outdoorsFilter == "Y") {
+        const filtered = allPlaces.filter(place => place.outdoors == "Y");
+        showPlaces(filtered);
+
+        localStorage.removeItem("filterOutdoors");
+    } else if (outdoorsFilter == "N") {
+        const filtered = allPlaces.filter(place => place.outdoors == "N");
+        showPlaces(filtered);
+
+        localStorage.removeItem("filterOutdoors")
+    }
+
+    
 
     //eventlyssnare för knapparna för filtreringen
     document.querySelector("#categoryBtn").addEventListener("click", () => {
@@ -20,6 +39,8 @@ async function init() {
     document.querySelector("#cityBtn").addEventListener("click", () => {
         toggleDropdown("city");
     });
+
+    
     
 }
 window.addEventListener("DOMContentLoaded", init);
@@ -84,7 +105,11 @@ function filters(places) {
     }
 
     fill("category", Array.from(categories).sort());
-    fill("price", Array.from(prices).sort((a, b) => a-b));
+    fill("price", Array.from(prices).sort((a, b) => {
+        const aStart = parseInt(a.split("-")[0]);
+        const bStart = parseInt(b.split("-"[0]));
+        return aStart - bStart; //för att pris intervallerna ska vara i ordning
+    }));
     fill("city", Array.from(cities).sort());
 }
 
