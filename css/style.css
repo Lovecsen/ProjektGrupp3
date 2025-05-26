@@ -33,7 +33,7 @@ main {
     padding: 15px;
 }
 
- /* Navigeringen till höger */
+/* Navigeringen till höger */
 #asideDiv {
     display: flex;
     align-items: center;
@@ -85,7 +85,7 @@ main {
 
 /* för första frågan som bara har en knapp, så den också ligger till höger */
 .formBtn:has(button:first-child:last-child) {
-  justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 /* klass för stilsättning av inaktiverad knapp */
@@ -104,21 +104,43 @@ main {
 
 /* hamburgermenyn till höger */
 #hamburgerMenu {
-    display: none; /*Göm länkarna i hamburgarmenyn*/
+    display: none;
+    /*Göm länkarna i hamburgarmenyn*/
     list-style-type: none;
     position: absolute;
     background-color: #c8e3ba;
     top: 100%;
-    padding: 10px;
     margin-top: 0px;
     box-shadow: 0 1px 2px;
     border-radius: 3%;
-    z-index: 1001; /* så dropdownen hamnar över kartan*/
+    z-index: 1001;
+    /* så dropdownen hamnar över kartan*/
+    right: 0;
+    width: 130px;
+    text-align: left;
+    margin: 0 auto;
 }
 
+ul {
+    list-style: none;
+     margin: 0;
+    padding: 0;
+}
+
+
 /* de olika länkarna i hamburgermenyn */
-#hamburgerMenu li {
-    margin-bottom: 15px;
+#hamburgerMenu a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    color: #000000;
+    text-align: left;
+}
+
+
+#hamburgerMenu a:hover {
+    text-decoration: underline;
+    background-color: #b1cd99;
 }
 
 /* bilden för hamburgarmenyn */
@@ -127,12 +149,13 @@ main {
     margin-bottom: 5px;
 }
 
+
 /* alla knapparna */
 button {
     border-radius: 7px;
     border: 0;
     background-color: rgb(232, 228, 228);
-    color:#000000;
+    color: #000000;
     font-size: 13px;
     padding: 8px;
     margin-top: 10px;
@@ -152,8 +175,8 @@ button:hover {
 }
 
 /* div elementet som är runt det nya div elementet för varje populär turistdestination */
-#popularOutsideDiv > div,
-#popularInsideDiv > div,
+#popularOutsideDiv>div,
+#popularInsideDiv>div,
 #near {
     display: flex;
 }
@@ -171,18 +194,18 @@ button:hover {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: min-content min-content min-content min-content min-content;
     grid-template-areas:
-    ". . heart"
-    "h3 h3 h3"
-    ". img ."
-    "h4 h4 h4"
-    "p p p";
+        ". . heart"
+        "h3 h3 h3"
+        ". img ."
+        "h4 h4 h4"
+        "p p p";
 }
 
 /* hjärt ikonen i populära resmål*/
 .smapiPopular .heart {
     grid-area: heart;
     width: 35px;
-    height:35px;
+    height: 35px;
     justify-self: end;
     padding: 7px;
     margin-bottom: 0px;
@@ -218,8 +241,8 @@ button:hover {
 }
 
 /* omslutande element för populära turistmål */
-#wrapperElem, 
-#wrapperElem2, 
+#wrapperElem,
+#wrapperElem2,
 #near {
     overflow-y: scroll;
 }
@@ -237,10 +260,10 @@ button:hover {
     grid-template-columns: 3fr 3fr 1fr;
     grid-template-rows: min-content min-content min-content min-content;
     grid-template-areas:
-    "imgUrl name favorite"
-    "imgUrl city city"
-    "imgUrl price price"
-    "description description description";
+        "imgUrl name favorite"
+        "imgUrl city city"
+        "imgUrl price price"
+        "description description description";
 }
 
 /* Hjärt inkonen */
@@ -252,7 +275,7 @@ button:hover {
 
 /* bilden för resmålet */
 #imgUrl {
-    display:block;
+    display: block;
     width: 150px;
     object-fit: cover;
     grid-area: imgUrl;
@@ -294,7 +317,7 @@ button:hover {
 
 /* små rutorna som popar upp när man hovrar över en pin på kartan*/
 .smallInfoDiv {
-    position:fixed;
+    position: fixed;
     display: none;
     background: white;
     padding: 10px;
@@ -362,7 +385,7 @@ footer {
     border: 1px solid #ccc;
     z-index: 1000;
     padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* de nya label elementen som skapas i javascript för svarsalternativen */
@@ -371,14 +394,14 @@ footer {
     margin-bottom: 0.5rem;
 }
 
-/* klass som läggs till när en dropdown meny ska synas */ 
+/* klass som läggs till när en dropdown meny ska synas */
 .open {
-    display:block;
+    display: block;
 }
 
-/* img elementet för varje resemåls "kort"*/ 
+/* img elementet för varje resemåls "kort"*/
 .picture {
-    display:block;
+    display: block;
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -403,18 +426,3 @@ input {
     padding: 10px;
     width: 200px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
