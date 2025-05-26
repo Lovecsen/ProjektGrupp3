@@ -15,7 +15,7 @@
             "abstract": "Inspirerande performanceguidning, med självaste Carl von Linné som ciceron finns med hos oss som vanligt. I vår receptionsbyggnad finns möjlighet att anordna både konferenser och inbjuda till familjehögtider. Trädgården med sina äppelträd och utsikt över örtagården, skapar en rofylld plats -  Råshult - en paus i tiden!",
             "text": "Råshult inbjuder till en fantastisk tidsresa tillbaka till 1700 talets landskap och trädgårdar. I kaféet erbjuder vår välkänd vegetarisk och inovativ lunchbuffé och fyller vårt kaféet med hembakade kakor, Småländs ostkaka-glutenfri som serveras med sylt och grädde. Inspirerande performanceguidning, med självaste Carl von Linné som ciceron finns med hos oss som vanligt. I vår receptionsbyggnad finns möjlighet att anordna både konferenser och inbjuda till familjehögtider. Trädgården med sina äppelträd och utsikt över örtagården, skapar en rofylld plats -  Råshult - en paus i tiden!",
             "price_range": "100-250",
-            "outdoors": "N",
+            "outdoors": "Y",
             "child_discount": "Y",
             "student_discount": "N",
             "senior_discount": "N",
@@ -24,14 +24,14 @@
             "province": "Småland",
             "modified_at": "2025-05-25 14:28:26",
             "rating": "4.40000",
-            "num_reviews": "?"
+            "num_reviews": ""
         },
         {
             "id": "905",
             "lat": "57.4368140789712",
             "lng": "13.62392945767242",
             "name": "Isaberg Mountain Resort",
-            "description": "Ävetyrspark?",
+            "description": "Ävetyrspark",
             "type": "activity",
             "address": "Isaberg Fritidsby",
             "zip_code": "335 72",
@@ -50,7 +50,7 @@
             "province": "Småland",
             "modified_at": "2025-05-25 18:05:29",
             "rating": "4.40000",
-            "num_reviews": "?"
+            "num_reviews": ""
         }
     ]
 }
