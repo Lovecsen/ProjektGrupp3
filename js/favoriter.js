@@ -1,4 +1,5 @@
 import { fetchImages } from './images.js'; //hämtar bilder från flickr via images.js
+let remove = null; //det resmål som ska tas bort
 
 function init() {
     showFavorites(); //anrop av showFavorites
@@ -33,6 +34,23 @@ async function showFavorites() {
 
     let favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
 
+    let confirm = document.querySelector("#confirm");
+        let yes = document.querySelector("#yes");
+        let no = document.querySelector("#no");
+
+        yes.onclick =  function() {
+            let fav = JSON.parse(localStorage.getItem("favoriter")) || [];
+            fav = fav.filter(id => id.toString() !== remove);
+
+            localStorage.setItem("favoriter", JSON.stringify(fav));
+            confirm.classList.add("hide");
+            showFavorites();
+        };
+
+        no.onclick = function () {
+            confirm.classList.add("hide");
+        };
+
     for (let i = 0; i < favoritePlaces.length; i++) {
         const place = favoritePlaces[i];
         markerLocations(place); //anrop av funktion i karta.js för markörer
@@ -56,7 +74,19 @@ async function showFavorites() {
 
         div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 
-        div.addEventListener("pointerdown", function () {
+        const trash = div.querySelector(".trash");
+
+        trash.addEventListener("click", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            remove = this.getAttribute("data-id");
+             confirm.classList.remove("hide");
+        });
+    
+        div.addEventListener("pointerdown", function (e) {
+            if(e.target.classList.contains("trash")) return;
+
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
