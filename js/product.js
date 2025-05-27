@@ -153,6 +153,7 @@ async function showNear(near) {
 
     let nearMarkersBtn = document.querySelector("#nearMarkers");
     nearMarkersBtn.addEventListener("pointerdown", () => {
+        
         nearLocations(near);
     });
 

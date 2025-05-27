@@ -1,5 +1,6 @@
 
 let map; //objekt för kartan
+let markers = [];
 
 function init() {
     initMap("map");
@@ -17,7 +18,9 @@ function initMap(id) {
 }
 
 function markerLocations(obj) {
-    const marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+
+    let marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+    markers.push(marker);
 
     smallInfo(marker, obj);
 
@@ -31,7 +34,7 @@ function nearLocations(obj) {
 
     map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng oc zoomar in
 
-    const marker = L.marker([obj.lat, obj.lng], {icon: myIcon}).addTo(map); //ny markör med lat och lng för de olika objekten
+    let marker = L.marker([obj.lat, obj.lng], {icon: myIcon}).addTo(map); //ny markör med lat och lng för de olika objekten
 
     smallInfo(marker, obj);
     
@@ -59,10 +62,11 @@ function smallInfo(marker, obj) {
             smallInfo.style.display = 'none'
         });
 
-        if (!window.location.href == "product.html") {
+    
         el.addEventListener('pointerdown', (e) => {
             e.preventDefault();
-            window.location.href = "produkt.html";
-        });
-    }}, 0);
+            localStorage.setItem("selectedPlaceId", obj.id); //spara i lokalStorage så den markör man klickas på är den information som visas på produktsidan
+            window.location.href = "produkt.html"; 
+    });
+    }, 0);
 }

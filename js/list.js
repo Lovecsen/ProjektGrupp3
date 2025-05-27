@@ -41,7 +41,8 @@ async function init() {
     });
     document.querySelector("#outdoorsBtn").addEventListener("click", () => {
         toggleDropdown("outdoors");
-    })
+    });
+    
 
     
  
@@ -210,7 +211,14 @@ function filterPlaces(places, filters) {
 }
 //funktion som skriver ut turistmålen på sidan
 async function showPlaces(places) {
+
     placeContainer.innerHTML = ""; // rensar innehållet
+
+     //rensar gamla markörer
+    for (let i = 0; i < markers.length; i++) {
+        map.removeLayer(markers[i]);
+    }
+    markers = [];
 
     //loopa genom varje turistmål i listan
     for (let i = 0; i < places.length; i++) {
