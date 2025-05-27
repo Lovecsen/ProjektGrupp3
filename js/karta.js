@@ -59,9 +59,10 @@ function smallInfo(marker, obj) {
             smallInfo.style.display = 'none'
         });
 
+        if (!window.location.href == "product.html") {
         el.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             window.location.href = "produkt.html";
         });
-    }, 0);
+    }}, 0);
 }
