@@ -43,7 +43,12 @@ async function init() {
         toggleDropdown("outdoors");
     });
     
-
+    //rensar filter
+    let clear = document.querySelector("#clear");
+    clear.addEventListener("click", function () {
+        localStorage.removeItem("filters");
+        getData();
+    })
     
  
 }
@@ -99,6 +104,7 @@ async function getData() {
 
         filters(allPlaces); //skicka vidare till funktion filters
         showPlaces(allPlaces); // skicka vidare till funktion showPlaces
+        restoreFilter(); //kontrollerar om det finns valda filter sedan innan
     } else {
         placeContainer.innerText = "Fel vid hämtning: " + response.status; //felmeddelande 
 }
@@ -138,6 +144,26 @@ function filters(places) {
     fill("outdoors", outdoorsOptions);
 }
 
+function restoreFilter() {
+    let savedFilters = localStorage.getItem("filters");
+    if (savedFilters) {
+    let filter = JSON.parse(savedFilters);
+
+    for (let key in filter) {
+        let values = filter[key];
+        for (let i = 0; i < values.length; i++) {
+            let value = values[i];
+            let input = document.querySelector("input[name='" + key + "'][value='" + value + "']");
+            if (input) {
+                input.checked = true;
+            }
+        }
+    }
+    const filtered = filterPlaces(allPlaces, filter);
+    showPlaces(filtered);
+    }
+}
+
 //skapar checkboxar för varje värde till dropdown menyn
 function fill(id, items) {
     const container = document.getElementById(id);
@@ -174,11 +200,13 @@ function applyFilter() {
 
     //objekt för att samla de filterval som gjorts
     const filters = {
-        categories: checkedValues("category"),
-        prices: checkedValues("price"),
-        cities: checkedValues("city"),
+        category: checkedValues("category"),
+        price: checkedValues("price"),
+        city: checkedValues("city"),
         outdoors: checkedValues("outdoors")
     }; 
+    let theFilters = JSON.stringify(filters);
+    localStorage.setItem("filters", theFilters);
 
     const filtered = filterPlaces(allPlaces, filters);
 
@@ -198,11 +226,11 @@ function filterPlaces(places, filters) {
     //gå igenom varje place i listan places, returnerar ny lista med endast objekt som matchar vollkoren
     return places.filter(place => {
 
-        const matchCategory = filters.categories.length == 0 || filters.categories.includes(place.description); //ingen kategori vald eller om place.description finns med
+        const matchCategory = filters.category.length == 0 || filters.category.includes(place.description); //ingen kategori vald eller om place.description finns med
 
-        const matchPrice = filters.prices.length == 0 || filters.prices.includes(place.price_range); //om inget pris är valt eller om place.price_range finns med
+        const matchPrice = filters.price.length == 0 || filters.price.includes(place.price_range); //om inget pris är valt eller om place.price_range finns med
 
-        const matchCity = filters.cities.length == 0 || filters.cities.includes(place.city); //om ingen stad är vald eller om place.city finns med
+        const matchCity = filters.city.length == 0 || filters.city.includes(place.city); //om ingen stad är vald eller om place.city finns med
 
         const matchOutdoors = filters.outdoors.length == 0 || filters.outdoors.includes(place.outdoors);
 
@@ -211,10 +239,10 @@ function filterPlaces(places, filters) {
 }
 //funktion som skriver ut turistmålen på sidan
 async function showPlaces(places) {
-
+    
     placeContainer.innerHTML = ""; // rensar innehållet
 
-     //rensar gamla markörer
+    //rensar gamla markörer
     for (let i = 0; i < markers.length; i++) {
         map.removeLayer(markers[i]);
     }
