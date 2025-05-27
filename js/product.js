@@ -140,6 +140,13 @@ async function showNear(near) {
     newNear.innerHTML =
         "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + near.id + "'><h3>" + near.name + "</h3><img src='" + imgUrl + "' alt='" + near.name + "'><h4>Stad: " + near.city + "</h4><p>Pris: " + near.price_range + " kr</p>"; //strukturen för informationen
 
+        newNear.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", near.id); // Spara turistmålets ID i localStorage
+
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+        });
+
     nearDiv.appendChild(newNear);
 
     let nearMarkersBtn = document.querySelector("#nearMarkers");
