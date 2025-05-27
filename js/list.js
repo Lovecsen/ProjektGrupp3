@@ -44,7 +44,7 @@ async function init() {
     })
 
     
-    
+ 
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -74,6 +74,15 @@ function toggleDropdown(id) {
             menu[i].classList.remove("open");
         }
     }
+
+    //för att kunna stänga filterrutan med esc knappen
+    document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        for (let i = 0; i < menu.length; i++) {
+            menu[i].classList.remove("open");
+        }
+    }
+});
 }
 
 //funktion som hämtar data från SMAPI
@@ -224,12 +233,16 @@ async function showPlaces(places) {
 
         newDiv.innerHTML = "<img id='img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
+        let menu = document.querySelectorAll(".dropdownMenu");
+
+        
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
             window.location.href = "produkt.html";
         });
+    
 
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
 
