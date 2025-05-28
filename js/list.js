@@ -39,9 +39,18 @@ async function init() {
     document.querySelector("#cityBtn").addEventListener("click", () => {
         toggleDropdown("city");
     });
-
+    document.querySelector("#outdoorsBtn").addEventListener("click", () => {
+        toggleDropdown("outdoors");
+    });
     
+    //rensar filter
+    let clear = document.querySelector("#clear");
+    clear.addEventListener("click", function () {
+        localStorage.removeItem("filters");
+        getData();
+    })
     
+ 
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -71,6 +80,15 @@ function toggleDropdown(id) {
             menu[i].classList.remove("open");
         }
     }
+
+    //för att kunna stänga filterrutan med esc knappen
+    document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        for (let i = 0; i < menu.length; i++) {
+            menu[i].classList.remove("open");
+        }
+    }
+});
 }
 
 //funktion som hämtar data från SMAPI
@@ -86,6 +104,7 @@ async function getData() {
 
         filters(allPlaces); //skicka vidare till funktion filters
         showPlaces(allPlaces); // skicka vidare till funktion showPlaces
+        restoreFilter(); //kontrollerar om det finns valda filter sedan innan
     } else {
         placeContainer.innerText = "Fel vid hämtning: " + response.status; //felmeddelande 
 }
@@ -96,12 +115,14 @@ function filters(places) {
     const categories = new Set();
     const prices = new Set();
     const cities = new Set();
+    const outdoors = new Set(["N", "Y"]);
 
     for (let i = 0; i < places.length; i++) {
         const place = places[i];
         if (place.description) categories.add(place.description);
         if (place.price_range) prices.add(place.price_range);
         if (place.city) cities.add(place.city);
+        if (place.outdoors) outdoors.add(place.outdoors);
     }
 
     fill("category", Array.from(categories).sort());
@@ -111,6 +132,36 @@ function filters(places) {
         return aStart - bStart; //för att pris intervallerna ska vara i ordning
     }));
     fill("city", Array.from(cities).sort());
+
+    //för att det ska skrivas ut inomhus och utomhus istället för N och Y i filtreringsrutan
+    const outdoorsOptions = Array.from(outdoors).map(val => {
+        return {
+            value: val,
+            label: val == "N" ? "Inomhus" :
+                   val == "Y" ? "Utomhus" : val
+        }});
+
+    fill("outdoors", outdoorsOptions);
+}
+
+function restoreFilter() {
+    let savedFilters = localStorage.getItem("filters");
+    if (savedFilters) {
+    let filter = JSON.parse(savedFilters);
+
+    for (let key in filter) {
+        let values = filter[key];
+        for (let i = 0; i < values.length; i++) {
+            let value = values[i];
+            let input = document.querySelector("input[name='" + key + "'][value='" + value + "']");
+            if (input) {
+                input.checked = true;
+            }
+        }
+    }
+    const filtered = filterPlaces(allPlaces, filter);
+    showPlaces(filtered);
+    }
 }
 
 //skapar checkboxar för varje värde till dropdown menyn
@@ -121,6 +172,10 @@ function fill(id, items) {
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
 
+        //för att ha stöd för både sring och objekt eftersom vi behövde göra om N till inomhus och Y till utomhus
+        const value = typeof item == "object" ? item.value : item;
+        const labelText = typeof item == "object" ? item.label : item;
+
         //skapar nytt label element
         const label = document.createElement("label");
         label.classList.add("dropdown-item");
@@ -128,12 +183,12 @@ function fill(id, items) {
         //skapar nytt input element
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.value = item;
+        checkbox.value = value;
         checkbox.name = id;
         checkbox.addEventListener("change", applyFilter);
 
         label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(" " + item));
+        label.appendChild(document.createTextNode(" " + labelText));
 
         container.appendChild(label);
 
@@ -145,15 +200,17 @@ function applyFilter() {
 
     //objekt för att samla de filterval som gjorts
     const filters = {
-        categories: checkedValues("category"),
-        prices: checkedValues("price"),
-        cities: checkedValues("city")
+        category: checkedValues("category"),
+        price: checkedValues("price"),
+        city: checkedValues("city"),
+        outdoors: checkedValues("outdoors")
     }; 
+    let theFilters = JSON.stringify(filters);
+    localStorage.setItem("filters", theFilters);
 
     const filtered = filterPlaces(allPlaces, filters);
 
     showPlaces(filtered);
-    
 }
 
 //hämtar valda checkboxar 
@@ -169,18 +226,27 @@ function filterPlaces(places, filters) {
     //gå igenom varje place i listan places, returnerar ny lista med endast objekt som matchar vollkoren
     return places.filter(place => {
 
-        const matchCategory = filters.categories.length == 0 || filters.categories.includes(place.description); //ingen kategori vald eller om place.description finns med
+        const matchCategory = filters.category.length == 0 || filters.category.includes(place.description); //ingen kategori vald eller om place.description finns med
 
-        const matchPrice = filters.prices.length == 0 || filters.prices.includes(place.price_range); //om inget pris är valt eller om place.price_range finns med
+        const matchPrice = filters.price.length == 0 || filters.price.includes(place.price_range); //om inget pris är valt eller om place.price_range finns med
 
-        const matchCity = filters.cities.length == 0 || filters.cities.includes(place.city); //om ingen stad är vald eller om place.city finns med
+        const matchCity = filters.city.length == 0 || filters.city.includes(place.city); //om ingen stad är vald eller om place.city finns med
 
-        return matchCategory && matchPrice && matchCity;
+        const matchOutdoors = filters.outdoors.length == 0 || filters.outdoors.includes(place.outdoors);
+
+        return matchCategory && matchPrice && matchCity && matchOutdoors;
     });
 }
 //funktion som skriver ut turistmålen på sidan
 async function showPlaces(places) {
+    
     placeContainer.innerHTML = ""; // rensar innehållet
+
+    //rensar gamla markörer
+    for (let i = 0; i < markers.length; i++) {
+        map.removeLayer(markers[i]);
+    }
+    markers = [];
 
     //loopa genom varje turistmål i listan
     for (let i = 0; i < places.length; i++) {
@@ -201,14 +267,18 @@ async function showPlaces(places) {
             shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
         }
 
-        newDiv.innerHTML = "<img id='img-" + place.id + "' src='photos/noimage.jpg' alt='Laddar..' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        newDiv.innerHTML = "<img id='img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
+        let menu = document.querySelectorAll(".dropdownMenu");
+
+        
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
             window.location.href = "produkt.html";
         });
+    
 
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
 

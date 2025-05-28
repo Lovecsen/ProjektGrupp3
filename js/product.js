@@ -48,7 +48,7 @@ function showProductDetails(product) {
     }
 
     newProduct.innerHTML =
-        "<h2>" + product.name + "</h2>" +
+        "<h2>" + product.name + "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'></h2>" +
         "<p><strong>Stad:</strong> " + product.city + "</p>" +
         "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
         "<p><strong>Beskrivning:</strong> " + description + "</p>";
@@ -57,6 +57,8 @@ function showProductDetails(product) {
 
     getReviews(placeId);
     getNear(product);
+    heart(newProduct);
+
 }
 
 async function getReviews(placeId) {
@@ -140,10 +142,18 @@ async function showNear(near) {
     newNear.innerHTML =
         "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + near.id + "'><h3>" + near.name + "</h3><img src='" + imgUrl + "' alt='" + near.name + "'><h4>Stad: " + near.city + "</h4><p>Pris: " + near.price_range + " kr</p>"; //strukturen för informationen
 
+        newNear.addEventListener("pointerdown", function () {
+            localStorage.setItem("selectedPlaceId", near.id); // Spara turistmålets ID i localStorage
+
+            // Navigera till produkt.html
+            window.location.href = "produkt.html";
+        });
+
     nearDiv.appendChild(newNear);
 
     let nearMarkersBtn = document.querySelector("#nearMarkers");
     nearMarkersBtn.addEventListener("pointerdown", () => {
+        
         nearLocations(near);
     });
 
