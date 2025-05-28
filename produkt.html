@@ -17,30 +17,32 @@
     <nav id="navbar">
         <a href="index.html"><img src="photos/Logga.svg" alt="Älv och Ö"></a>
         <div id="asideDiv">
-        <a href="favoriter.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
-        <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
-        <ul id="hamburgerMenu">
-            <li><a href="index.html">Startsida</a></li>
-            <li><a href="listsida.html">Alla turistmål</a></li>
-            <li><a href="favoriter.html">Favoriter</a></li>
-            <li><a href="omoss.html">Om oss</a></li>
-        </ul>
-    </div>
+            <a href="favoriter.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
+            <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
+            <ul id="hamburgerMenu">
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="listsida.html">Alla turistmål</a></li>
+                <li><a href="favoriter.html">Favoriter</a></li>
+                <li><a href="omoss.html">Om oss</a></li>
+            </ul>
+        </div>
     </nav>
     <main>
-    <button onclick="history.back()"><img src="photos/arrowback.svg" alt="Tillbaka"></button>
+        <div id="page">
+            <button onclick="history.back()"><img src="photos/arrowback.svg" alt="Tillbaka"></button>
 
-    <div id="productDetails"></div>
+            <div id="productDetails"></div>
 
-    <div id="map"></div>
+            <div id="map"></div>
 
-    <h2>Recensioner</h2>
-    <div id="reviewsDiv"></div>
+            <h2>Recensioner</h2>
+            <div id="reviewsDiv"></div>
 
-    <h2>Närliggande turistmål</h2>
-    <div id="near"></div>
+            <h2>Närliggande turistmål</h2>
+            <div id="near"></div>
 
-    <button id="nearMarkers" onclick="window.location.href='#productDetails'">Se närliggande turistmål på kartan</button>
+            <button id="nearMarkers" onclick="window.location.href='#productDetails'">Se närliggande turistmål på kartan</button>
+        </div>
     </main>
     <footer>
         <h4>Älv & Ö</h4>
