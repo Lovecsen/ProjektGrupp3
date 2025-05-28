@@ -1,7 +1,7 @@
 {
     "establishment": [
         {
-            "id": "905",
+            "id": "1000",
             "lat": "56.62040153440862",
             "lng": "14.198670384222595",
             "name": "Linnes Råshult",
@@ -27,7 +27,7 @@
             "num_reviews": ""
         },
         {
-            "id": "905",
+            "id": "1001",
             "lat": "57.4368140789712",
             "lng": "13.62392945767242",
             "name": "Isaberg Mountain Resort",
