@@ -10,17 +10,29 @@ html {
 body {
     position: relative;
     margin: 0px;
-    padding-top: 100px;
 }
 
 /* för att sätta en margin på alla sidor förutom på bakgrundsbilden på startsidan*/
 #page {
-    margin: 7px; 
+    margin: 7px;
+    margin-top: 100px;
+}
+
+#startpage {
+    margin: 7px;
+}
+
+/* Centrerar smapiPlace och favoriter*/
+#placeContainer, #favoritesContainer, #destination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #backgroundWrapper {
     position: relative;
     width: 100%;
+    height: 545px;
     overflow: hidden;
     background-image: url(../bakgrunder/lake.jpg);
     background-repeat: no-repeat;
@@ -61,16 +73,28 @@ body {
     border-radius: 12px;
 }
 
+#intro {
+    margin-top: 120px;
+}
+
+#intro a {
+    color: #ffa93f;
+}
+
+#intro a:hover {
+    color: #c6812e;
+}
+
 /* Hela formuläret för frågorna */
 #form {
     border-radius: 10px;
     padding: 5px;
     background-color: rgba(223, 237, 216, 0.863);
-    height: 210px;
+    height: 230px;
     position: relative;
-    width: 400px;
+    min-width: 300px;
     z-index: 1;
-    margin: 0 auto 100px auto;
+    margin: 0 30px 100px 30px;
 }
 
 /* Svarsalternativen */
@@ -208,7 +232,9 @@ button:hover {
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
-    margin: 10px 13px 10px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 13px;
     font-size: 11px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -235,7 +261,7 @@ button:hover {
     width: 95px;
     height: 135px;
     grid-area: img;
-  padding-top: 35px;
+    padding-top: 35px;
     margin-left: 6px;
 }
 
@@ -274,10 +300,12 @@ button:hover {
 /* nya div elementen för alla turistmål på listsidan */
 .smapiPlace {
     border-radius: 10px;
+    width: 100%;
     padding: 10px;
     text-align: right;
-    margin-top: 15px;
+    margin-top: 20px;
     background-color: #e8f3e3;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     display: grid;
     grid-template-columns: 3fr 3fr 1fr;
@@ -294,6 +322,8 @@ button:hover {
     grid-area: favorite;
     padding-left: 30px;
     padding-top: 4px;
+    justify-self: end;
+    align-self: start;
 }
 
 /* bilden för resmålet */
@@ -375,7 +405,8 @@ button:hover {
 /* rutorna för recensioner */
 .smapiReviews {
     min-width: 200px;
-    background-color: #dfedd8;
+    flex: 1;
+    background-color: #fef2f3;
     margin: 5px;
     padding: 20px;
     border-radius: 10px;
@@ -451,7 +482,7 @@ input {
 }
 
 .modal {
-    position:fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -484,39 +515,126 @@ input {
 .smapiProduct .heart {
     padding-right: 20px;
     width: 80px;
-    
+
+}
+
+#omOssText {
+    max-width: 700px;
 }
 
 @media screen and (min-width: 800px) {
+
+    /*STARTSIDA */
     #form {
-        max-width: 600px;
+        width: 600px;
         margin: 0 auto;
     }
 
     #intro {
         margin: 100px;
-        margin-top: 50px;
-        margin-bottom: 0px;
+        max-width: 800px;
+        margin: 120px auto 0 auto;
+    }
+
+    #intro2 {
+        max-width: 800px;
+        margin: 0 auto;
     }
 
     .smapiPopular {
-        height:240px;
+        height: 200px;
+        font-size: 14px;
+        max-width: 370px;
     }
 
-    .smapiPopular img {
-        width: 120px;
-        height: 120px;
-    }
-    
-}
-
-@media screen and (min-width: 1200px) {
-    .smapiPopular {
-        height:300px;
+    .smapiPopular h3 {
+        font-size: 15px;
     }
 
     .smapiPopular img {
         width: 170px;
         height: 170px;
+        margin-right: 20px;
+    }
+
+    /*LISTSIDA */
+    .smapiPlace {
+        display: grid;
+        grid-template-columns: 2fr 3fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+            "imgUrl name favorite"
+            "imgUrl city city"
+            "imgUrl price price"
+            "imgUrl description description";
+        gap: 10px;
+        max-width: 700px;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .smapiPlace img.picture {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin: auto 0;
+    }
+
+    #name,
+    #city,
+    #price,
+    #description {
+        text-align: left;
+        font-size: 16px;
+        margin-top: 0px;
+    }
+
+    /*PRODUKTSIDA*/
+    .smapiReviews {
+        max-width: 350px;
+    }
+
+    /*FAVORITSIDA*/
+    #favoritesContainer img.picture {
+        width: 200px;
+    }
+
+    /*QUIZRESULTAT SIDA*/
+    #destination img.picture {
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    /*STARTSIDA*/
+    .smapiPopular {
+        height: 250px;
+        max-width: 400px;
+    }
+
+    .smapiPopular img {
+        width: 200px;
+        height: 200px;
+    }
+
+    /*LISTSIDA */
+    .smapiPlace {
+        max-width: 900px;
+    }
+
+    .smapiPlace img.picture {
+        width: 250px;
+    }
+
+    /*FAVORITSIDA*/
+    #favoritesContainer img.picture {
+        width: 250px;
+    }
+
+     /*QUIZRESULTAT SIDA*/
+    #destination img.picture {
+        width: 250px;
+        height: 250px;
     }
 }
