@@ -1,11 +1,11 @@
 function init() {
-    const hamburgerIcon = document.querySelector("#hamburgerIcon");
+    const hamburgerIcon = document.querySelector("#hamburgerIcon"); //bilden på hamburgermenyn
 
-    hamburgerIcon.addEventListener("pointerdown", showHamburger);
+    hamburgerIcon.addEventListener("pointerdown", showHamburger); //eventlyssnare för klick på hamburgermenyn
 
-    let navHeart = document.querySelector("#favorites");
+    let navHeart = document.querySelector("#favorites"); //bilden för favoriter i navbaren
 
-    if (!navHeart) return;
+    if (!navHeart) return; //om inte navHeart finns avbryts funktionen
 
     //mus är över hjärtat ändras det till rött
     navHeart.addEventListener("pointerenter", () => {
@@ -20,8 +20,9 @@ function init() {
 }
 window.addEventListener("DOMContentLoaded", init);
 
+//funktion för att visa/dölja innehållet i hamburgarmenyn
 function showHamburger() {
-    const hamburgerMenu = document.querySelector("#hamburgerMenu");
+    const hamburgerMenu = document.querySelector("#hamburgerMenu"); //id för listan i hamburgermenyn
 
     //för att visa dropdown för hamburgermenyn
     if (hamburgerMenu.style.display == "block") {
