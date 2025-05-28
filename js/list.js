@@ -6,8 +6,6 @@ let placeContainer; //div element för att hålla temaparker
 let allPlaces = []; //array för alla platser
 let imgUrl; //urlen för den bild som ska visas
 
-
-
 async function init() {
     placeContainer = document.querySelector("#placeContainer"); //hämtar det tomma div-elementet i HTML
     await getData(); //anropa funktion getData
@@ -27,8 +25,6 @@ async function init() {
         localStorage.removeItem("filterOutdoors")
     }
 
-    
-
     //eventlyssnare för knapparna för filtreringen
     document.querySelector("#categoryBtn").addEventListener("click", () => {
         toggleDropdown("category");
@@ -42,15 +38,15 @@ async function init() {
     document.querySelector("#outdoorsBtn").addEventListener("click", () => {
         toggleDropdown("outdoors");
     });
-    
+
     //rensar filter
     let clear = document.querySelector("#clear");
     clear.addEventListener("click", function () {
         localStorage.removeItem("filters");
         getData();
     })
-    
- 
+
+
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -74,7 +70,7 @@ function toggleDropdown(id) {
 
     //visa eller dölja dropdown menyn
     for (let i = 0; i < menu.length; i++) {
-        if (menu[i].id == id ) {
+        if (menu[i].id == id) {
             menu[i].classList.toggle("open");
         } else {
             menu[i].classList.remove("open");
@@ -82,32 +78,43 @@ function toggleDropdown(id) {
     }
 
     //för att kunna stänga filterrutan med esc knappen
-    document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-        for (let i = 0; i < menu.length; i++) {
-            menu[i].classList.remove("open");
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            for (let i = 0; i < menu.length; i++) {
+                menu[i].classList.remove("open");
+            }
         }
-    }
-});
+    });
 }
 
-//funktion som hämtar data från SMAPI
+//funktion som hämtar data från SMAPI och lokal json-fil
 async function getData() {
-    
+
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
-    let response = await fetch("https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions); //skicka förfrågan tilll SMAPI
+    try {
+        const [smapiRes, jsonRes] = await Promise.all([
+            fetch("https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions), //skicka förfrågan tilll SMAPI
+            fetch("json/destinations.json") //hämta från lokal json-fil
+        ]);
 
-    if (response.ok) {
-        let data = await response.json();
-        allPlaces = data.payload;
+        // Kontrollera att förfrågningarna lyckades 
+        if (smapiRes.ok && jsonRes.ok) {
 
-        filters(allPlaces); //skicka vidare till funktion filters
-        showPlaces(allPlaces); // skicka vidare till funktion showPlaces
-        restoreFilter(); //kontrollerar om det finns valda filter sedan innan
-    } else {
-        placeContainer.innerText = "Fel vid hämtning: " + response.status; //felmeddelande 
-}
+            //gör om svaren till json
+            const smapiData = await smapiRes.json();
+            const jsonData = await jsonRes.json();
+
+            allPlaces = smapiData.payload.concat(jsonData.establishment); // slår ihop båda listorna
+
+            filters(allPlaces); //skicka vidare till funktion filters
+            showPlaces(allPlaces); // skicka vidare till funktion showPlaces
+            restoreFilter(); //kontrollerar om det finns valda filter sedan innan
+
+        }
+    } catch (error) {
+        placeContainer.innerText = "Fel vid hämtning: " + error.message; //felmeddelande om try går fel
+    }
 }
 
 //sorterar de olika filtermöjligheterna
@@ -138,8 +145,9 @@ function filters(places) {
         return {
             value: val,
             label: val == "N" ? "Inomhus" :
-                   val == "Y" ? "Utomhus" : val
-        }});
+                val == "Y" ? "Utomhus" : val
+        }
+    });
 
     fill("outdoors", outdoorsOptions);
 }
@@ -147,20 +155,20 @@ function filters(places) {
 function restoreFilter() {
     let savedFilters = localStorage.getItem("filters");
     if (savedFilters) {
-    let filter = JSON.parse(savedFilters);
+        let filter = JSON.parse(savedFilters);
 
-    for (let key in filter) {
-        let values = filter[key];
-        for (let i = 0; i < values.length; i++) {
-            let value = values[i];
-            let input = document.querySelector("input[name='" + key + "'][value='" + value + "']");
-            if (input) {
-                input.checked = true;
+        for (let key in filter) {
+            let values = filter[key];
+            for (let i = 0; i < values.length; i++) {
+                let value = values[i];
+                let input = document.querySelector("input[name='" + key + "'][value='" + value + "']");
+                if (input) {
+                    input.checked = true;
+                }
             }
         }
-    }
-    const filtered = filterPlaces(allPlaces, filter);
-    showPlaces(filtered);
+        const filtered = filterPlaces(allPlaces, filter);
+        showPlaces(filtered);
     }
 }
 
@@ -191,7 +199,6 @@ function fill(id, items) {
         label.appendChild(document.createTextNode(" " + labelText));
 
         container.appendChild(label);
-
     }
 }
 
@@ -204,7 +211,7 @@ function applyFilter() {
         price: checkedValues("price"),
         city: checkedValues("city"),
         outdoors: checkedValues("outdoors")
-    }; 
+    };
     let theFilters = JSON.stringify(filters);
     localStorage.setItem("filters", theFilters);
 
@@ -239,7 +246,7 @@ function filterPlaces(places, filters) {
 }
 //funktion som skriver ut turistmålen på sidan
 async function showPlaces(places) {
-    
+
     placeContainer.innerHTML = ""; // rensar innehållet
 
     //rensar gamla markörer
@@ -271,14 +278,12 @@ async function showPlaces(places) {
 
         let menu = document.querySelectorAll(".dropdownMenu");
 
-        
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
             window.location.href = "produkt.html";
         });
-    
 
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
 
@@ -288,10 +293,7 @@ async function showPlaces(places) {
             if (imgElem && imgUrl) {
                 imgElem.src = imgUrl;
             }
-
         });
-         
         heart(newDiv);
     }
-
 }
