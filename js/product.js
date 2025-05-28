@@ -42,10 +42,14 @@ function showProductDetails(product) {
     markerLocations(product);
 
     //Om ingen beskrivning finns skrivs "Ingen beskrivning tillgänglig" ut
-    let description = product.abstract;
+    let description = "";
+
     if (product.abstract == "") {
         description = "Ingen beskrivning tillgänglig";
+    } else {
+        description = product.abstract.trim();
     }
+
 
     newProduct.innerHTML =
         "<h2>" + product.name + "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'></h2>" +

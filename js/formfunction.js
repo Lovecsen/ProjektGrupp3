@@ -1,97 +1,95 @@
-import { fetchImages } from './images.js';
-import { heart } from './heart.js';
-let resultElem;
-let answerElem;
+import { fetchImages } from './images.js'; //hämtar bilder från flickr via images.js
+import { heart } from './heart.js'; //hämtar funktionen heart från heart.js filen
+let resultElem; //element för att skriva ut turistmålen i resultatet
+let answerElem; //element för meddelande när användaren får quizresultat
 
-//tar med svaren från föregående sida med localstorage
-window.addEventListener("DOMContentLoaded", () => {
+function init() {
+    //hämtar från localStorage
     const answer1 = localStorage.getItem("answer1");
     const answer2 = localStorage.getItem("answer2");
     const answer3 = localStorage.getItem("answer3");
     const answer4 = localStorage.getItem("answer4");
 
-    getData(answer1, answer2, answer3, answer4);
-    
-});
+    getData(answer1, answer2, answer3, answer4);//anrop av getData
 
+}
+window.addEventListener("DOMContentLoaded", init)
+
+//funktion för att hämta data från SMAPI
 async function getData(answer1, answer2, answer3, answer4) {
-    
+
     resultElem = document.querySelector("#destination"); //element för att hålla de nya div elementen för turistmålen
 
     answerElem = document.querySelector("#answer"); //p element som ska kunna ändras
 
-    let myApiKey = "Tc9ZD2gK";
+    let myApiKey = "Tc9ZD2gK"; //API nyckel
 
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
     //urlen för det som ska hämtas i smapi med värdena för svaren användaren gett
     let url = "https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions + "&type=" + answer3 + "&price_ranges=" + answer4;
 
-    //om användaren svarade båda på första frågan läggs en till sträng till urlen
+    //om användaren svarade båda på första frågan läggs outdoors till urlen
     if (answer1 !== ".") url += "&outdoors=" + answer1;
-    
-    //om användaren svarade spelar ingen roll på andra frågan läggs en till sträng till urlen
+
+    //om användaren svarade spelar ingen roll på andra frågan läggs child_discount till urlen
     if (answer2 !== ".") url += "&child_discount=" + answer2;
 
-    let response = await fetch(url);
-   
-    let data = await response.json();
+    let response = await fetch(url); //hämtar från SMAPI med url
+
+    let data = await response.json(); //inväntar svaret från SMAPI
 
     //körs endast om man är i quizresultat
     if (window.location.pathname.includes("quizresultat.html")) {
-    //om det inte finns något som matchas med svaren i smapi
-    if (!data.payload || data.payload.length == 0) {
-        answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
-        return;
-    }
-    }
- 
-    showResult(data.payload); // skicka vidare till funktion showPlaces
-
-    //rensar svaren från localstorage
-    localStorage.removeItem("answer1");
-    localStorage.removeItem("answer2");
-    localStorage.removeItem("answer3");
-    localStorage.removeItem("answer4");
-}
-
-
-async function showResult(result) {
-if (window.location.pathname.includes("quizresultat.html")) {
-    for (let i = 0; i < result.length; i++) {
-        const place = result[i]; //aktuellt turistmål
-
-        markerLocations(place); //lägger till pin på kartan
-
-        const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
-
-        newDiv.classList.add("smapiPlace"); //lägg till en class
-
-        let shortDescription = ""; //kort beskrivning som ska visas
-
-        // Om beskrivningen är längre än 100 tecken, kapa och lägg till "..."
-        if (place.abstract == "") {
-            shortDescription = "Ingen beskrivning tillgänglig";
-        } else if (place.abstract.length > 100) {
-            shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
-        } else {
-            shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
+        //om det inte finns något som matchas med svaren i smapi
+        if (!data.payload || data.payload.length == 0) {
+            answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
+            return;
         }
-
-        let imgUrl = await fetchImages(place);
-
-        newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
-
-        newDiv.addEventListener("pointerdown", function () {
-            localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
-
-            // Navigera till produkt.html
-            window.location.href = "produkt.html";
-        });
-
-        resultElem.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
-
-        heart(newDiv);
     }
+
+    showResult(data.payload); // skicka vidare till funktion showPlaces
 }
+
+//visar resultaten på sidan
+async function showResult(result) {
+    //körs endast om man är i quizresultat
+    if (window.location.pathname.includes("quizresultat.html")) {
+        for (let i = 0; i < result.length; i++) {
+            const place = result[i]; //aktuellt turistmål
+
+            markerLocations(place); //lägger till pin på kartan
+
+            const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
+
+            newDiv.classList.add("smapiPlace"); //lägg till en class
+
+            let shortDescription = ""; //kort beskrivning som ska visas
+
+            // Om beskrivningen är längre än 100 tecken, kapa och lägg till "... Läs mer"
+            if (place.abstract == "") {
+                shortDescription = "Ingen beskrivning tillgänglig"; //om ingen beskrivning finns
+            } else if (place.abstract.length > 100) {
+                shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
+            } else {
+                shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
+            }
+
+            let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
+
+            newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+
+            //användaren klickar på ett turistmål
+            newDiv.addEventListener("pointerdown", function () {
+                localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
+
+                // Navigera till produkt.html
+                window.location.href = "produkt.html";
+            });
+
+            resultElem.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
+
+            heart(newDiv); //anropar heart för favoritfunktionen
+        }
+    }
 }

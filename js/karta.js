@@ -1,72 +1,73 @@
 
 let map; //objekt för kartan
-let markers = [];
+let markers = []; //array för att h
 
 function init() {
-    initMap("map");
+    initMap("map"); //anropar initmap
 }
 window.addEventListener("load", init);
 
 function initMap(id) {
-
     //nytt kartobjekt
-    map = L.map(id).setView([57.353,15.601], 6);
+    map = L.map(id).setView([57.353, 15.601], 6);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         minZoom: 5
     }).addTo(map);
-
 }
 
 function markerLocations(obj) {
-
     let marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
-    markers.push(marker);
+    markers.push(marker); //lägger markörerna i arrayen
 
-    smallInfo(marker, obj);
-
+    smallInfo(marker, obj); //anropar smallInfo
 }
 
+//funktion för att visa markörer för närliggande turistmål
 function nearLocations(obj) {
 
     let myIcon = L.icon({
         iconUrl: "photos/marker.svg"
-    });
+    }); //egen markör för att skilja på det aktuella turistmålet och de närliggande
 
-    map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng oc zoomar in
+    map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng och zoomar in
 
-    let marker = L.marker([obj.lat, obj.lng], {icon: myIcon}).addTo(map); //ny markör med lat och lng för de olika objekten
+    let marker = L.marker([obj.lat, obj.lng], { icon: myIcon }).addTo(map); //ny markör med lat och lng för de olika objekten
 
-    smallInfo(marker, obj);
-    
+    smallInfo(marker, obj); //anrop smallInfo
+
 }
 
+//funktion för att visa små informationsrutor vid hover för markörerna
 function smallInfo(marker, obj) {
-//gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
+    //gör så markern väntas in att bli renderad innan vi försökter få tag i DOM-elementet
     setTimeout(() => {
-        const el = marker.getElement();
-        if (!el) return;
+        const elem = marker.getElement(); //hämtar elementet kopplat till markören
+        if (!elem) return; //om inte elem finns avbryts funktionen
 
         const smallInfo = document.createElement('div'); //div element för att visa info bredvid markörer
-        smallInfo.classList.add("smallInfoDiv");
-        smallInfo.innerHTML = "<h4>" + obj.name + "</h4><p>" + obj.description + "</p><p>" + obj.price_range + " kr</p>";
-        document.body.appendChild(smallInfo);
+        smallInfo.classList.add("smallInfoDiv"); //lägg till klass
 
-        el.addEventListener('pointerenter', (e) => {
-            const rect = el.getBoundingClientRect();
-            smallInfo.style.left = rect.right + 10 + 'px';
-            smallInfo.style.top = rect.top + 'px';
+        smallInfo.innerHTML = "<h4>" + obj.name + "</h4><p>" + obj.description + "</p><p>" + obj.price_range + " kr</p>";
+
+        document.body.appendChild(smallInfo); //lägger smallInfo i document.body så den kan visas vid markören
+
+        elem.addEventListener('pointerenter', () => {
+            const size = elem.getBoundingClientRect(); //hämtar position och storlek för elem
+            //hur smallInfo ska visas
+            smallInfo.style.left = size.right + 10 + 'px';
+            smallInfo.style.top = size.top + 'px';
             smallInfo.style.display = 'block';
         });
 
-        el.addEventListener('pointerleave', () => {
-            smallInfo.style.display = 'none'
+        elem.addEventListener('pointerleave', () => {
+            smallInfo.style.display = 'none' //dölj smallInfo
         });
 
-    
-        el.addEventListener('pointerdown', (e) => {
+
+        elem.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             localStorage.setItem("selectedPlaceId", obj.id); //spara i lokalStorage så den markör man klickas på är den information som visas på produktsidan
-            window.location.href = "produkt.html"; 
-    });
+            window.location.href = "produkt.html";
+        });
     }, 0);
 }

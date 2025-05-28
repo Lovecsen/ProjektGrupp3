@@ -32,7 +32,15 @@ if (window.location.pathname.includes("index.html")) {
             setQuestion(i);
         }
         showQuestion(0);
-        nextBtns[3].addEventListener("click", result); //anropa functionen i formfunction.js
+        nextBtns[3].addEventListener("click", function () {
+            //rensar svaren från localstorage om formulär gjorts innan
+            localStorage.removeItem("answer1");
+            localStorage.removeItem("answer2");
+            localStorage.removeItem("answer3");
+            localStorage.removeItem("answer4");
+
+            result();
+        }); //anropa functionen i formfunction.js
     }
     window.addEventListener("DOMContentLoaded", init);
 
@@ -47,8 +55,8 @@ if (window.location.pathname.includes("index.html")) {
 
         //om nästa knappen
         if (nextBtn) {
-            nextBtn.classList.add("disabled");
-            nextBtn.disabled = true;
+            nextBtn.classList.add("disabled"); //klass för inaktiverad
+            nextBtn.disabled = true; //inaktivera
 
             if (!inputChecked(theInputs)) {
                 nextBtn.classList.add("disabled");
