@@ -56,7 +56,7 @@ async function getProductDetails(placeId) {
 }
 
 //visa informationen på sidan
-function showProductDetails(product) {
+async function showProductDetails(product) {
     const newProduct = document.createElement("div"); //skapa nytt div-element för turistmålet
     newProduct.classList.add("smapiProduct"); //lägg till en class
     markerLocations(product); //anrop av funktion i karta.js för markörer
@@ -71,10 +71,10 @@ function showProductDetails(product) {
         description = "Ingen beskrivning tillgänglig";
     }
 
-
+    let imgUrl = await fetchImages(product); //hämtar bilder via flickr från images.js
     //skriver ut infon i div-elementet
     newProduct.innerHTML =
-        "<h2>" + product.name + "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'></h2>" +
+        "<h2>" + product.name + "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'><img src='" + imgUrl + "' alt='" + product.name + "' id='productImage'></h2>" +
         "<p><strong>Stad:</strong> " + product.city + "</p>" +
         "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
         "<p><strong>Beskrivning:</strong> " + description + "</p>";
