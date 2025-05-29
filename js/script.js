@@ -20,7 +20,6 @@ function init() {
     wrapperElemOutside = document.querySelector("#wrapperElem"); //här läggs alla utomhus turistmål
     wrapperElemInside = document.querySelector("#wrapperElem2");//här läggs alla inomhus turistmål
 
-
     let insideBtn = document.querySelector("#insideBtn"); //knapp för att visa alla inomhus turistmål
 
     //eventlyssnare för "se alla inomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara inomhus

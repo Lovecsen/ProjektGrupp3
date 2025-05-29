@@ -23,7 +23,7 @@ let prevBtns = [
 let inputClasses = ["first", "second", "third", "fourth"]; //array för namnet på klasserna i de olika input elementen för de olika svarsalternativen
 
 let visitedQuestions = [false, false, false, false]; //array för false för vardera fråga gällande att den ska vara false fram till att användaren får frågan
-
+//körs endast om man är på startsidan
 if (window.location.pathname.includes("index.html")) {
     function init() {
 
@@ -62,8 +62,9 @@ if (window.location.pathname.includes("index.html")) {
                 nextBtn.classList.add("disabled");
                 nextBtn.disabled = true; //inaktivera knappen om inga radio knappar klickats i
             }
-            for (let inputHtml of theInputs) {
-                inputHtml.addEventListener("change", () => {
+            for (let i = 0; i < theInputs.length; i++) {
+                theInputs[i].addEventListener("change", () => {
+                    //om något av svarsalternativen klickats i blir nästaknappen aktiv, annars blir den inaktiv
                     if (inputChecked(theInputs)) {
                         nextBtn.classList.remove("disabled");
                         nextBtn.disabled = false;
@@ -73,43 +74,45 @@ if (window.location.pathname.includes("index.html")) {
                     }
                 });
             }
-            nextBtn.addEventListener("click", () => showQuestion(index + 1));
+            nextBtn.addEventListener("click", () => showQuestion(index + 1)); // nästa fråga när användaren klickar på nästa knappen
         }
+        //om föregående knappen klickas visas föregående fråga
         if (prevBtn && index > 0) {
             prevBtn.addEventListener("click", () => showQuestion(index - 1));
         }
 
     }
 
+    //funktion för att visa de olika frågorna
     function showQuestion(theIndex) {
         for (let i = 0; i < questionElems.length; i++) {
             if (i == theIndex) {
-                questionElems[i].classList.remove("hide");
-                if (!visitedQuestions[i]) {
-                    inputReset(questionElems[i]);
-                    visitedQuestions[i] = true;
+                questionElems[i].classList.remove("hide"); //visa den nya frågan
+                if (!visitedQuestions[i]) { //om frågan inte har visats innan anropas funktionen inputReset
+                    inputReset(questionElems[i]); //anropar inputReset för att rensa eventuella inputvärden
+                    visitedQuestions[i] = true; //frågan har visats
                 }
             } else {
-                questionElems[i].classList.add("hide");
+                questionElems[i].classList.add("hide"); //dölj den gamla frågan
             }
         }
     }
 
+    //funktion för att rensa input fälten
     function inputReset(Qelem) {
         const inputs = Qelem.querySelectorAll('input[type="radio"], input[type="checkbox"]');
-        for (let input of inputs) {
-            input.checked = false;
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].checked = false; //input fälten checks ur 
         }
     }
 
     function inputChecked(inputs) {
-
+        //returnerar redan icheckade inputs 
         return Array.from(inputs).some(input => input.checked);
-
     }
 }
 
-
+//funktion för att kontrollera användarens svar på frågorna
 function result() {
 
     let answers = []; //tom array för att hålla svaren som användaren gör
@@ -177,6 +180,5 @@ function result() {
     localStorage.setItem("answer2", answers[1]);
     localStorage.setItem("answer3", answers[2]);
     localStorage.setItem("answer4", answers[3]);
-
 }
 
