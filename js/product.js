@@ -61,13 +61,16 @@ function showProductDetails(product) {
     newProduct.classList.add("smapiProduct"); //lägg till en class
     markerLocations(product); //anrop av funktion i karta.js för markörer
 
-    //Om ingen beskrivning finns skrivs "Ingen beskrivning tillgänglig" ut, annars är description abstract från SMAPI
+    //Om ingen beskrivning finns skrivs "Ingen beskrivning tillgänglig" ut, annars är description text från SMAPI, finns inte text är det abstract
     let description = "";
-    if (product.abstract == "") {
-        description = "Ingen beskrivning tillgänglig";
-    } else {
+    if (product.text && product.text.trim() !== "") {
+        description = product.text.trim();
+    } else if (product.abstract && product.abstract.trim() !== "") {
         description = product.abstract.trim();
+    } else {
+        description = "Ingen beskrivning tillgänglig";
     }
+
 
     //skriver ut infon i div-elementet
     newProduct.innerHTML =
@@ -179,7 +182,6 @@ async function showNear(near) {
 
     let nearMarkersBtn = document.querySelector("#nearMarkers"); //"se närligande turistmål på kartan"-knappen
     nearMarkersBtn.addEventListener("pointerdown", () => {
-
         nearLocations(near); //anropar nearLocations i karta.js för att sätta ut markörer för närliggande turistmål
     });
 

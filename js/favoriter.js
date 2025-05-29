@@ -1,15 +1,17 @@
 import { fetchImages } from './images.js'; //hämtar bilder från flickr via images.js
 let remove = null; //det resmål som ska tas bort
+let favoritePlaces = []; //array för att hålla favoriterna
+let favoriteDiv; //div element där resmålen ska skrivas ut
 
 function init() {
-    showFavorites(); //anrop av showFavorites
+    getFavorites(); //anrop av getFavorites
 }
 window.addEventListener("load", init);
 
-async function showFavorites() {
+async function getFavorites() {
     const favIds = (JSON.parse(localStorage.getItem("favoriter")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
 
-    let favoriteDiv = document.querySelector("#favoritesContainer"); //div element där resmålen ska skrivas ut
+    favoriteDiv = document.querySelector("#favoritesContainer"); //div element där resmålen ska skrivas ut
 
     if (!favoriteDiv) return; //om inte favoriteDiv finns avslutas funktionen
 
@@ -25,33 +27,50 @@ async function showFavorites() {
 
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
-    let response = await fetch("https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions); //skicka förfrågan tilll SMAPI
+    try {
+        const [smapiRes, jsonRes] = await Promise.all([
+            fetch("https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions), //skicka förfrågan tilll SMAPI
+            fetch("json/destinations.json") //hämta från lokal json-fil
+        ])
 
-    let data = await response.json(); //inväntar svaret från SMAPI
+        if (smapiRes.ok && jsonRes.ok) {
+            //gör om svaren till json
+            const smapiData = await smapiRes.json();
+            const jsonData = await jsonRes.json();
 
-    const places = data.payload; //payload egenskapen
+            const places = smapiData.payload.concat(jsonData.establishment); //payload egenskapen
+            favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
 
-    let favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
 
-    let confirm = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
-    let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
-    let no = document.querySelector("#no"); //nej knappen för att ta bort ur favoriter
+            let confirm = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
+            let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
+            let no = document.querySelector("#no"); //nej knappen för att ta bort ur favoriter
 
-    //om användaren klickar på ja
-    yes.onclick = function () {
-        let fav = JSON.parse(localStorage.getItem("favoriter")) || []; //hämtar favoriter ur localstorage
-        fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
+            showFavorites();
 
-        localStorage.setItem("favoriter", JSON.stringify(fav)); //uppdaterar localstorage
-        confirm.classList.add("hide"); //döljer nrutan igen
-        showFavorites(); //anropar showFavorites för att uppdatera favoriter
-    };
+            //om användaren klickar på ja
+            yes.addEventListener("pointerdown", function () {
+                let fav = JSON.parse(localStorage.getItem("favoriter")) || []; //hämtar favoriter ur localstorage
+                fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
 
-    //om användaren klickar nej
-    no.onclick = function () {
-        confirm.classList.add("hide"); //döljer rutan igen
-    };
+                localStorage.setItem("favoriter", JSON.stringify(fav)); //uppdaterar localstorage
+                confirm.classList.add("hide"); //döljer nrutan igen
+                showFavorites(); //anropar showFavorites för att uppdatera favoriter
+            });
 
+            //om användaren klickar nej
+            no.addEventListener("pointerdown", function () {
+                confirm.classList.add("hide"); //döljer rutan igen
+            });
+
+        }
+    } catch (error) {
+        favoriteDiv.innerText = "Fel vid hämtning: " + error.message;
+    }
+}
+
+
+async function showFavorites() {
     //rensar gamla markörer
     for (let i = 0; i < markers.length; i++) {
         map.removeLayer(markers[i]);
@@ -68,13 +87,18 @@ async function showFavorites() {
 
         let shortDescription = ""; //tom sträng för att hålla breskrivning
 
-        // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer" 
-        if (place.abstract == "") {
-            shortDescription = "Ingen beskrivning tillgänglig"; //om beskrivning inte finns
-        } else if (place.abstract.length > 100) {
-            shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
+        //om place.text finns används detta, annars används place.abstract. Om inget av dem finns, skrivs "ingen beskrivning tillgänglig" ut
+        if (place.text && place.text.trim() !== "") {
+            shortDescription = place.text.trim();
+        } else if (place.abstract && place.abstract.trim() !== "") {
+            shortDescription = place.abstract.trim(); //om beskrivning inte finns
         } else {
-            shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
+            shortDescription = "Ingen beskrivning tillgänglig";
+        }
+
+        // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer"
+        if (shortDescription.length > 100) {
+            shortDescription = shortDescription.substring(0, 100).trim() + "... <i>Läs mer</i>";
         }
 
         let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
@@ -83,7 +107,7 @@ async function showFavorites() {
 
         const trash = div.querySelector(".trash"); //ikon för att ta bort favorit
 
-        trash.addEventListener("click", function (e) {
+        trash.addEventListener("pointerdown", function (e) {
             e.stopPropagation(); //stoppar eventuella andra eventlyssnare
             e.preventDefault(); //stoppar andra beteende
 
@@ -105,3 +129,4 @@ async function showFavorites() {
     }
 
 }
+

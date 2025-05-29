@@ -32,7 +32,7 @@ if (window.location.pathname.includes("index.html")) {
             setQuestion(i);
         }
         showQuestion(0);
-        nextBtns[3].addEventListener("click", function () {
+        nextBtns[3].addEventListener("pointerdown", function () {
             //rensar svaren från localstorage om formulär gjorts innan
             localStorage.removeItem("answer1");
             localStorage.removeItem("answer2");
@@ -40,6 +40,7 @@ if (window.location.pathname.includes("index.html")) {
             localStorage.removeItem("answer4");
 
             result();
+            window.location.href = "quizresultat.html";
         }); //anropa functionen i formfunction.js
     }
     window.addEventListener("DOMContentLoaded", init);
@@ -74,11 +75,11 @@ if (window.location.pathname.includes("index.html")) {
                     }
                 });
             }
-            nextBtn.addEventListener("click", () => showQuestion(index + 1)); // nästa fråga när användaren klickar på nästa knappen
+            nextBtn.addEventListener("pointerdown", () => showQuestion(index + 1)); // nästa fråga när användaren klickar på nästa knappen
         }
         //om föregående knappen klickas visas föregående fråga
         if (prevBtn && index > 0) {
-            prevBtn.addEventListener("click", () => showQuestion(index - 1));
+            prevBtn.addEventListener("pointerdown", () => showQuestion(index - 1));
         }
 
     }

@@ -2,6 +2,7 @@ import { fetchImages } from './images.js'; //hämtar bilder från flickr via ima
 import { heart } from './heart.js'; //hämtar funktionen heart från heart.js filen
 let resultElem; //element för att skriva ut turistmålen i resultatet
 let answerElem; //element för meddelande när användaren får quizresultat
+let allPlaces = []; //array för att hålla turistmålen som ska visas
 
 function init() {
     //hämtar från localStorage
@@ -34,18 +35,43 @@ async function getData(answer1, answer2, answer3, answer4) {
     //om användaren svarade spelar ingen roll på andra frågan läggs child_discount till urlen
     if (answer2 !== ".") url += "&child_discount=" + answer2;
 
-    let response = await fetch(url); //hämtar från SMAPI med url
-    let data = await response.json(); //inväntar svaret från SMAPI
+    try {
+        const [smapiRes, jsonRes] = await Promise.all([
+            await fetch(url), //hämtar från SMAPI med url
+            fetch("json/destinations.json") //hämta från lokal json-fil
+        ]);
 
-    //körs endast om man är i quizresultat
-    if (window.location.pathname.includes("quizresultat.html")) {
-        //om det inte finns något som matchas med svaren i smapi
-        if (!data.payload || data.payload.length == 0) {
-            answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
-            return;
+        // Kontrollera att förfrågningarna lyckades 
+        if (smapiRes.ok && jsonRes.ok) {
+            //gör om svaren till json
+            const smapiData = await smapiRes.json();
+            const jsonData = await jsonRes.json();
+
+            const priceRanges = answer4.split(",");
+            const jsonFilter = jsonData.establishment.filter(place => {
+                const typeMatch = answer3.includes(place.type);
+                const priceMatch = priceRanges.includes(place.price_range);
+                const outdoorsMatch = answer1 == "." || place.outdoors == answer1;
+                const childMatch = answer2 == "." || place.child_discount == (answer2 == "Y");
+
+                return typeMatch && priceMatch && outdoorsMatch && childMatch;
+            });
+
+            allPlaces = smapiData.payload.concat(jsonFilter); // slår ihop båda listorna
+
+            //körs endast om man är i quizresultat
+            if (window.location.pathname.includes("quizresultat.html")) {
+                 //om det inte finns något som matchas med svaren i smapi
+                if (!allPlaces || allPlaces.length == 0) {
+                answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
+                return;
+           }
         }
+        showResult(allPlaces); // skicka vidare till funktion showPlaces
+        }
+    } catch (error) {
+        resultElem.innerText = "Fel vid hämtning: " + error.message;
     }
-    showResult(data.payload); // skicka vidare till funktion showPlaces
 }
 
 //visar resultaten på sidan
@@ -60,15 +86,20 @@ async function showResult(result) {
             const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
             newDiv.classList.add("smapiPlace"); //lägg till en class
 
-            let shortDescription = ""; //kort beskrivning som ska visas
+            let shortDescription = ""; //tom sträng för att hålla breskrivning
 
-            // Om beskrivningen är längre än 100 tecken, kapa och lägg till "... Läs mer"
-            if (place.abstract == "") {
-                shortDescription = "Ingen beskrivning tillgänglig"; //om ingen beskrivning finns
-            } else if (place.abstract.length > 100) {
-                shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
+            //om place.text finns används detta, annars används place.abstract. Om inget av dem finns, skrivs "ingen beskrivning tillgänglig" ut
+            if (place.text && place.text.trim() !== "") {
+                shortDescription = place.text.trim();
+            } else if (place.abstract && place.abstract.trim() !== "") {
+                shortDescription = place.abstract.trim(); //om beskrivning inte finns
             } else {
-                shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
+                shortDescription = "Ingen beskrivning tillgänglig";
+            }
+
+            // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer"
+            if (shortDescription.length > 100) {
+                shortDescription = shortDescription.substring(0, 100).trim() + "... <i>Läs mer</i>";
             }
 
             let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
