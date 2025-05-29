@@ -13,7 +13,7 @@ function init() {
     //eventlyssnare för "se alla utomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara utomhus
     outsideBtn.addEventListener("pointerdown", function () {
         localStorage.setItem("filterOutdoors", "Y"); //sparar i localStorage
-        window.location.href = "listsida.html";
+        window.location.href = "list.html";
     });
 
     popularOutside = document.querySelector("#popularOutsideDiv #wrapperElem"); //div element för att hålla de populära turistmålen för utomhus
@@ -25,7 +25,7 @@ function init() {
     //eventlyssnare för "se alla inomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara inomhus
     insideBtn.addEventListener("pointerdown", function () {
         localStorage.setItem("filterOutdoors", "N");
-        window.location.href = "listsida.html";
+        window.location.href = "list.html";
     })
 
     popularInside = document.querySelector("#popularInsideDiv div"); //div element för att hålla de populära turistmålen för inomhus
@@ -63,7 +63,7 @@ async function responsePopularOutsideDestinations(jsonData) {
             localStorage.setItem("selectedPlaceId", outside.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
-            window.location.href = "produkt.html";
+            window.location.href = "product.html";
         });
 
         popularOutside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML
@@ -100,7 +100,7 @@ async function responsePopularInsideDestinations(jsonData) {
             localStorage.setItem("selectedPlaceId", inside.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
-            window.location.href = "produkt.html";
+            window.location.href = "product.html";
         });
 
         popularInside.appendChild(newDiv); //lägger in det nya divelementet i det befintliga i HTML

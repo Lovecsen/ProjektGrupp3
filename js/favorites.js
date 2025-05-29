@@ -2,6 +2,7 @@ import { fetchImages } from './images.js'; //hämtar bilder från flickr via ima
 let remove = null; //det resmål som ska tas bort
 let favoritePlaces = []; //array för att hålla favoriterna
 let favoriteDiv; //div element där resmålen ska skrivas ut
+let confirmRemove; //div element för feedbackrutan när man tar bort ur favoriter
 
 function init() {
     getFavorites(); //anrop av getFavorites
@@ -9,7 +10,7 @@ function init() {
 window.addEventListener("load", init);
 
 async function getFavorites() {
-    const favIds = (JSON.parse(localStorage.getItem("favoriter")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
+    const favIds = (JSON.parse(localStorage.getItem("favorites")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
 
     favoriteDiv = document.querySelector("#favoritesContainer"); //div element där resmålen ska skrivas ut
 
@@ -42,7 +43,7 @@ async function getFavorites() {
             favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
 
 
-            let confirm = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
+            confirmRemove = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
             let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
             let no = document.querySelector("#no"); //nej knappen för att ta bort ur favoriter
 
@@ -50,17 +51,19 @@ async function getFavorites() {
 
             //om användaren klickar på ja
             yes.addEventListener("pointerdown", function () {
-                let fav = JSON.parse(localStorage.getItem("favoriter")) || []; //hämtar favoriter ur localstorage
+                console.log("ja klickat")
+                let fav = JSON.parse(localStorage.getItem("favorites")) || []; //hämtar favoriter ur localstorage
                 fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
 
-                localStorage.setItem("favoriter", JSON.stringify(fav)); //uppdaterar localstorage
-                confirm.classList.add("hide"); //döljer nrutan igen
-                showFavorites(); //anropar showFavorites för att uppdatera favoriter
+                localStorage.setItem("favorites", JSON.stringify(fav)); //uppdaterar localstorage
+
+                confirmRemove.classList.add("hide"); //döljer nrutan igen
+                getFavorites(); 
             });
 
             //om användaren klickar nej
             no.addEventListener("pointerdown", function () {
-                confirm.classList.add("hide"); //döljer rutan igen
+                confirmRemove.classList.add("hide"); //döljer rutan igen
             });
 
         }
@@ -103,16 +106,17 @@ async function showFavorites() {
 
         let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
 
-        div.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/trash.svg' alt='ta bort favorit' class='trash' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
+        div.innerHTML = "<img class='imgUrl' src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/trash.svg' alt='ta bort favorit' class='favorite' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 
-        const trash = div.querySelector(".trash"); //ikon för att ta bort favorit
+        const trash = div.querySelector(".favorite"); //ikon för att ta bort favorit
 
         trash.addEventListener("pointerdown", function (e) {
             e.stopPropagation(); //stoppar eventuella andra eventlyssnare
             e.preventDefault(); //stoppar andra beteende
 
             remove = this.getAttribute("data-id"); //den som ska tas bort
-            confirm.classList.remove("hide"); //visar rutan för att bekräfta borttagningen
+            
+            confirmRemove.classList.remove("hide"); //visar rutan för att bekräfta borttagningen
         });
 
         //användaren klickar på ett turistmål
@@ -122,7 +126,7 @@ async function showFavorites() {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
-            window.location.href = "produkt.html";
+            window.location.href = "product.html";
         });
 
         favoriteDiv.appendChild(div); //lägger div i favoriteDiv
