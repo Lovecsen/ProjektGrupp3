@@ -32,8 +32,8 @@ async function getProductDetails(placeId) {
         if (smapiRes.ok && jsonRes.ok) {
 
             //gör om svaren till json
-            let smapiData = await smapiRes.json(); 
-            let jsonData = await jsonRes.json();
+            const smapiData = await smapiRes.json(); 
+            const jsonData = await jsonRes.json();
 
             const allPlaces = [
                 ...(smapiData.payload || []),
@@ -91,7 +91,7 @@ async function getReviews(placeId) {
     const responseReviews = await fetch("https://smapi.lnu.se/api/?api_key=" + apiKey + "&controller=establishment&method=getreviews&id=" + placeId); //hämta recensioner från SMAPI
 
     if (responseReviews.ok) {
-        let dataReviews = await responseReviews.json(); //inväntar svaret från SMAPI
+        const dataReviews = await responseReviews.json(); //inväntar svaret från SMAPI
         const reviews = dataReviews.payload; //payloaf egenskap
 
         //om det inte finns recensioner, skriv ut "Inga recensioner tilgängliga" och avbryt funktionen
@@ -132,14 +132,14 @@ async function getNear(product) {
     if (responseNearAct.ok) {
         let dataAct = await responseNearAct.json(); //inväntar svar från SMAPI
 
-        const nearAct = dataAct.payload.filter(item => item.id !== product.id); //tar bort det aktuella turistmålet för att inte visa den bland närliggande turistmål
+        let nearAct = dataAct.payload.filter(item => item.id !== product.id); //tar bort det aktuella turistmålet för att inte visa den bland närliggande turistmål
         bothActAtt.push(...nearAct); //lägger till objekt i arrayen
     }
 
     if (responseNearAtt.ok) {
         let dataAtt = await responseNearAtt.json(); //inväntar svar från SMAPI
 
-        const nearAtt = dataAtt.payload.filter(item => item.id !== product.id); //tar bort det aktuella turistmålet för att inte visa den bland närliggande turistmål
+        let nearAtt = dataAtt.payload.filter(item => item.id !== product.id); //tar bort det aktuella turistmålet för att inte visa den bland närliggande turistmål
         bothActAtt.push(...nearAtt); //lägger till objekt i arrayen
     }
 

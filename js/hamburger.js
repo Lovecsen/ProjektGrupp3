@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", init);
 
 //funktion för att visa/dölja innehållet i hamburgarmenyn
 function showHamburger() {
-    const hamburgerMenu = document.querySelector("#hamburgerMenu"); //id för listan i hamburgermenyn
+    let hamburgerMenu = document.querySelector("#hamburgerMenu"); //id för listan i hamburgermenyn
 
     //för att visa dropdown för hamburgermenyn
     if (hamburgerMenu.style.display == "block") {
@@ -30,7 +30,7 @@ function showHamburger() {
     }
 }
 
-// Stäng dropdown-menyn om man klickar  utanför
+// Stäng dropdown-menyn om man klickar utanför
 window.addEventListener("pointerdown", function (event) {
     if (!hamburgerIcon.contains(event.target) && !hamburgerMenu.contains(event.target)) {
         hamburgerMenu.style.display = "none";

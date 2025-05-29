@@ -15,19 +15,13 @@ async function init() {
     dropdowns = document.querySelectorAll(".dropdownMenu"); //div för att hålla filteralternativen
 
     //detta filtrerar sidan efter om användaren klickat på "se alla utomhus" eller "se alla inomhus" knappen på första sidan
-    if (outdoorsFilter == "Y") {
-        const filtered = allPlaces.filter(place => place.outdoors == "Y"); //filtrera efter utomhus
+    if (outdoorsFilter == "Y" || outdoorsFilter == "N") {
+        const filtered = allPlaces.filter(place => place.outdoors == outdoorsFilter); //filtrera efter utomhus eller inomhus beroende på vad som ska visas
         showPlaces(filtered);
 
-        const input = document.querySelector("input[name='outdoors'][value='Y']"); //checkar boxen för utomhus i filter
+        const input = document.querySelector("input[name='outdoors'][value='" + outdoorsFilter + "']"); //checkar boxen för utomhus eller inomhus beroende på vilken som ska filtreras efter
         input.checked = true;
-    } else if (outdoorsFilter == "N") {
-        const filtered = allPlaces.filter(place => place.outdoors == "N"); //filtrera efter inomhus
-        showPlaces(filtered);
-
-        const input = document.querySelector("input[name='outdoors'][value='Y']"); //checkar boxen för inomhus i filter
-        input.checked = true;
-    }
+    } 
 
     //eventlyssnare för knapparna för filtreringen
     document.querySelector("#categoryBtn").addEventListener("pointerdown", () => {
@@ -140,9 +134,11 @@ function filters(places) {
     fill("category", Array.from(categories).sort());
     fill("price", Array.from(prices).sort((a, b) => {
         const aStart = parseInt(a.split("-")[0]);
-        const bStart = parseInt(b.split("-"[0]));
+        const bStart = parseInt(b.split("-")[0]);
         return aStart - bStart; //för att pris intervallerna ska vara i ordning
-    }));
+    })
+    .map(price => price + " kr") //lägger till kr efter prisintervallerna
+);
     fill("city", Array.from(cities).sort());
 
     //för att det ska skrivas ut inomhus och utomhus istället för N och Y i filtreringsrutan
@@ -297,7 +293,7 @@ async function showPlaces(places) {
 
         //gör så bilderna från flickr hämtas i bakgrunden så allt från smapi hämtas först och filter kan funka direkt
         fetchImages(place).then((imgUrl) => {
-            const imgElem = document.querySelector(".img-" + place.id);
+            let imgElem = document.querySelector(".img-" + place.id);
             if (imgElem && imgUrl) {
                 imgElem.src = imgUrl;
             }
