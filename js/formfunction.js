@@ -27,7 +27,7 @@ async function getData(answer1, answer2, answer3, answer4) {
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
     //urlen för det som ska hämtas i smapi med värdena för svaren användaren gett
-    let url = "https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + descriptions + "&type=" + answer3 + "&price_ranges=" + answer4;
+    let url = "https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + encodeURIComponent(descriptions) + "&type=" + encodeURIComponent(answer3) + "&price_ranges=" + encodeURIComponent(answer4);
 
     //om användaren svarade båda på första frågan läggs outdoors till urlen
     if (answer1 !== ".") url += "&outdoors=" + answer1;
@@ -47,24 +47,34 @@ async function getData(answer1, answer2, answer3, answer4) {
             const smapiData = await smapiRes.json();
             const jsonData = await jsonRes.json();
 
+            const types = answer3.split(",").map(type => type.trim());
             const priceRanges = answer4.split(",");
             //kontrollerar de valda filterna mot json
             const jsonFilter = jsonData.establishment.filter(place => {
-                const typeMatch = answer3.includes(place.type);
+                const typeMatch = types.includes(place.type);
                 const priceMatch = priceRanges.includes(place.price_range);
                 const outdoorsMatch = answer1 == "." || place.outdoors == answer1;
                 const childMatch = answer2 == "." || place.child_discount == (answer2 == "Y");
 
                 return typeMatch && priceMatch && outdoorsMatch && childMatch;
             });
+            //kontrollerar de valda filterna mot smapi
+            const smapiFilter = smapiData.payload.filter(place => {
+                const typeMatch = types.includes(place.type);
+                const priceMatch = priceRanges.includes(place.price_range);
+                const outdoorsMatch = answer1 == "." || place.outdoors == answer1;
+                const childMatch = answer2 == "." || place.child_discount == (answer2 == "Y");
 
-            allPlaces = smapiData.payload.concat(jsonFilter); // slår ihop båda listorna
+                return typeMatch && priceMatch && outdoorsMatch && childMatch;
+            })
+
+            allPlaces = [...jsonFilter, ...smapiFilter]; // slår ihop båda listorna
 
             //körs endast om man är i quizresultat
             if (window.location.pathname.includes("quizresult.html")) {
                  //om det inte finns något som matchas med svaren i smapi
                 if (!allPlaces || allPlaces.length == 0) {
-                answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
+                answerElem.innerHTML = "<p><strong>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan.</strong></p>";
                 return;
            }
         }

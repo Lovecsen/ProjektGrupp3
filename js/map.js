@@ -18,7 +18,12 @@ function initMap(id) {
 
 //funktion för att visa markörer för alla turistmål
 function markerLocations(obj) {
-    let marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
+
+    let myIcon = L.icon({
+        iconUrl: "photos/marker.svg",
+        iconAnchor: [10, 40] 
+    });
+    let marker = L.marker([obj.lat, obj.lng], { icon: myIcon }).addTo(map); //ny markör med lat och lng för de olika objekten
     markers.push(marker); //lägger markörerna i arrayen
 
     smallInfo(marker, obj); //anropar smallInfo
@@ -28,7 +33,7 @@ function markerLocations(obj) {
 function nearLocations(obj) {
 
     let myIcon = L.icon({
-        iconUrl: "photos/marker.svg"
+        iconUrl: "photos/markernear.svg"
     }); //egen markör för att skilja på det aktuella turistmålet och de närliggande
 
     map.setView([obj.lat, obj.lng], 10); //sätter kartan till objektets lat och lng och zoomar in
