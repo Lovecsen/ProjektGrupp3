@@ -7,6 +7,7 @@ function init() {
 }
 window.addEventListener("load", init);
 
+//funktion för kartan
 function initMap(id) {
     //nytt kartobjekt
     map = L.map(id).setView([57.353, 15.601], 6);
@@ -15,6 +16,7 @@ function initMap(id) {
     }).addTo(map);
 }
 
+//funktion för att visa markörer för alla turistmål
 function markerLocations(obj) {
     let marker = L.marker([obj.lat, obj.lng]).addTo(map); //ny markör med lat och lng för de olika objekten
     markers.push(marker); //lägger markörerna i arrayen
@@ -62,7 +64,6 @@ function smallInfo(marker, obj) {
         elem.addEventListener('pointerleave', () => {
             smallInfo.style.display = 'none' //dölj smallInfo
         });
-
 
         elem.addEventListener('pointerdown', (e) => {
             e.preventDefault();
