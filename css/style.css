@@ -3,7 +3,7 @@
 }
 
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     font-size: 14px;
 }
 
@@ -23,7 +23,9 @@ body {
 }
 
 /* Centrerar smapiPlace och favoriter*/
-#placeContainer, #favoritesContainer, #destination {
+#placeContainer,
+#favoritesContainer,
+#destination {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -372,9 +374,13 @@ button:hover {
 .smallInfoDiv {
     position: fixed;
     display: none;
-    background: white;
-    padding: 10px;
+    background: rgba(232, 240, 230, 0.9);
+    color: rgb(25, 49, 26);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
     border: 1px solid #004225;
+    border-radius: 15px;
 }
 
 /* omslutande div element för knappen till alla turistmål på startsidan */
@@ -632,7 +638,7 @@ input {
         width: 250px;
     }
 
-     /*QUIZRESULTAT SIDA*/
+    /*QUIZRESULTAT SIDA*/
     #destination img.picture {
         width: 250px;
         height: 250px;
