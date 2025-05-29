@@ -30,22 +30,22 @@ async function init() {
     }
 
     //eventlyssnare för knapparna för filtreringen
-    document.querySelector("#categoryBtn").addEventListener("click", () => {
+    document.querySelector("#categoryBtn").addEventListener("pointerdown", () => {
         toggleDropdown("category"); //ketegorifilter
     });
-    document.querySelector("#priceBtn").addEventListener("click", () => {
+    document.querySelector("#priceBtn").addEventListener("pointerdown", () => {
         toggleDropdown("price"); //prisfilter
     });
-    document.querySelector("#cityBtn").addEventListener("click", () => {
+    document.querySelector("#cityBtn").addEventListener("pointerdown", () => {
         toggleDropdown("city"); //stadfilter
     });
-    document.querySelector("#outdoorsBtn").addEventListener("click", () => {
+    document.querySelector("#outdoorsBtn").addEventListener("pointerdown", () => {
         toggleDropdown("outdoors"); //utomhusfilter
     });
 
     //rensar filter
     let clear = document.querySelector("#clear"); //rensa filter knapp
-    clear.addEventListener("click", function () {
+    clear.addEventListener("pointerdown", function () {
         localStorage.removeItem("filters"); //rensar localstorage
         getData();
     })
@@ -55,7 +55,7 @@ async function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 //för att kunna klicka utanför knappen för att stänga dropdownen
-document.addEventListener("click", (e) => {
+document.addEventListener("pointerdown", (e) => {
 
     const isBtn = e.target.closest("button"); //knapp klickades på
     const isMenu = e.target.closest(".dropdownMenu"); //meny klickades på
@@ -270,14 +270,19 @@ async function showPlaces(places) {
 
         let shortDescription = ""; //tom sträng för att hålla breskrivning
 
-        // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer"
-        if (place.abstract == "") {
-            shortDescription = "Ingen beskrivning tillgänglig"; //om beskrivning inte finns
-        } else if (place.abstract.length > 100) {
-            shortDescription = place.abstract.substring(0, 100).trim() + "... <i>Läs mer</i>";
+        //om place.text finns används detta, annars används place.abstract. Om inget av dem finns, skrivs "ingen beskrivning tillgänglig" ut
+        if (place.text && place.text.trim() !== "") {
+            shortDescription = place.text.trim(); 
+        } else if (place.abstract && place.abstract.trim() !== "") {
+            shortDescription = place.abstract.trim(); //om beskrivning inte finns
         } else {
-            shortDescription = place.abstract.trim(); //annars använd hela beskrivningen
+            shortDescription = "Ingen beskrivning tillgänglig";
         }
+
+        // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer"
+        if (shortDescription.length > 100) {
+            shortDescription = shortDescription.substring(0, 100).trim() + "... <i>Läs mer</i>";
+        } 
 
         newDiv.innerHTML = "<img id='img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 

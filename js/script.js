@@ -57,7 +57,7 @@ async function responsePopularOutsideDestinations(jsonData) {
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
         let imgUrl = await fetchImages(outside); //hämtar bilder via flickr från images.js
 
-        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + outside.id + "'><h3>" + outside.name + "</h3><img src='" + imgUrl + "' alt='" + outside.name + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + outside.id + "'><h3 class='name'>" + outside.name + "</h3><img src='" + imgUrl + "' alt='" + outside.name + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", outside.id); // Spara turistmålets ID i localStorage
@@ -94,7 +94,7 @@ async function responsePopularInsideDestinations(jsonData) {
         newDiv.classList.add("smapiPopular"); //ny class för det nya div elementet
         let imgUrl = await fetchImages(inside); //hämtar bilder via flickr från images.js
 
-        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
+        newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3 class='name'>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", inside.id); // Spara turistmålets ID i localStorage
