@@ -43,7 +43,7 @@ async function getProductDetails(placeId) {
             const product = allPlaces.find(p => p.id == placeId); //hitta id:t för turistmålet som ska
 
             if (product) {
-            showProductDetails(product); //eftrsom vi anger ett exakt id får vi bara ett svar och kan skriva index 0 istället för att göra en for loop
+            showProductDetails(product); 
             } else {
                 productDetails.innerText = "Turistmål hittades inte.";
             }
@@ -74,10 +74,9 @@ async function showProductDetails(product) {
     let imgUrl = await fetchImages(product); //hämtar bilder via flickr från images.js
     //skriver ut infon i div-elementet
     newProduct.innerHTML =
-        "<h2>" + product.name + "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'><img src='" + imgUrl + "' alt='" + product.name + "' id='productImage'></h2>" +
-        "<p><strong>Stad:</strong> " + product.city + "</p>" +
-        "<p><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
-        "<p><strong>Beskrivning:</strong> " + description + "</p>";
+        "<h2 id='header'>" + product.name + "</h2><img src='" + imgUrl + "' alt='" + product.name + "' id='productImage'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'><p id='city'><strong>Stad:</strong> " + product.city + "</p>" +
+        "<p id='price'><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p id='website'><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
+        "<p id='description'><strong>Beskrivning:</strong> " + description + "</p>";
 
     productDetails.appendChild(newProduct); //lägger newProduct i favoriteDiv
 
@@ -175,7 +174,7 @@ async function showNear(near) {
         localStorage.setItem("selectedPlaceId", near.id); // Spara turistmålets ID i localStorage
 
         // Navigera till produkt.html
-        window.location.href = "produkt.html";
+        window.location.href = "product.html";
     });
 
     nearDiv.appendChild(newNear); //lägger newNear i nearDiv

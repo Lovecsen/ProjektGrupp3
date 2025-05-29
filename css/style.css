@@ -254,16 +254,14 @@ button:hover {
         "img p";
 }
 
-/* hjärt ikonen i populära resmål*/
+/* hjärt ikonen */
 .smapiPopular .heart {
     grid-area: heart;
     width: 35px;
     height: 35px;
     justify-self: end;
     padding: 7px;
-    margin-bottom: 0;
-    margin-right: 0;
-    margin-top: 0;
+    margin: 0;
 }
 
 /* img i populära turistmål */
@@ -318,7 +316,7 @@ button:hover {
     width: 100%;
     padding: 10px;
     text-align: right;
-    margin-top: 20px;
+    margin: 20px 0 5px 0;
     background-color: #e8f3e3;
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -333,7 +331,7 @@ button:hover {
 }
 
 /* Hjärt inkonen */
-#favorite {
+.smapiPlace .favorite {
     grid-area: favorite;
     padding-left: 30px;
     padding-top: 4px;
@@ -342,9 +340,10 @@ button:hover {
 }
 
 /* bilden för resmålet */
-#imgUrl {
+.smapiPlace .imgUrl {
     display: block;
     width: 150px;
+    height: 150px;
     object-fit: cover;
     grid-area: imgUrl;
     padding-right: 15px;
@@ -352,31 +351,31 @@ button:hover {
 }
 
 /* Rubriken för resmålet */
-#name {
+.name {
     grid-area: name;
     text-align: left;
 }
 
 /* Staden för resmålet */
-#city {
+.city {
     grid-area: city;
     text-align: left;
 }
 
 /* Pris för resmålet */
-#price {
+.price {
     grid-area: price;
     text-align: left;
 }
 
 /* beskrivning för resmålet */
-#description {
+.description {
     grid-area: description;
     text-align: left;
 }
 
 /*Hovereffekt på titeln på resmålen*/
-.smapiPlace:hover #name {
+.smapiPlace:hover .name {
     text-decoration: underline;
 }
 
@@ -490,17 +489,6 @@ footer {
     display: block;
 }
 
-/* img elementet för varje resemåls "kort"*/
-.picture {
-    display: block;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    grid-area: imgUrl;
-    padding-right: 15px;
-    padding-top: 20px;
-}
-
 /* hover effekt för "läs mer" när en beskrivning är för lång */
 i:hover {
     text-decoration: underline;
@@ -544,18 +532,62 @@ input {
     display: none;
 }
 
-.smapiProduct h2 {
-    display: flex;
-    justify-content: space-between;
+/* informationen om turistmålet produktsidan */
+.smapiProduct {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content min-content min-content min-content min-content;
+    grid-template-areas: 
+    "h2 h2"
+    "img heart"
+    "img city"
+    "img price"
+    "img website"
+    "description description";
 }
 
-.smapiProduct .heart {
+/* rubriken produktsidan */
+.smapiProduct #header {
+    grid-area: h2;
+    text-align: center;
+}
+
+/* bilden produktsidan */
+.smapiProduct #productImage {
+    grid-area: img;
+    width: 200px;
+    height: 200px;
     padding-right: 20px;
-    width: 80px;
-
 }
 
-#omOssText {
+/* hjärtat för favorit produktsidan */
+.smapiProduct #favorite {
+    grid-area: heart;
+    width: 35px;
+    height: 35px;
+    justify-self: end;
+    padding: 7px;
+    margin: 0 20px 0 0;
+}
+
+/* staden produktsidan */
+.smapiProduct #city {
+    grid-area: city;
+}
+ /* priset produktsidan */
+.smapiProduct #price {
+    grid-area: price;
+}
+ /* websidan produktsidan */
+.smapiProduct #website {
+    grid-area: website;
+}
+ /* beskrivningen produktsidan */
+.smapiProduct #description {
+    grid-area: description;
+}
+ /* om oss texten */
+#aboutusText {
     max-width: 700px;
 }
 
@@ -646,10 +678,10 @@ input {
         margin-top: -13px;
     }
 
-    #name,
-    #city,
-    #price,
-    #description {
+    .name,
+    .city,
+    .price,
+    .description {
         text-align: left;
         font-size: 16px;
         margin-top: 0px;

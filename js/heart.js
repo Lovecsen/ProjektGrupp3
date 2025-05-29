@@ -5,7 +5,7 @@ export function heart(elem) {
     if (!heartPicture) return; //om heartPicture inte finns avbryts funktionen
 
     const placeId = heartPicture.dataset.id.toString(); //hämtar data-id och sparar i en sträng
-    let favorites = JSON.parse(localStorage.getItem("favoriter")) || []; //hämta från localstorage
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || []; //hämta från localstorage
 
     //om turistmålet är favorit så är hjärtat rött
     if (favorites.includes(placeId)) {
@@ -30,7 +30,7 @@ export function heart(elem) {
     heartPicture.addEventListener("pointerdown", (e) => {
         e.stopPropagation(); //stoppar eventuella andra eventlyssnare
 
-        favorites = JSON.parse(localStorage.getItem("favoriter")) || []; //hämta från localstorage
+        favorites = JSON.parse(localStorage.getItem("favorites")) || []; //hämta från localstorage
 
         //om turistmålet inte redan finns bland favoriter läggs den till och hjärtat blir rött, finns den redan tas den bort från localstorage och hjärtat blir vitt
         if (!favorites.includes(placeId)) {
@@ -40,6 +40,6 @@ export function heart(elem) {
             favorites = favorites.filter(id => id !== placeId);
             heartPicture.src = "photos/smallheart.svg";
         }
-        localStorage.setItem("favoriter", JSON.stringify(favorites)); //lägger till ändringar i localstorage
+        localStorage.setItem("favorites", JSON.stringify(favorites)); //lägger till ändringar i localstorage
     });
 }

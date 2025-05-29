@@ -40,7 +40,7 @@ if (window.location.pathname.includes("index.html")) {
             localStorage.removeItem("answer4");
 
             result();
-            window.location.href = "quizresultat.html";
+            window.location.href = "quizresult.html";
         }); //anropa functionen i formfunction.js
     }
     window.addEventListener("DOMContentLoaded", init);
@@ -81,7 +81,6 @@ if (window.location.pathname.includes("index.html")) {
         if (prevBtn && index > 0) {
             prevBtn.addEventListener("pointerdown", () => showQuestion(index - 1));
         }
-
     }
 
     //funktion för att visa de olika frågorna
@@ -126,7 +125,7 @@ function result() {
         } else if (input1.id == "inside") {
             answers.push("N")
         } else if (input1.id == "both") {
-            answers.push("."); //den kunde inte vara tom?
+            answers.push("."); //för att ändå skicka med ett värde
         }
     }
 
@@ -138,7 +137,7 @@ function result() {
         } else if (input2.id == "no") {
             answers.push("N");
         } else if (input2.id == "yesno") {
-            answers.push("."); //den kunde inte vara tom?
+            answers.push("."); //för att ändå skicka med ett värde
         }
     }
 

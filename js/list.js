@@ -284,20 +284,20 @@ async function showPlaces(places) {
             shortDescription = shortDescription.substring(0, 100).trim() + "... <i>Läs mer</i>";
         } 
 
-        newDiv.innerHTML = "<img id='img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+        newDiv.innerHTML = "<img class='imgUrl img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
         newDiv.addEventListener("pointerdown", function () {
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
-            window.location.href = "produkt.html";
+            window.location.href = "product.html";
         });
 
         placeContainer.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML
 
         //gör så bilderna från flickr hämtas i bakgrunden så allt från smapi hämtas först och filter kan funka direkt
         fetchImages(place).then((imgUrl) => {
-            const imgElem = document.querySelector("#img-" + place.id);
+            const imgElem = document.querySelector(".img-" + place.id);
             if (imgElem && imgUrl) {
                 imgElem.src = imgUrl;
             }

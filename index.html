@@ -7,7 +7,7 @@
     <title>Älv & Ö - turista i Småland och på Öland</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/script.js"></script>
-    <script type="module" src="js/test.js"></script>
+    <script type="module" src="js/switchQuestions.js"></script>
     <script src="js/hamburger.js"></script>
     <script type="module" src="js/images.js"></script>
 
@@ -15,15 +15,15 @@
 
 <body>
     <nav id="navbar">
-        <a href="index.html"><img src="photos/Logga.svg" alt="Älv och Ö"></a>
+        <a href="index.html"><img src="photos/logotype.svg" alt="Älv och Ö"></a>
         <div id="asideDiv">
-            <a href="favoriter.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
+            <a href="favorites.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
             <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
             <ul id="hamburgerMenu">
                 <li><a href="index.html">Startsida</a></li>
-                <li><a href="listsida.html">Alla turistmål</a></li>
-                <li><a href="favoriter.html">Favoriter</a></li>
-                <li><a href="omoss.html">Om oss</a></li>
+                <li><a href="list.html">Alla turistmål</a></li>
+                <li><a href="favorites.html">Favoriter</a></li>
+                <li><a href="about.html">Om oss</a></li>
             </ul>
         </div>
     </nav>
@@ -32,7 +32,7 @@
         <div id="backgroundWrapper">
             <section id="section1">
               <div id="intro">
-                    <p>Älv & Ö riktar sig till dig som vill upptäcka Småland och Öland. Läs mer om oss <a href="omoss.html"><i>här</i></a></p>.
+                    <p>Älv & Ö riktar sig till dig som vill upptäcka Småland och Öland. Läs mer om oss <a href="about.html"><i>här</i></a></p>.
                 </div>
                 <div id="intro2">
 
@@ -88,25 +88,25 @@
 
             <section id="section2">
                 <section class="popular">
-                    <h3 class="white">Utomhus</h3>
+                    <h3>Utomhus</h3>
                     <div id="popularOutsideDiv">
                         <div id="wrapperElem">
                             <!-- Js lägger in div för varje turistmål-->
                         </div>
                     </div>
                 </section>
-                <button type="button" id="outsideBtn" onclick="window.location.href='listsida.html'">Se alla utomhus <img src="photos/rightarrow.svg" alt="pil"></button>
+                <button type="button" id="outsideBtn" onclick="window.location.href='list.html'">Se alla utomhus <img src="photos/rightarrow.svg" alt="pil"></button>
                 <section class="popular">
-                    <h3 class="white">Inomhus</h3>
+                    <h3>Inomhus</h3>
                     <div id="popularInsideDiv">
                         <div id="wrapperElem2">
                             <!-- Js lägger in div för varje turistmål-->
                         </div>
                     </div>
                 </section>
-                <button type="button" id="insideBtn" onclick="window.location.href='listsida.html'">Se alla inomhus <img src="photos/rightarrow.svg" alt="pil"></button>
+                <button type="button" id="insideBtn" onclick="window.location.href='list.html'">Se alla inomhus <img src="photos/rightarrow.svg" alt="pil"></button>
                 <div id="allDestinations">
-                    <button type="button" id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål <img src="photos/rightarrow.svg" alt="pil"></button>
+                    <button type="button" id="allBtn" onclick="window.location.href='list.html'">Se listan över alla turistmål <img src="photos/rightarrow.svg" alt="pil"></button>
                 </div>
             </section>
         </div>

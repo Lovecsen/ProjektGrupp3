@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Älv & Ö - Resultat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/hamburger.js"></script>
+    <script type="module" src="js/formfunction.js"></script>
+    <script src="js/switchQuestions.js"></script>
+    <script src="js/map.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <nav id="navbar">
+        <a href="index.html"><img src="photos/logotype.svg" alt="Älv och Ö"></a>
+        <div id="asideDiv">
+            <a href="favorites.html"><img src="photos/heart.svg" alt="Favoriter" id="favorites"></a>
+            <img src="photos/hamburgermenu.svg" id=hamburgerIcon alt="Meny">
+            <ul id="hamburgerMenu">
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="list.html">Alla turistmål</a></li>
+                <li><a href="favorites.html">Favoriter</a></li>
+                <li><a href="about.html">Om oss</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div id="page">
+            <h1>Ditt resultat</h1>
+            <p id="answer">Utifrån dina svar passar nedan resemålen dig!</p>
+            <p>Om du istället vill se alla turistmål Älv & Ö har att erbjuda, klicka <a href="list.html">här</a>.</p>
+
+            <div id="map"></div>
+
+            <div id="destination">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h4>Älv & Ö</h4>
+        <p>Tel: 08-00000000</p>
+        <p>Kontakt@alv&o.se</p>
+    </footer>
+
+</body>
+
+</html>

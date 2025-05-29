@@ -48,6 +48,7 @@ async function getData(answer1, answer2, answer3, answer4) {
             const jsonData = await jsonRes.json();
 
             const priceRanges = answer4.split(",");
+            //kontrollerar de valda filterna mot json
             const jsonFilter = jsonData.establishment.filter(place => {
                 const typeMatch = answer3.includes(place.type);
                 const priceMatch = priceRanges.includes(place.price_range);
@@ -60,7 +61,7 @@ async function getData(answer1, answer2, answer3, answer4) {
             allPlaces = smapiData.payload.concat(jsonFilter); // slår ihop båda listorna
 
             //körs endast om man är i quizresultat
-            if (window.location.pathname.includes("quizresultat.html")) {
+            if (window.location.pathname.includes("quizresult.html")) {
                  //om det inte finns något som matchas med svaren i smapi
                 if (!allPlaces || allPlaces.length == 0) {
                 answerElem.innerHTML = "<p>Inga resultat matchade dina svar. Klicka <a href='index.html'>här</a> för att kommer tillbaka till startsidan." + "<p>Vill du kolla på alla resmål, klicka <a href='listsida.html'>här</a> .";
@@ -77,7 +78,7 @@ async function getData(answer1, answer2, answer3, answer4) {
 //visar resultaten på sidan
 async function showResult(result) {
     //körs endast om man är i quizresultat
-    if (window.location.pathname.includes("quizresultat.html")) {
+    if (window.location.pathname.includes("quizresult.html")) {
         for (let i = 0; i < result.length; i++) {
             const place = result[i]; //aktuellt turistmål
 
@@ -104,14 +105,14 @@ async function showResult(result) {
 
             let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
 
-            newDiv.innerHTML = "<img id='imgUrl' src='" + imgUrl + "' alt='" + place.name + "' class='picture'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + place.id + "'><h4 id='name'>" + place.name + "</h4><p id='city'>Stad: " + place.city + "</p><p id='price'>Pris: " + place.price_range + " kr</p>" + "<p id='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
+            newDiv.innerHTML = "<img class='imgUrl' src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
             //användaren klickar på ett turistmål
             newDiv.addEventListener("pointerdown", function () {
                 localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
                 // Navigera till produkt.html
-                window.location.href = "produkt.html";
+                window.location.href = "product.html";
             });
 
             resultElem.appendChild(newDiv); //lägg till det nya div-elementet i det tomma div-elementet i HTML

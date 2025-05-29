@@ -1,6 +1,6 @@
 
 let map; //objekt för kartan
-let markers = []; //array för att h
+let markers = []; //array för att hålla markörerna
 
 function init() {
     initMap("map"); //anropar initmap
@@ -68,7 +68,7 @@ function smallInfo(marker, obj) {
         elem.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             localStorage.setItem("selectedPlaceId", obj.id); //spara i lokalStorage så den markör man klickas på är den information som visas på produktsidan
-            window.location.href = "produkt.html";
+            window.location.href = "product.html";
         });
     }, 0);
 }
