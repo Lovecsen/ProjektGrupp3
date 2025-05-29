@@ -1,6 +1,5 @@
 function init() {
     const hamburgerIcon = document.querySelector("#hamburgerIcon"); //bilden på hamburgermenyn
-
     hamburgerIcon.addEventListener("pointerdown", showHamburger); //eventlyssnare för klick på hamburgermenyn
 
     let navHeart = document.querySelector("#favorites"); //bilden för favoriter i navbaren
@@ -9,7 +8,6 @@ function init() {
 
     //mus är över hjärtat ändras det till rött
     navHeart.addEventListener("pointerenter", () => {
-
         navHeart.src = "photos/redfavorites.svg";
     });
 

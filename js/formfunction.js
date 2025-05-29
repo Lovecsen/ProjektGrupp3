@@ -19,7 +19,6 @@ window.addEventListener("DOMContentLoaded", init)
 async function getData(answer1, answer2, answer3, answer4) {
 
     resultElem = document.querySelector("#destination"); //element för att hålla de nya div elementen för turistmålen
-
     answerElem = document.querySelector("#answer"); //p element som ska kunna ändras
 
     let myApiKey = "Tc9ZD2gK"; //API nyckel
@@ -36,7 +35,6 @@ async function getData(answer1, answer2, answer3, answer4) {
     if (answer2 !== ".") url += "&child_discount=" + answer2;
 
     let response = await fetch(url); //hämtar från SMAPI med url
-
     let data = await response.json(); //inväntar svaret från SMAPI
 
     //körs endast om man är i quizresultat
@@ -47,7 +45,6 @@ async function getData(answer1, answer2, answer3, answer4) {
             return;
         }
     }
-
     showResult(data.payload); // skicka vidare till funktion showPlaces
 }
 
@@ -61,7 +58,6 @@ async function showResult(result) {
             markerLocations(place); //lägger till pin på kartan
 
             const newDiv = document.createElement("div"); //skapa nytt div-element för turistmålet
-
             newDiv.classList.add("smapiPlace"); //lägg till en class
 
             let shortDescription = ""; //kort beskrivning som ska visas
