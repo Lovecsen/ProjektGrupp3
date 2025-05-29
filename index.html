@@ -7,7 +7,7 @@
     <title>Älv & Ö - turista i Småland och på Öland</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/script.js"></script>
-    <script type="module" src="js/test.js" defer></script>
+    <script type="module" src="js/test.js"></script>
     <script src="js/hamburger.js"></script>
     <script type="module" src="js/images.js"></script>
 
@@ -31,28 +31,27 @@
     <main>
         <div id="backgroundWrapper">
             <section id="section1">
-                <section id="intro">
-                    <p>Älv & Ö riktar sig till dig som vill upptäcka Småland och Öland. Läs mer om oss <a href="omoss.html"><i>här</i></a>.
-                </section>
-                <section id="intro2">
-                    </p>
+                <div id="intro">
+                    <p>Älv & Ö riktar sig till dig som vill upptäcka Småland och Öland. Läs mer om oss <a href="omoss.html"><i>här</i></a></p>.
+                </div>
+                <div id="intro2">
                     <p> Vill du ha hjälp att hitta destinationer som kan passa dig? Svara på 4 korta frågor så listar vi turistmål utifrån dina preferenser!</p>
-                </section>
+                </div>
                 <section id="form">
                     <form id="question1">
                         <p>1. Vilken typ passar dig bäst?</p>
-                        <label>Utomhusaktiviteter<input type="radio" name="what" id="outside" class="first"></label>
-                        <label>Inomhusaktiviteter<input type="radio" name="what" id="inside" class="first"></label>
-                        <label>Båda<input type="radio" name="what" id="both" class="first"></label>
+                        <label>Utomhusaktiviteter <input type="radio" name="what" id="outside" class="first"></label>
+                        <label>Inomhusaktiviteter <input type="radio" name="what" id="inside" class="first"></label>
+                        <label>Båda <input type="radio" name="what" id="both" class="first"></label>
                         <div class="formBtn">
                             <button type="button" class=next id="firstNext">Nästa</button>
                         </div>
                     </form>
                     <form id="question2" class="hide">
                         <p>2. Vill du att turistmålet ska vara barnvänligt?</p>
-                        <label>Ja<input type="radio" name="child" id="yes" class="second"></label>
-                        <label>Nej<input type="radio" name="child" id="no" class="second"></label>
-                        <label>Spelar ingen roll<input type="radio" name="child" id="yesno" class="second"></label>
+                        <label>Ja <input type="radio" name="child" id="yes" class="second"></label>
+                        <label>Nej <input type="radio" name="child" id="no" class="second"></label>
+                        <label>Spelar ingen roll <input type="radio" name="child" id="yesno" class="second"></label>
                         <div class="formBtn">
                             <button type="button" id="previous2">Föregående</button>
                             <button type="button" id="secondNext">Nästa</button>
@@ -61,9 +60,9 @@
                     </form>
                     <form id="question3" class="hide">
                         <p>3. Är du intresserade av en aktivitet eller vill du kolla på servärdheter?</p>
-                        <label>Aktiviteter<input type="radio" name="activityorsights" id="activity" class="third"></label>
-                        <label>Sevärdheter<input type="radio" name="activityorsights" id="sights" class="third"></label>
-                        <label>Båda<input type="radio" name="activityorsights" id="both3" class="third"></label>
+                        <label>Aktiviteter <input type="radio" name="activityorsights" id="activity" class="third"></label>
+                        <label>Sevärdheter <input type="radio" name="activityorsights" id="sights" class="third"></label>
+                        <label>Båda <input type="radio" name="activityorsights" id="both3" class="third"></label>
                         <div class="formBtn">
                             <button type="button" id="previous3">Föregående</button><button type="button" id="thirdNext">Nästa</button>
                         </div>
@@ -71,21 +70,20 @@
                     </form>
                     <form id="question4" class="hide">
                         <p>4. Vilken prisklass skulle du kunna tänka dig?</p>
-                        <label>0-100 kr<input type="checkbox" name="0" id="0" class="fourth"></label>
-                        <label>100-300 kr<input type="checkbox" name="100" id="100" class="fourth"></label>
-                        <label>300-500 kr<input type="checkbox" name="250" id="300" class="fourth"></label>
-                        <label>500+ kr<input type="checkbox" name="500" id="500" class="fourth"></label>
+                        <label>0-100 kr <input type="checkbox" name="0" id="0" class="fourth"></label>
+                        <label>100-300 kr <input type="checkbox" name="100" id="100" class="fourth"></label>
+                        <label>300-500 kr <input type="checkbox" name="250" id="300" class="fourth"></label>
+                        <label>500+ kr <input type="checkbox" name="500" id="500" class="fourth"></label>
                         <div class="formBtn">
                             <button type="button" id="previous4">Föregående</button><button type="button" id="fourthNext" onclick="window.location.href='quizresultat.html'">Få resultat</button>
                         </div>
                     </form>
                 </section>
-                <section>
+            </section>
         </div>
 
         <div id="startpage">
             <h2 id="popularDestination">Populära turistmål</h2>
-            </section>
 
             <section id="section2">
                 <section class="popular">
@@ -109,7 +107,6 @@
                 <div id="allDestinations">
                     <button type="button" id="allBtn" onclick="window.location.href='listsida.html'">Se listan över alla turistmål <img src="photos/rightarrow.svg" alt="pil"></button>
                 </div>
-            </section>
             </section>
         </div>
     </main>
