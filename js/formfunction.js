@@ -22,7 +22,7 @@ async function getData(answer1, answer2, answer3, answer4) {
     resultElem = document.querySelector("#destination"); //element för att hålla de nya div elementen för turistmålen
     answerElem = document.querySelector("#answer"); //p element som ska kunna ändras
 
-    let myApiKey = "Tc9ZD2gK"; //API nyckel
+    const myApiKey = "Tc9ZD2gK"; //API nyckel
 
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 

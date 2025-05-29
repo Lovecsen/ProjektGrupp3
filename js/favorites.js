@@ -24,7 +24,7 @@ async function getFavorites() {
         return;
     }
 
-    let myApiKey = "Tc9ZD2gK"; //API nyckel
+    const myApiKey = "Tc9ZD2gK"; //API nyckel
 
     const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
 
@@ -39,9 +39,8 @@ async function getFavorites() {
             const smapiData = await smapiRes.json();
             const jsonData = await jsonRes.json();
 
-            const places = smapiData.payload.concat(jsonData.establishment); //payload egenskapen
+            let places = smapiData.payload.concat(jsonData.establishment); //payload egenskapen
             favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
-
 
             confirmRemove = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
             let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
@@ -51,7 +50,7 @@ async function getFavorites() {
 
             //om användaren klickar på ja
             yes.addEventListener("pointerdown", function () {
-                console.log("ja klickat")
+                
                 let fav = JSON.parse(localStorage.getItem("favorites")) || []; //hämtar favoriter ur localstorage
                 fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
 
@@ -106,9 +105,9 @@ async function showFavorites() {
 
         let imgUrl = await fetchImages(place); //hämtar bilder via flickr från images.js
 
-        div.innerHTML = "<img class='imgUrl' src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/trash.svg' alt='ta bort favorit' class='favorite' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
+        div.innerHTML = "<img class='imgUrl' src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/trash.svg' alt='ta bort favorit' class='heart' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription + "</p>"; //skriver ut infon i div-elementet
 
-        const trash = div.querySelector(".favorite"); //ikon för att ta bort favorit
+        const trash = div.querySelector(".heart"); //ikon för att ta bort favorit
 
         trash.addEventListener("pointerdown", function (e) {
             e.stopPropagation(); //stoppar eventuella andra eventlyssnare

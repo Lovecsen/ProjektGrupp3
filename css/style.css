@@ -331,7 +331,7 @@ button:hover {
 }
 
 /* Hjärt inkonen */
-.smapiPlace .favorite {
+.smapiPlace .heart {
     grid-area: favorite;
     padding-left: 30px;
     padding-top: 4px;

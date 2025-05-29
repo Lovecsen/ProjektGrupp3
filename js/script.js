@@ -8,10 +8,12 @@ let wrapperElemInside; //här läggs alla inomhus turistmål
 
 //initiering 
 function init() {
+    
     let outsideBtn = document.querySelector("#outsideBtn"); //knapp för att visa alla utomhus turistmål
 
     //eventlyssnare för "se alla utomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara utomhus
     outsideBtn.addEventListener("pointerdown", function () {
+        clearAllFilters(); //rensar tidigare filter
         localStorage.setItem("filterOutdoors", "Y"); //sparar i localStorage
         window.location.href = "list.html";
     });
@@ -24,7 +26,14 @@ function init() {
 
     //eventlyssnare för "se alla inomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara inomhus
     insideBtn.addEventListener("pointerdown", function () {
+        clearAllFilters(); //rensar tidigare filter
         localStorage.setItem("filterOutdoors", "N");
+        window.location.href = "list.html";
+    })
+
+    document.querySelector("#allBtn").addEventListener("pointerdown", () => {
+        clearAllFilters(); //rensar tidigare filter
+        localStorage.removeItem("filterOutdoors");
         window.location.href = "list.html";
     })
 
@@ -107,4 +116,9 @@ async function responsePopularInsideDestinations(jsonData) {
 
         heart(newDiv); //anropar heart för favoritfunktionen
     }
+}
+
+function clearAllFilters() {
+    localStorage.removeItem("filterOutdoors");
+    localStorage.removeItem("filters");
 }

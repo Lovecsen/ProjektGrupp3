@@ -1,6 +1,6 @@
 export function heart(elem) {
 
-    const heartPicture = elem.querySelector(".heart"); //hjärtan bilden på varje turistmål
+    let heartPicture = elem.querySelector(".heart"); //hjärtan bilden på varje turistmål
 
     if (!heartPicture) return; //om heartPicture inte finns avbryts funktionen
 
