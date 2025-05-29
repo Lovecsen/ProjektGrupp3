@@ -172,8 +172,7 @@ function restoreFilter() {
                 }
             }
         }
-        const filtered = filterPlaces(allPlaces, filter); //filtered innehåller de filter som ska tillämpas
-        showPlaces(filtered); //anropar showplaces med filtered
+        applyFilter(); //anropa applyFilter
     }
 }
 
