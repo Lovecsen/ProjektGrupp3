@@ -118,8 +118,8 @@ async function showFavorites() {
             confirmRemove.classList.remove("hide"); //visar rutan för att bekräfta borttagningen
         });
 
-        //användaren klickar på ett turistmål
-        div.addEventListener("pointerdown", function (e) {
+        //använder click för att det ska funka att skrolla på touch
+        div.addEventListener("click", function (e) {
             if (e.target.classList.contains("trash")) return; //om man klickar på soptunnan avbryts funktionen
 
             localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage

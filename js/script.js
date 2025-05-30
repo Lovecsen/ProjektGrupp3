@@ -72,7 +72,8 @@ async function responsePopularOutsideDestinations(jsonData) {
 
         newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + outside.id + "'><h3 class='name'>" + outside.name + "</h3><img src='" + imgUrl + "' alt='" + outside.name + "'><h4>Stad: " + outside.city + "</h4><p>Pris: " + outside.price_range + " kr</p>"; //strukturen för informationen
 
-        newDiv.addEventListener("pointerdown", function () {
+        //använder click för att det ska funka att skrolla på touch
+        newDiv.addEventListener("click", function () {
             localStorage.setItem("selectedPlaceId", outside.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
@@ -109,7 +110,8 @@ async function responsePopularInsideDestinations(jsonData) {
 
         newDiv.innerHTML = "<img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + inside.id + "'><h3 class='name'>" + inside.name + "</h3><img src='" + imgUrl + "' alt='" + inside.name + "'><h4>Stad: " + inside.city + "</h4><p>Pris: " + inside.price_range + " kr</p>"; //strukturen för informationen
 
-        newDiv.addEventListener("pointerdown", function () {
+        //använder click för att det ska funka att skrolla på touch
+        newDiv.addEventListener("click", function () {
             localStorage.setItem("selectedPlaceId", inside.id); // Spara turistmålets ID i localStorage
 
             // Navigera till produkt.html
