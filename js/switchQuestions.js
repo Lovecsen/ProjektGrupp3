@@ -24,7 +24,7 @@ let inputClasses = ["first", "second", "third", "fourth"]; //array för namnet p
 
 let visitedQuestions = [false, false, false, false]; //array för false för vardera fråga gällande att den ska vara false fram till att användaren får frågan
 //körs endast om man är på startsidan
-if (window.location.pathname.includes("index.html")) {
+if (window.location.pathname == "/" || window.location.pathname.includes("index.html")) {
     function init() {
 
         //anropar funktion för att avgöra vilken fråga som ska visas
