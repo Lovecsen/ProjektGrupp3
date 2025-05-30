@@ -5,14 +5,36 @@ let favoriteDiv; //div element där resmålen ska skrivas ut
 let confirmRemove; //div element för feedbackrutan när man tar bort ur favoriter
 
 function init() {
+    favoriteDiv = document.querySelector("#favoritesContainer"); //div element där resmålen ska skrivas ut
+
+    confirmRemove = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
+    let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
+    let no = document.querySelector("#no"); //nej knappen för att ta bort ur favoriter
+
+    //om användaren klickar på ja
+    yes.addEventListener("pointerdown", function () {
+
+        let fav = JSON.parse(localStorage.getItem("favorites")) || []; //hämtar favoriter ur localstorage
+        fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
+
+        localStorage.setItem("favorites", JSON.stringify(fav)); //uppdaterar localstorage
+
+        confirmRemove.classList.add("hide"); //döljer nrutan igen
+        getFavorites();
+    });
+
+    //om användaren klickar nej
+    no.addEventListener("pointerdown", function () {
+        confirmRemove.classList.add("hide"); //döljer rutan igen
+    });
+
     getFavorites(); //anrop av getFavorites
+
 }
 window.addEventListener("load", init);
 
 async function getFavorites() {
     const favIds = (JSON.parse(localStorage.getItem("favorites")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
-
-    favoriteDiv = document.querySelector("#favoritesContainer"); //div element där resmålen ska skrivas ut
 
     if (!favoriteDiv) return; //om inte favoriteDiv finns avslutas funktionen
 
@@ -41,29 +63,7 @@ async function getFavorites() {
 
             let places = smapiData.payload.concat(jsonData.establishment); //payload egenskapen
             favoritePlaces = places.filter(place => favIds.includes(place.id.toString())); //filtrerar ut alla platser som är favoriserade
-
-            confirmRemove = document.querySelector("#confirm"); //div element för feedbackrutan när man tar bort ur favoriter
-            let yes = document.querySelector("#yes"); //ja knappen för att ta bort ur favoriter
-            let no = document.querySelector("#no"); //nej knappen för att ta bort ur favoriter
-
             showFavorites();
-
-            //om användaren klickar på ja
-            yes.addEventListener("pointerdown", function () {
-                
-                let fav = JSON.parse(localStorage.getItem("favorites")) || []; //hämtar favoriter ur localstorage
-                fav = fav.filter(id => id.toString() !== remove); //tar bort id:t från listan
-
-                localStorage.setItem("favorites", JSON.stringify(fav)); //uppdaterar localstorage
-
-                confirmRemove.classList.add("hide"); //döljer nrutan igen
-                getFavorites(); 
-            });
-
-            //om användaren klickar nej
-            no.addEventListener("pointerdown", function () {
-                confirmRemove.classList.add("hide"); //döljer rutan igen
-            });
 
         }
     } catch (error) {
@@ -114,7 +114,7 @@ async function showFavorites() {
             e.preventDefault(); //stoppar andra beteende
 
             remove = this.getAttribute("data-id"); //den som ska tas bort
-            
+
             confirmRemove.classList.remove("hide"); //visar rutan för att bekräfta borttagningen
         });
 
@@ -129,6 +129,7 @@ async function showFavorites() {
         });
 
         favoriteDiv.appendChild(div); //lägger div i favoriteDiv
+
     }
 
 }
