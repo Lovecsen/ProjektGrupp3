@@ -117,8 +117,8 @@ async function showResult(result) {
 
             newDiv.innerHTML = "<img class='imgUrl' src='" + imgUrl + "' alt='" + place.name + "'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
-            //användaren klickar på ett turistmål
-            newDiv.addEventListener("pointerdown", function () {
+            //använder click för att det ska funka att skrolla på touch
+            newDiv.addEventListener("click", function () {
                 localStorage.setItem("selectedPlaceId", place.id); // Spara turistmålets ID i localStorage
 
                 // Navigera till produkt.html
