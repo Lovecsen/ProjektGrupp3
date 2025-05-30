@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box; /*test*/
+    box-sizing: border-box;
 }
 
 html {
@@ -537,13 +537,13 @@ input {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content min-content min-content min-content min-content min-content;
-    grid-template-areas: 
-    "h2 h2"
-    "img heart"
-    "img city"
-    "img price"
-    "img website"
-    "description description";
+    grid-template-areas:
+        "h2 h2"
+        "img heart"
+        "img city"
+        "img price"
+        "img website"
+        "description description";
 }
 
 /* rubriken produktsidan */
@@ -574,25 +574,31 @@ input {
 .smapiProduct #city {
     grid-area: city;
 }
- /* priset produktsidan */
+
+/* priset produktsidan */
 .smapiProduct #price {
     grid-area: price;
 }
- /* websidan produktsidan */
+
+/* websidan produktsidan */
 .smapiProduct #website {
     grid-area: website;
 }
- /* beskrivningen produktsidan */
+
+/* beskrivningen produktsidan */
 .smapiProduct #description {
     grid-area: description;
+    max-width: 600px;
 }
- /* om oss texten */
+
+/* om oss texten */
 #aboutusText {
     max-width: 700px;
 }
 
 @media screen and (min-width: 450px) {
 
+    /*STARTSIDA*/
     .smapiPopular {
         max-width: 310px;
     }
@@ -605,26 +611,74 @@ input {
         width: 110px;
         height: 110px;
         margin-top: 18px;
+        margin-right: 10px;
     }
 
-   .smapiPlace {
-    display: grid;
-        grid-template-columns: 1fr auto auto 2fr;
+    /*LISTSIDA*/
+    .smapiPlace {
+        display: grid;
+        grid-template-columns: 2fr 3fr 1fr;
+        grid-template-rows: auto auto auto auto;
         grid-template-areas:
-            ". imgUrl name favorite"
-            ". imgUrl city city"
-            ". imgUrl price price"
+            "imgUrl name favorite"
+            "imgUrl city city"
+            "imgUrl price price"
+            "imgUrl description description";
+        gap: 0px;
+        max-width: 550px;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .smapiPlace img.picture {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-top: -13px;
+    }
+
+    .name,
+    .city,
+    .price,
+    .description {
+        text-align: left;
+        margin-top: 0px;
+    }
+
+
+    /*PRODUKTSIDA*/
+
+    .smapiProduct {
+        grid-template-columns: 1fr 3fr 3fr 3fr;
+        grid-template-areas:
+            ". h2 h2 heart"
+            ". img . ."
+            ". img city ."
+            ". img price ."
+            ". img website ."
             ". description description description";
-            max-width: 600px;
-   }
+    }
+
+    .smapiProduct img {
+        margin-left: 10px;
+    }
+
+    .smapiProduct #description {
+        margin-left: 10px;
+    }
+
 }
 
 @media screen and (min-width: 800px) {
 
     /*STARTSIDA */
     #form {
-        width: 600px;
+        width: 470px;
         margin: 0 auto;
+    }
+
+    #form p {
+        padding-left: 15px;
     }
 
     #intro {
@@ -656,20 +710,6 @@ input {
     }
 
     /*LISTSIDA */
-    .smapiPlace {
-        display: grid;
-        grid-template-columns: 2fr 3fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        grid-template-areas:
-            "imgUrl name favorite"
-            "imgUrl city city"
-            "imgUrl price price"
-            "imgUrl description description";
-        gap: 10px;
-        max-width: 700px;
-        width: 100%;
-        padding: 15px;
-    }
 
     .smapiPlace img.picture {
         width: 200px;
@@ -692,6 +732,33 @@ input {
         max-width: 350px;
     }
 
+    .smapiProduct {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            "h2 h2 heart"
+            "img . ."
+            "img city ."
+            "img price ."
+            "img website ."
+            "img description description";
+        margin-right: 50px;
+        margin-bottom: 15px;
+    }
+
+    .smapiProduct img {
+        margin-left: 120px;
+    }
+
+    .smapiProduct #description {
+        margin-left: 0px;
+    }
+
+    #wrapperProduct {
+        max-width: 1000px;
+        margin: 20px auto;
+
+    }
+
     /*FAVORITSIDA*/
     #favoritesContainer img.picture {
         width: 200px;
@@ -706,12 +773,8 @@ input {
 @media screen and (min-width: 1200px) {
 
     /*LISTSIDA */
-    .smapiPlace {
-        max-width: 900px;
-    }
-
-    .smapiPlace img.picture {
-        width: 250px;
+    .smapiProduct img {
+        margin-left: 220px;
     }
 
     /*FAVORITSIDA*/
