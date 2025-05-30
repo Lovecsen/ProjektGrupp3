@@ -75,7 +75,7 @@ async function showProductDetails(product) {
     //skriver ut infon i div-elementet
     newProduct.innerHTML =
         "<h2 id='header'>" + product.name + "</h2><img src='" + imgUrl + "' alt='" + product.name + "' id='productImage'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' id='favorite' data-id='" + product.id + "'><p id='city'><strong>Stad:</strong> " + product.city + "</p>" +
-        "<p id='price'><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p id='website'><strong>Webbplats:</strong> <a href='" + product.website + "'>" + product.website + "</a>" +
+        "<p id='price'><strong>Pris:</strong> " + product.price_range + " kr</p>" + "<p id='website'><strong>Webbplats:</strong> <a href='" + product.website + "' target='_blank'>" + product.website + "</a>" +
         "<p id='description'><strong>Beskrivning:</strong> " + description + "</p>";
 
     productDetails.appendChild(newProduct); //lägger newProduct i favoriteDiv
