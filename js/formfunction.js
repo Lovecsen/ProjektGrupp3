@@ -24,7 +24,7 @@ async function getData(answer1, answer2, answer3, answer4) {
 
     const myApiKey = "Tc9ZD2gK"; //API nyckel
 
-    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
+    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat,älgpark" //alla descriptions vi vill hämta
 
     //urlen för det som ska hämtas i smapi med värdena för svaren användaren gett
     let url = "https://smapi.lnu.se/api/?api_key=" + myApiKey + "&controller=establishment&method=getall&descriptions=" + encodeURIComponent(descriptions) + "&type=" + encodeURIComponent(answer3) + "&price_ranges=" + encodeURIComponent(answer4);

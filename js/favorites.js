@@ -48,7 +48,7 @@ async function getFavorites() {
 
     const myApiKey = "Tc9ZD2gK"; //API nyckel
 
-    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
+    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat,älgpark" //alla descriptions vi vill hämta
 
     try {
         const [smapiRes, jsonRes] = await Promise.all([
