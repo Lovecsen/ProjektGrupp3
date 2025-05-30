@@ -121,7 +121,7 @@ function showReviews(reviews) {
 //funktion för att hämta närliggande resmål
 async function getNear(product) {
 
-    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
+    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat,älgpark" //alla descriptions vi vill hämta
 
     const responseNearAct = await fetch("https://smapi.lnu.se/api/?api_key=" + apiKey + "&controller=activity&method=getfromlatlng&descriptions=" + descriptions + "&lat=" + product.lat + "&lng=" + product.lng + "&radius=100&order_by=distance_in_km&sort_in=ASC"); //hämtar aktiviteter med resmålets lat och lng
 

@@ -34,11 +34,12 @@ function init() {
 window.addEventListener("load", init);
 
 async function getFavorites() {
-    const favIds = (JSON.parse(localStorage.getItem("favorites")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
+    favoriteDiv.innerHTML = ""; //rensa innehåll först
+    
+    let favIds = (JSON.parse(localStorage.getItem("favorites")) || []).map(id => id.toString()); //hämtar resmål som favoriserats via localStorage eller tom array om inget finns i localStorage - gör om array till sträng
+    favIds = favIds.map(id => id.toString()); //för att säkerställa att alla id är strängar
 
     if (!favoriteDiv) return; //om inte favoriteDiv finns avslutas funktionen
-
-    favoriteDiv.innerHTML = ""; //rensa innehåll först
 
     //om inga resmål har favoriserats
     if (favIds.length == 0) {
@@ -48,7 +49,7 @@ async function getFavorites() {
 
     const myApiKey = "Tc9ZD2gK"; //API nyckel
 
-    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
+    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat,älgpark" //alla descriptions vi vill hämta
 
     try {
         const [smapiRes, jsonRes] = await Promise.all([

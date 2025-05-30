@@ -87,7 +87,7 @@ function toggleDropdown(id) {
 //funktion som hämtar data från SMAPI och lokal json-fil
 async function getData() {
 
-    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat" //alla descriptions vi vill hämta
+    const descriptions = "zipline,temapark,klippklättring,nöjespark,sevärdhet,museum,konstgalleri,glasbruk,slott,kyrka,hembygdspark,fornlämning,myrstack,naturreservat,älgpark" //alla descriptions vi vill hämta
 
     try {
         const [smapiRes, jsonRes] = await Promise.all([
