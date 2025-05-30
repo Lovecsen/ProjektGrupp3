@@ -8,7 +8,11 @@ let wrapperElemInside; //här läggs alla inomhus turistmål
 
 //initiering 
 function init() {
-    
+    window.addEventListener("pageshow", (event) => {
+        if (event.persisted) {
+            window.location.reload(); //laddar om sidan för att favoriterna ska uppdateras
+        }
+    })
     let outsideBtn = document.querySelector("#outsideBtn"); //knapp för att visa alla utomhus turistmål
 
     //eventlyssnare för "se alla utomhus"- knappen så användaren skickas vidare till en redan filtrerad listsida med bara utomhus
