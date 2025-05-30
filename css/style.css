@@ -12,6 +12,11 @@ body {
     margin: 0px;
 }
 
+main {
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
 /* för att sätta en margin på alla sidor förutom på bakgrundsbilden på startsidan*/
 #page {
     margin: 7px;
