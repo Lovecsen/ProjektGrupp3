@@ -42,4 +42,8 @@ export function heart(elem) {
         }
         localStorage.setItem("favorites", JSON.stringify(favorites)); //lägger till ändringar i localstorage
     });
+    //förhindrar att informationssidan dyker upp när man klickar på hjärtat
+    heartPicture.addEventListener("click", (e) => {
+        e.stopPropagation();
+    })
 }

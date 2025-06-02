@@ -118,6 +118,11 @@ async function showFavorites() {
             confirmRemove.classList.remove("hide"); //visar rutan för att bekräfta borttagningen
         });
 
+        //förhindrar att informationssidan dyker upp när man klickar på soptunnan
+        trash.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+
         //använder click för att det ska funka att skrolla på touch
         div.addEventListener("click", function (e) {
             if (e.target.classList.contains("trash")) return; //om man klickar på soptunnan avbryts funktionen
