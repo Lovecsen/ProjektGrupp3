@@ -21,7 +21,7 @@ async function init() {
 
         const input = document.querySelector("input[name='outdoors'][value='" + outdoorsFilter + "']"); //checkar boxen för utomhus eller inomhus beroende på vilken som ska filtreras efter
         input.checked = true;
-    } 
+    }
 
     //eventlyssnare för knapparna för filtreringen
     document.querySelector("#categoryBtn").addEventListener("pointerdown", () => {
@@ -132,13 +132,13 @@ function filters(places) {
 
     //gör om till array och sortera alla filter efter bokstavsordning och anropa fill
     fill("category", Array.from(categories).sort());
-    fill("price", Array.from(prices).sort((a, b) => {
-        const aStart = parseInt(a.split("-")[0]);
-        const bStart = parseInt(b.split("-")[0]);
-        return aStart - bStart; //för att pris intervallerna ska vara i ordning
-    })
-    .map(price => price + " kr") //lägger till kr efter prisintervallerna
-);
+    fill("price", Array.from(prices)
+        .sort((a, b) => {
+            const aStart = parseInt(a.split("-")[0]);
+            const bStart = parseInt(b.split("-")[0]);
+            return aStart - bStart; //för att pris intervallerna ska vara i ordning
+        })
+    );
     fill("city", Array.from(cities).sort());
 
     //för att det ska skrivas ut inomhus och utomhus istället för N och Y i filtreringsrutan
@@ -268,7 +268,7 @@ async function showPlaces(places) {
 
         //om place.text finns används detta, annars används place.abstract. Om inget av dem finns, skrivs "ingen beskrivning tillgänglig" ut
         if (place.text && place.text.trim() !== "") {
-            shortDescription = place.text.trim(); 
+            shortDescription = place.text.trim();
         } else if (place.abstract && place.abstract.trim() !== "") {
             shortDescription = place.abstract.trim(); //om beskrivning inte finns
         } else {
@@ -278,7 +278,7 @@ async function showPlaces(places) {
         // Om beskrivningen är längre än 100 tecken, kapa och lägg till "...Läs mer"
         if (shortDescription.length > 100) {
             shortDescription = shortDescription.substring(0, 100).trim() + "... <i>Läs mer</i>";
-        } 
+        }
 
         newDiv.innerHTML = "<img class='imgUrl img-" + place.id + "' src='photos/noimage.svg' alt='Laddar..'><img src='photos/smallheart.svg' alt='favoritmarkering' class='heart' data-id='" + place.id + "'><h4 class='name'>" + place.name + "</h4><p class='city'>Stad: " + place.city + "</p><p class='price'>Pris: " + place.price_range + " kr</p>" + "<p class='description'>Beskrivning: " + shortDescription; //skriver ut infon i div-elementet
 
